@@ -28,7 +28,19 @@
     {
         private int steamVersionMemoryOffset;
         private MemoryReader memory = new MemoryReader();
-
+        
+        public bool openSF4Process()
+        {
+            if (this.memory.OpenProcess("SSFIV"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }     
+        }
+        
         public SF4Memory(bool steamVersion)
         {
             SetSteamVersion(steamVersion);
@@ -48,28 +60,12 @@
 
         private int readIntFromGameMemory(int address, int[] offsets)
         {
-            if (this.memory.OpenProcess("SSFIV"))
-            {
-                return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + (address + steamVersionMemoryOffset), offsets));
-
-            }
-            else
-            {
-                return -1;
-            }
+            return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + (address + steamVersionMemoryOffset), offsets));
         }
 
         private float readFloatFromGameMemory(int address, int[] offsets)
         {
-            if (this.memory.OpenProcess("SSFIV"))
-            {
-                return this.memory.ReadFloat(this.memory.BaseAddress() + (address + steamVersionMemoryOffset), offsets);
-
-            }
-            else
-            {
-                return -1;
-            }
+            return this.memory.ReadFloat(this.memory.BaseAddress() + (address + steamVersionMemoryOffset), offsets);
         }
 
         public int GetFrameCount()
