@@ -382,13 +382,14 @@
         /// <param name="timeLineItems"></param>
         public void PlayTimeLine(IEnumerable<TimeLineItemViewModel> timeLineItems)
         {
-            Execute.OnUIThread(() => OffsetFrame = 0);
-            
             if (!_sf4Memory.openSF4Process())
             {
                 System.Windows.Forms.MessageBox.Show("Couldn't open the SF4 Process, are you sure it's running?");
+                return;
             }
 
+            Execute.OnUIThread(() => OffsetFrame = 0);
+            
             //Wait 2 seconds to give time to start
             WaitForFrames(120);
 
