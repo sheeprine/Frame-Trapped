@@ -507,7 +507,7 @@
             _gameExecuteablePath = Settings.Default.Properties["SSFIVLocation"].DefaultValue.ToString();
             _isMainWindowEnabled = true;
 
-            _sf4Memory = new SF4Memory(true);
+            _sf4Memory = new SF4Memory();
             _inputResolver = new InputResolver(_sf4Memory);
 
             Execute.OnUIThread(

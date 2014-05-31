@@ -26,7 +26,6 @@
      */
     public class SF4Memory
     {
-        private int steamVersionMemoryOffset;
         private MemoryReader memory = new MemoryReader();
         
         public bool openSF4Process()
@@ -40,43 +39,25 @@
                 return false;
             }     
         }
-        
-        public SF4Memory(bool steamVersion)
-        {
-            SetSteamVersion(steamVersion);
-        }
-
-        public void SetSteamVersion(bool steamVersion)
-        {
-            if (steamVersion)
-            {
-                steamVersionMemoryOffset = 0x10c0;
-            }
-            else
-            {
-                steamVersionMemoryOffset = 0;
-            }
-        }
-
 
         private int readIntFromGameMemory(int address)
         {
-            return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + (address + steamVersionMemoryOffset)));
+            return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + address ));
         }
 
         private int readIntFromGameMemory(int address, int[] offsets)
         {
-            return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + (address + steamVersionMemoryOffset), offsets));
+            return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + address, offsets));
         }
 
         private float readFloatFromGameMemory(int address, int[] offsets)
         {
-            return this.memory.ReadFloat(this.memory.BaseAddress() + (address + steamVersionMemoryOffset), offsets);
+            return this.memory.ReadFloat(this.memory.BaseAddress() + address, offsets);
         }
 
         private byte[] readMemoryAOB(int address, int[] offsets, uint bytestoread)
         {
-            return this.memory.ReadAOB(this.memory.BaseAddress() + (address + steamVersionMemoryOffset ), offsets, bytestoread);
+            return this.memory.ReadAOB(this.memory.BaseAddress() + address , offsets, bytestoread);
         }
         
         
@@ -89,55 +70,45 @@
 
         public int GetFrameCount() //I have not tested this much. Don't know how stable it is. Address found by toolassistedabel AKA abeltech. Should work on both high and low stage quality settings.
         {
-            return readIntFromGameMemory(0x80F0F0, new int[] { 0x28 });
+            return readIntFromGameMemory(0x687E90, new int[] { 0x28 });
         }
 
         public float GetP1PosX()
         {
-            return readFloatFromGameMemory(0x80f0cc, new int[] { 8, 0x60 });
+            return readFloatFromGameMemory(0x687E6C, new int[] { 0x8, 0x70 });
         }
 
         public float GetP2PosX()
         {
-            return readFloatFromGameMemory(0x80f0cc, new int[] { 12, 0x60 });
-        }
-
-        public int GetP1Health()
-        {
-            return readIntFromGameMemory(0x80f0cc, new int[] { 8, 0x6c5c });
-        }
-
-        public int GetP2Health()
-        {
-            return readIntFromGameMemory(0x80f0cc, new int[] { 12, 0x6c5c });
+            return readFloatFromGameMemory(0x687E6C, new int[] { 0xC, 0x70 });
         }
 
         public int GetComboCounter()                  //There is only one combo counter. It's the same for both players. Will increase with 1 for each hit in a combo.
         {
-            return readIntFromGameMemory(0x0080F0D0, new int[] { 0x130 });
+            return readIntFromGameMemory(0x687E70, new int[] { 0x130 });
         }
 
         public int GetPlayerScript(int player) //Returns animation number (script number).
         {
-            int address = 0x0080F0CC;
+            int address = 0x687E6C;
             int action = -1;
             if (player == 1)
-                action = readIntFromGameMemory(address, new int[] { 0x8, 0xA0, 0x14 });
+                action = readIntFromGameMemory(address, new int[] { 0x8, 0xB0, 0x18 });
             else
-                action = readIntFromGameMemory(address, new int[] { 0xC, 0xA0, 0x14 });
+                action = readIntFromGameMemory(address, new int[] { 0xC, 0xB0, 0x18 });
             return action;
         }
 
         public int GetAnimationFrame(int player) //Returns which frame the animation is on
         {
-            int address = 0x0080F0CC;
+            int address = 0x687E6C;
             if (player == 1)
             {
-                return System.BitConverter.ToInt16(readMemoryAOB(address, new int[] { 0x8, 0xA0, 0x1A }, 2), 0);
+                return System.BitConverter.ToInt16(readMemoryAOB(address, new int[] { 0x8, 0xB0, 0x1E }, 2), 0);
             }
             else
             {
-                return System.BitConverter.ToInt16(readMemoryAOB(address, new int[] { 0xC, 0xA0, 0x1A }, 2), 0);
+                return System.BitConverter.ToInt16(readMemoryAOB(address, new int[] { 0xC, 0xB0, 0x1E }, 2), 0);
             }
         }
 
@@ -148,11 +119,11 @@
 
             if (player == 1)
             {
-                characterI = readIntFromGameMemory(0x8104B0);
+                characterI = readIntFromGameMemory(0x689C6C);
             }
             else if (player == 2)
             {
-                characterI = readIntFromGameMemory(0x810738);
+                characterI = readIntFromGameMemory(0x689C8C);
             }
 
 
