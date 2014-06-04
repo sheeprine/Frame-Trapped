@@ -922,7 +922,7 @@
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 70, 0, 50, 0, 30, new[] { HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 6, 3, 24, -9, -4, "Forces Stand"));
 
-            moveList.Add(new MoveViewModel("Target Combo 1", MoveViewModel.MoveTypeEnum.Focus, tmpHitList, tmpCommand));
+            moveList.Add(new MoveViewModel("Target Combo 1", MoveViewModel.MoveTypeEnum.Unique, tmpHitList, tmpCommand));
 
             #endregion
 
