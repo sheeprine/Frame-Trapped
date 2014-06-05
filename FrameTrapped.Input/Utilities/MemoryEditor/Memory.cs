@@ -259,7 +259,7 @@
         {
             IntPtr ptr;
             int num = this.CalculatePointer(iMemoryAddress, iOffsets);
-            byte[] bBuffer = new byte[1];
+            byte[] bBuffer = new byte[iBytesToRead];
             MAPI.ReadProcessMemory(this.hReadProcess, (IntPtr) num, bBuffer, iBytesToRead, out ptr);
             return bBuffer;
         }
