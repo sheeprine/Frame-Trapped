@@ -41,31 +41,10 @@
 
         public float JumpLength { get; private set; } 
 
-        public ObservableCollection<MoveViewModel> MovesList { get; private set; }
+        public MoveListViewModel MoveList { get; private set; }
 
-        public void Group()
-        {
-            ICollectionView collection = CollectionViewSource.GetDefaultView(MovesList);
-            if (collection != null && collection.CanGroup == true)
-            {
-                collection.GroupDescriptions.Clear();
-                collection.GroupDescriptions.Add(new PropertyGroupDescription("MoveType"));
-                //collection.GroupDescriptions.Add(new PropertyGroupDescription("BlockType"));
-            }
 
-            NotifyOfPropertyChange(() => MovesList);
-        }
-
-        public void Ungroup()
-        {
-            ICollectionView collection = CollectionViewSource.GetDefaultView(MovesList);
-            if (collection != null)
-            {
-                collection.GroupDescriptions.Clear();
-            }
-        }
-
-        public FighterViewModel(string name, FighterTypeEnum figherType, int stamina, int stun, float forwardMovementSpeed, float backwardMovementSpeed, ObservableCollection<MoveViewModel> movesList)
+        public FighterViewModel(string name, FighterTypeEnum figherType, int stamina, int stun, float forwardMovementSpeed, float backwardMovementSpeed, MoveListViewModel moveList)
         {
             Name = name;
             Image = new Uri("pack://application:,,,/FrameTrapped.StreetFighterLibrary;component/Resources/Images/ssf4-" + string.Join("", Name.ToLower().Replace(' ', '_').Split('.')) + ".jpg");
@@ -75,7 +54,7 @@
             Stun = stun;
             ForwardMovementSpeed = forwardMovementSpeed;
             BackwardMovementSpeed = backwardMovementSpeed;
-            MovesList = movesList;
+            MoveList = moveList;
         }
     }
 }

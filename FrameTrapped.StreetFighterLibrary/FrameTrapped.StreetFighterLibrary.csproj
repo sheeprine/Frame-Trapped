@@ -127,6 +127,7 @@
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\FighterViewModel.cs" />
     <Compile Include="ViewModels\HitViewModel.cs" />
+    <Compile Include="ViewModels\MoveListViewModel.cs" />
     <Compile Include="ViewModels\StreetFighterLibraryViewModel.cs" />
     <Compile Include="ViewModels\MoveViewModel.cs" />
     <Compile Include="Views\CommandView.xaml.cs">

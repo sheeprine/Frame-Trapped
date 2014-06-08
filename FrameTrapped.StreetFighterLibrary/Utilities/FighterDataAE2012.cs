@@ -15,11 +15,9 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
 
-            #region Normals
             // Close Punches
-
             // Close Jab
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
                 new InputItemViewModel() { Light_Punch = true } 
@@ -49,7 +47,6 @@
             moveList.Add(new MoveViewModel("Close Fierce", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Close Kicks
-
             // Close Short
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
                 new InputItemViewModel() { Light_Kick = true }
@@ -74,7 +71,7 @@
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 40, 0, 125, 0, 60, new[] { HitViewModel.CancelAbilityEnum.Super }, 8, 8, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 70, 0, 75, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Super }, 2, 4, 15, -1, 4, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 70, 0, 75, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 2, 4, 15, -1, 4, ""));
 
             moveList.Add(new MoveViewModel("Close Roundhouse", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -103,7 +100,7 @@
                 new InputItemViewModel() { Hard_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 120, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 8, 3, 15, 0, 4, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 120, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 8, 3, 15, 0, -4, ""));
 
             moveList.Add(new MoveViewModel("Far Fierce", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -132,7 +129,7 @@
                 new InputItemViewModel() { Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 110, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 9, 4, 20, -6, -2, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 110, 0, 125, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 9, 4, 20, -6, -2, ""));
 
             moveList.Add(new MoveViewModel("Far Roundhouse", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -173,7 +170,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Down, Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 20, 0, 50, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 4, 3, 9, -1, 2, "Low attack"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 20, 0, 50, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Chain, HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 4, 3, 9, -1, 2, ""));
 
             moveList.Add(new MoveViewModel("Crouch Short", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -182,7 +179,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Down, Medium_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 60, 0, 100, 0, 40, new[] { HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 5, 3, 14, -3, 0, "Low attack"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 60, 0, 100, 0, 40, new[] { HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 5, 5, 12, -3, 0, ""));
 
             moveList.Add(new MoveViewModel("Crouch Long", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -191,7 +188,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Down, Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 90, 0, 100, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 5, 4, 28, -14, 0, "Low attack, cannot fast recover"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 90, 0, 100, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 5, 4, 28, -14, 0, "Untechable knockdown"));
 
             moveList.Add(new MoveViewModel("Crouch Roundhouse", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -203,7 +200,7 @@
             });
 
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 10, 7, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 10, 7, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Neutral Jump Jab", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -212,7 +209,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 5, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 5, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Neutral Jump Strong", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -221,7 +218,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Hard_Punch = true } 
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 6, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 6, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Neutral Jump Fierce", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -232,7 +229,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 40, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 5, 9, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 40, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 5, 9, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Neutral Jump Short", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -241,7 +238,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Medium_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 10, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 10, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Neutral Jump Long", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -250,7 +247,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 4, 4, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 200, 0, 100, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 4, 4, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Neutral Jump Roundhouse", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -262,7 +259,7 @@
             });
 
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 4, 7, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 4, 7, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Angled Jump Jab", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -271,8 +268,8 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 50, 0, 50, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 7, 3, 0, 0, 0, "Legs projectile invincible until end of startup frames, [1st Air hit] floats opponent,"));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 30, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 0, 4, 0, 0, 0, "[2nd Air hit] knock down and can juggle"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 7, 3, 0, 0, 0, "Legs projectile invincible until end of startup frames, [1st Air hit] floats opponent,"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 30, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 0, 4, 0, 0, 0, "[2nd Air hit] knock down and can juggle"));
 
             moveList.Add(new MoveViewModel("Angled Jump Strong", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -281,7 +278,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Hard_Punch = true } 
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 6, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 6, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Angled Jump Fierce", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -292,7 +289,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 40, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 4, 8, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 40, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 4, 8, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Angled Jump Short", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -301,7 +298,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Medium_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 70, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 6, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 6, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Angled Jump Long", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -310,7 +307,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 7, 7, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 200, 0, 100, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 7, 7, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
 
             moveList.Add(new MoveViewModel("Angled Jump Roundhouse", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -322,8 +319,8 @@
             });
 
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 30, 0, 50, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 17, 1, 0, 0, 0, "Overhead attack"));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 1, 2, 14, -2, 3, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 30, 0, 50, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 17, 1, 0, 1, 1, "Overhead attack"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 1, 2, 14, -2, 3, ""));
 
             moveList.Add(new MoveViewModel("Collarbone Breaker", MoveViewModel.MoveTypeEnum.Unique, tmpHitList, tmpCommand));
 
@@ -336,11 +333,9 @@
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 0, 2, 18, 0, 4, ""));
 
             moveList.Add(new MoveViewModel("Solar Plexus Strike", MoveViewModel.MoveTypeEnum.Unique, tmpHitList, tmpCommand));
-            #endregion
 
-            #region Focus Attacks
             // Focus Attacks
-            
+
             // Focus Attack Level 1
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
                 new InputItemViewModel() { Medium_Punch = true, Medium_Kick = true } 
@@ -353,10 +348,10 @@
 
             // Focus Attack Level 2
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Medium_Punch = true, Medium_Kick = true, WaitFrames = 29 }
+                new InputItemViewModel() { Medium_Punch = true, Medium_Kick = true, WaitFrames = 17 }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 80, 0, 150, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 29, 2, 35, -15, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 80, 0, 150, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 17, 2, 35, -15, 0, ""));
 
             moveList.Add(new MoveViewModel("Focus Attack Level 2", MoveViewModel.MoveTypeEnum.Focus, tmpHitList, tmpCommand));
 
@@ -368,9 +363,7 @@
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Unblockable, 140, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 65, 2, 35, 0, 0, ""));
 
             moveList.Add(new MoveViewModel("Focus Attack Level 3", MoveViewModel.MoveTypeEnum.Focus, tmpHitList, tmpCommand));
-            #endregion
 
-            #region ThrowAttacks
             // Throw Attacks
 
             // Forward Throw
@@ -391,8 +384,7 @@
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Techable, 130, 0, 120, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 3, 2, 20, 0, 0, "Untechable knockdown, Range 0.9 Units"));
 
             moveList.Add(new MoveViewModel("Backward Throw", MoveViewModel.MoveTypeEnum.Throw, tmpHitList, tmpCommand));
-            #endregion
-        
+
             // Special Attacks
 
             #region Hadokens
@@ -403,7 +395,7 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.Forward, Light_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 60, 0, 100, 0, 10, new[] { HitViewModel.CancelAbilityEnum.Super }, 13, 0, 45, -6, -2, "[Air hit] knock down, 16~17f focus cancellable without hit"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 70, 0, 100, 0, 10, new[] { HitViewModel.CancelAbilityEnum.Super }, 13, 0, 45, -6, -2, "[Air hit] knock down, 16~17f focus cancellable without hit"));
 
             moveList.Add(new MoveViewModel("Light Hadoken", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
 
@@ -414,7 +406,7 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.Forward, Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 60, 0, 100, 0, 10, new[] { HitViewModel.CancelAbilityEnum.Super }, 13, 0, 45, -6, -2, "[Air hit] knock down, 16~17f focus cancellable without hit"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 70, 0, 100, 0, 10, new[] { HitViewModel.CancelAbilityEnum.Super }, 13, 0, 45, -6, -2, "[Air hit] knock down, 16~17f focus cancellable without hit"));
 
             moveList.Add(new MoveViewModel("Medium Hadoken", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
 
@@ -425,7 +417,7 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.Forward, Hard_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 60, 0, 100, 0, 10, new[] { HitViewModel.CancelAbilityEnum.Super }, 13, 0, 45, -6, -2, "[Air hit] knock down, 16~17f focus cancellable without hit"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 70, 0, 100, 0, 10, new[] { HitViewModel.CancelAbilityEnum.Super }, 13, 0, 45, -6, -2, "[Air hit] knock down, 16~17f focus cancellable without hit"));
 
             moveList.Add(new MoveViewModel("Hard Hadoken", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
 
@@ -436,8 +428,8 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.Forward, Light_Punch = true, Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, -250, new[] { HitViewModel.CancelAbilityEnum.Super }, 12, 0, 0, 0, 0, "Knock down, can juggle, [counterhit] floats opponent, 15~16f focus cancellable"));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 40, 1, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, -250, new[] { HitViewModel.CancelAbilityEnum.Super }, 12, 0, 45, 0, 0, "Knock down, can juggle, [counterhit] floats opponent, 15~16f focus cancellable"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 50, 1, 0, ""));
 
             moveList.Add(new MoveViewModel("EX Hadoken", MoveViewModel.MoveTypeEnum.ExtraSpecial, tmpHitList, tmpCommand));
 
@@ -452,7 +444,7 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.DownForward, Light_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 70, 200, 100, 30, new[] { HitViewModel.CancelAbilityEnum.Super }, 3, 14, 24, -17, 0, "1~2f Invincible, 3~4f unthrowable, 3~16f lower body invincibility, 4f~ airborne, knock down, [] refers to active frames 3~14f"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 70, 200, 200, 30, new[] { HitViewModel.CancelAbilityEnum.Super }, 3, 14, 24, -17, 0, "1~2f Invincible, 3~4f unthrowable, 3~16f lower body invincibility, 4f~ airborne, knock down, [] refers to active frames 3~14f"));
 
             moveList.Add(new MoveViewModel("Light Shoryuken", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
 
@@ -464,7 +456,7 @@
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 80, 0, 150, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Super }, 3, 2, 0, 0, 0, "1~5f Invincible, 6~16f lower body invincibility, 5f~ airborne, knock down, "));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 12, 43, -34, 0, "[2nd hit] can juggle"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 0, 12, 43, -34, 0, "[2nd hit] can juggle"));
 
             moveList.Add(new MoveViewModel("Medium Shoryuken", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
 
@@ -475,8 +467,7 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.DownForward, Hard_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 0, 150, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Super }, 3, 2, 0, 0, 0, "1~4f Invincible, 3~4f unthrowable, 5~16f lower body invincibility, 3f~ airborne, knock down, [] refers to active frames 3~14f"));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 12, 46, -37, 0, "[2nd hit] can juggle"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 160, 60, 200, 50, 20, new HitViewModel.CancelAbilityEnum[] { }, 3, 14, 46, -37, 0, "1~4f Invincible, 3~4f unthrowable, 5~16f lower body invincibility, 3f~ airborne, knock down, [] refers to active frames 3~14f"));
 
             moveList.Add(new MoveViewModel("Hard Shoryuken", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
 
@@ -487,8 +478,8 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.DownForward,  Light_Punch = true, Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 80, 0, 100, 0, -250, new[] { HitViewModel.CancelAbilityEnum.Super }, 3, 2, 0, 0, 0, "1~16f Invincible, 6f~ airborne, knock down, "));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 60, 0, 100, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 12, 48, -39, 0, "[2nd hit] can juggle"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, -250, new[] { HitViewModel.CancelAbilityEnum.Super }, 3, 2, 45, 0, 0, "1~16f Invincible, 6f~ airborne, knock down, "));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 12, 48, -39, 0, "[2nd hit] can juggle"));
 
             moveList.Add(new MoveViewModel("EX Shoryuken", MoveViewModel.MoveTypeEnum.ExtraSpecial, tmpHitList, tmpCommand));
 
@@ -503,8 +494,8 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.Back,  Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 0, 200, 0, 30, new HitViewModel.CancelAbilityEnum[] { }, 11, 2, 0, 0, 0, "7~20f lower body immune to projectiles, 7f~ airborne, knock down, armor break, cannot hit crouching opponents."));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 0, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 6, 2, 17, -6, 0, "[2nd hit] aimed backwards"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, -250, new[] { HitViewModel.CancelAbilityEnum.Super }, 3, 2, 45, 0, 0, "1~16f Invincible, 6f~ airborne, knock down, "));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 50, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 12, 48, -39, 0, "[2nd hit] can juggle"));
 
             moveList.Add(new MoveViewModel("Light Tatsumaki Senpukyaku", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
 
@@ -662,7 +653,7 @@
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 10, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 52, 11, 0, ""));
 
             moveList.Add(new MoveViewModel("Shinkuu Hadouken (Fast)", MoveViewModel.MoveTypeEnum.Special, tmpHitList, tmpCommand));
-#endregion
+            #endregion
 
             #region Metsu Hadouken & Metsu Shoryuken
 
@@ -718,10 +709,10 @@
 
         public static FighterViewModel Ken()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
+            BindableCollection<HitViewModel> tmpHitList;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
 
             #region Normals
             // Close Jab
@@ -775,7 +766,7 @@
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 110, 0, 200, 0, 60, new[] { HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 8, 3, 21, -6, -2, ""));
-            
+
             moveList.Add(new MoveViewModel("Close Roundhouse", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Far Punches
@@ -972,7 +963,7 @@
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 70, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 5, 6, 0, 0, 0, ""));
-            
+
             moveList.Add(new MoveViewModel("Angled Jump Strong", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Angled Jump Fierce
@@ -1012,7 +1003,7 @@
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 5, 7, 0, 0, 0, ""));
 
             moveList.Add(new MoveViewModel("Angled Jump Roundhouse", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
-            
+
 
             // Unique kicks
 
@@ -1043,13 +1034,13 @@
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 120, 0, 150, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 21, 2, 20, -4, -1, "Feint lasts 24f"));
 
             moveList.Add(new MoveViewModel("Thunder kick", MoveViewModel.MoveTypeEnum.Unique, tmpHitList, tmpCommand));
-#endregion
+            #endregion
 
             #region Target Combo
 
             // Target Combo
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Medium_Punch = true },
+                new InputItemViewModel() { Medium_Punch = true, WaitFrames = 5},
                 new InputItemViewModel() { Hard_Punch = true }
             });
 
@@ -1212,7 +1203,7 @@
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 70, 0, 100, 0, -250, new[] { HitViewModel.CancelAbilityEnum.Super }, 4, 2, 54, -41, 0, "1~11f invincible, 12-18f lower body invincibility, Pursuit Property, 1st-2nd hit cancellable"));
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 30, 0, 25, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 2, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 30, 0, 25, 0, 0, new HitViewModel.CancelAbilityEnum[] {}, 0, 2, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 30, 0, 25, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 2, 0, 0, 0, ""));
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 80, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 6, 0, 0, 0, ""));
 
             moveList.Add(new MoveViewModel("EX Shoryuken", MoveViewModel.MoveTypeEnum.ExtraSpecial, tmpHitList, tmpCommand));
@@ -1363,7 +1354,7 @@
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 40, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 1, 0, 0, 0, ""));
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 40, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 8, 0, 0, 0, ""));
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 20, 1, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0,3, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 0, 0, 0, ""));
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 100, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 7, 43, -29, 0, ""));
 
             moveList.Add(new MoveViewModel("Light Shoryureppa", MoveViewModel.MoveTypeEnum.Super, tmpHitList, tmpCommand));
@@ -1469,12 +1460,13 @@
             return kenFighter;
         }
 
+
         public static FighterViewModel EHonda()
         {
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("E. Honda", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1484,7 +1476,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Ibuki", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1494,7 +1486,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Makoto", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1504,7 +1496,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Dudley", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1514,7 +1506,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Seth", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1524,7 +1516,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Gouken", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1534,7 +1526,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Akuma", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1544,7 +1536,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Gen", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1554,7 +1546,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Dan", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1564,7 +1556,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Sakura", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1574,7 +1566,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Oni", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1586,7 +1578,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Yun", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1596,7 +1588,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Juri", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1606,7 +1598,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Chun-Li", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1616,7 +1608,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Dhalsim", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1626,7 +1618,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Abel", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1636,7 +1628,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("C. Viper", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1646,7 +1638,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("M. Bison", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1656,7 +1648,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Sagat", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1666,7 +1658,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Cammy", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1676,7 +1668,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Dee Jay", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1686,7 +1678,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Cody", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1696,7 +1688,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Guy", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1706,7 +1698,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Hakan", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1716,7 +1708,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Yang", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1728,7 +1720,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Evil Ryu", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1738,7 +1730,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Guile", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1748,7 +1740,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Blanka", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1758,7 +1750,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Zangief", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1768,7 +1760,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Rufus", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1778,7 +1770,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("El Fuerte", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1788,7 +1780,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Vega", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1798,7 +1790,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Balrog", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1808,7 +1800,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Fei Long", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1818,7 +1810,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("T. Hawk", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1828,7 +1820,7 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Adon", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1838,18 +1830,18 @@
             BindableCollection<HitViewModel> tmpHitList; ;
             CommandViewModel tmpCommand;
 
-            BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+            MoveListViewModel moveList = new MoveListViewModel();
             FighterViewModel fighter = new FighterViewModel("Rose", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
-       
+
         //public static FighterViewModel Test2Data()
         //{
 
         //    BindableCollection<HitViewModel> tmpHitList; ;
         //    CommandViewModel tmpCommand;
 
-        //    BindableCollection<MoveViewModel> moveList = new BindableCollection<MoveViewModel>();
+        //     MoveListViewModel moveList = new MoveListViewModel();
 
         //    tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
         //        new InputItemViewModel() { Light_Punch = true } 

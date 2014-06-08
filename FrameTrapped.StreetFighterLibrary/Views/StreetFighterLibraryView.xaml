@@ -88,13 +88,13 @@
                 <Expander.Header>
                     <DockPanel >
                         <TextBlock Style="{StaticResource FighterHeaderStyle}" DockPanel.Dock="Left">Moves List</TextBlock>
-                        <Button Content="Clear Groups" Margin="10,2,2,2" DockPanel.Dock="Right" cal:Message.Attach="Ungroup" />
-                        <Button Content="Group by Move Type" Margin="2" DockPanel.Dock="Right" cal:Message.Attach="Group" />
+                        <Button Content="Clear Groups" Margin="10,2,2,2" DockPanel.Dock="Right" cal:Action.TargetWithoutContext="{Binding MoveList}" cal:Message.Attach="Ungroup" />
+                        <Button Content="Group by Move Type" Margin="2" DockPanel.Dock="Right" cal:Action.TargetWithoutContext="{Binding MoveList}"  cal:Message.Attach="Group" />
                         <Separator  Margin="10,0,0,0" />
                     </DockPanel>
                 </Expander.Header>
-                <DataGrid x:Name="MovesList" 
-                          ItemsSource="{Binding MovesList}"
+                <DataGrid x:Name="MoveList" 
+                          ItemsSource="{Binding MoveList}"
                           Height="Auto"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
