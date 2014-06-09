@@ -1,11 +1,40 @@
-﻿<UserControl x:Class="FrameTrapped.Options.Views.OptionsView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:TeamExplorer="clr-namespace:Microsoft.TeamFoundation.Controls.WPF.TeamExplorer;assembly=Microsoft.TeamFoundation.Controls" x:Class="FrameTrapped.Options.Views.OptionsView"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <DockPanel  Style="{DynamicResource HeaderDockPanelStyle}">
+            <TextBlock Text="{DynamicResource Options}" Style="{DynamicResource HeaderTextBlockStyle}" />
+        </DockPanel>
+        <!-- SSFIV.exe Location -->
+        <UniformGrid Columns="2">
+            <Border Style="{DynamicResource OptionDescriptionBorder}">
+                <Label Content="Super Street Fighter 4 Location:"/>
+            </Border>
+            <Border Style="{DynamicResource OptionValueBorder}">
+                <DockPanel >
+                    <Button Content="Browse..." cal:Message.Attach="SSFIVLocationDialog"  DockPanel.Dock="Right"/>
+                    <TextBox x:Name="SSFIVLocation"/>
+                </DockPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- SSFIV Type (Steam or not) -->
+        <UniformGrid Columns="2" >
+            <Border Style="{DynamicResource OptionDescriptionBorder}">
+                <Label Content="Tick if this is the Steam version of SSFIV:"/>
+            </Border>
+            <Border Style="{DynamicResource OptionValueBorder}">
+                <CheckBox Content="Steam Version" x:Name="SSFIVSteamVersion" VerticalAlignment="Center"/>
+            </Border>
+        </UniformGrid>
+    </StackPanel>
 </UserControl>

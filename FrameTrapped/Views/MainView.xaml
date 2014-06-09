@@ -50,6 +50,14 @@
                     </TabItem.Header>
                     <ContentControl cal:View.Model="{Binding Path=ComboTrainerViewModel, Mode=TwoWay}" />
                 </TabItem>
+                <TabItem x:Name="OptionsTabItem" IsSelected="{Binding OptionsTabItemSelected}" Style="{DynamicResource VerticalTabItemStyle}">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{DynamicResource Options}" Style="{DynamicResource VerticalTabTextBlockStyle}"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <ContentControl cal:View.Model="{Binding Path=OptionsViewModel, Mode=TwoWay}" />
+                </TabItem>
             </TabControl>
         </DockPanel>
     </Border>

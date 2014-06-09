@@ -11,6 +11,7 @@
     using FrameTrapped.ComboTrainer.Messages;
     using FrameTrapped.ComboTrainer.ViewModels;
     using FrameTrapped.Home.ViewModels;
+    using FrameTrapped.Options.ViewModels;
     using FrameTrapped.StreetFighterLibrary.ViewModels; 
 
     /// <summary>
@@ -69,8 +70,10 @@
         /// </summary>
         private ComboTrainerViewModel _comboTrainerViewModel;
 
-
-        // private OptionsViewModel _optionsViewModel;
+        /// <summary>
+        /// The options view model.
+        /// </summary>
+        private OptionsViewModel _optionsViewModel;
 
         /// <summary>
         /// Gets or sets window title.
@@ -226,6 +229,23 @@
         }
 
         /// <summary>
+        /// Gets or sets the options view model.
+        /// </summary>
+        public OptionsViewModel OptionsViewModel
+        {
+            get
+            {
+                return _optionsViewModel;
+            }
+
+            set
+            {
+                _optionsViewModel = value;
+                NotifyOfPropertyChange(() => OptionsViewModel);
+            }
+        }
+
+        /// <summary>
         /// Updates the application title with what view you are on.
         /// </summary>
         /// <param name="p"></param>
@@ -327,6 +347,7 @@
             HomeViewModel = new HomeViewModel();
             StreetFighterLibraryViewModel = new StreetFighterLibraryViewModel(_events);
             ComboTrainerViewModel = new ComboTrainerViewModel(_events);
+            OptionsViewModel = new OptionsViewModel(_events);
 
             HomeTabItemSelected = true;
         }

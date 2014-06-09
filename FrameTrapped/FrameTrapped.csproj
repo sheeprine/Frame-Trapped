@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>..\publish\</PublishUrl>
+    <PublishUrl>ftp://ink-gaming.com/public_html/ink-gaming.com/deploy/ft/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,14 +25,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://tompiddock.com/deploy/frametrapped/</InstallUrl>
+    <InstallUrl>http://ink-gaming.com/deploy/ft/</InstallUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>Frame Trapped - SF4 Combo Trainer</ProductName>
     <PublisherName>Frame Trapped</PublisherName>
     <MinimumRequiredVersion>2.2.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>2.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -48,6 +49,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -127,6 +129,9 @@
     <Reference Include="FrameTrapped.Input">
       <HintPath>lib\FrameTrapped.Input.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="FrameTrapped.Options">
+      <HintPath>lib\FrameTrapped.Options.dll</HintPath>
     </Reference>
     <Reference Include="FrameTrapped.StreetFighterLibrary">
       <HintPath>lib\FrameTrapped.StreetFighterLibrary.dll</HintPath>
@@ -226,8 +231,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="FrameTrapped_1_TemporaryKey.pfx" />
-    <None Include="FrameTrapped_2_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -40,10 +40,11 @@
         {
             List<Assembly> assemblies = new List<Assembly>();
             assemblies.Add(Assembly.GetExecutingAssembly());
+            assemblies.Add(Assembly.Load("FrameTrapped.ComboTrainer"));
             assemblies.Add(Assembly.Load("FrameTrapped.Home"));
             assemblies.Add(Assembly.Load("FrameTrapped.Input"));
+            assemblies.Add(Assembly.Load("FrameTrapped.Options"));
             assemblies.Add(Assembly.Load("FrameTrapped.StreetFighterLibrary"));
-            assemblies.Add(Assembly.Load("FrameTrapped.ComboTrainer"));
 
             return assemblies;
         }

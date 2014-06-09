@@ -12,7 +12,7 @@ namespace FrameTrapped.Common.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,7 +26,7 @@ namespace FrameTrapped.Common.Properties {
         /// <summary>
         /// The location for SSFIV.exe
         /// </summary>
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Configuration.SettingsDescriptionAttribute("The location for SSFIV.exe")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Super Street Fighter IV - Arcade E" +
@@ -34,6 +34,21 @@ namespace FrameTrapped.Common.Properties {
         public string SSFIVLocation {
             get {
                 return ((string)(this["SSFIVLocation"]));
+            }
+            set {
+                this["SSFIVLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SSFIVSteamVersion {
+            get {
+                return ((bool)(this["SSFIVSteamVersion"]));
+            }
+            set {
+                this["SSFIVSteamVersion"] = value;
             }
         }
     }

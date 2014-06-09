@@ -31,11 +31,6 @@
         private readonly IEventAggregator _events;
 
         /// <summary>
-        /// The path to the game file (should be an executable).
-        /// </summary>
-        private string _gameExecuteablePath;
-
-        /// <summary>
         /// The game process itself.
         /// </summary>
         private Process _gameProcess;
@@ -69,7 +64,6 @@
         /// The SF4 Memory handler.
         /// </summary>
         private SF4Memory _sf4Memory;
-        
 
         /// <summary>
         /// Array that defines directional inputs.
@@ -95,6 +89,17 @@
         /// Flag to show if the game is in a match.
         /// </summary>
         private volatile bool _inMatch;
+
+        /// <summary>
+        /// Gets the game executable path.
+        /// </summary>
+        public string GameExecutablePath
+        {
+            get
+            {
+                return Settings.Default.SSFIVLocation;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the application is busy.
@@ -218,14 +223,14 @@
                     {
                         StartInfo =
                         {
-                            FileName = _gameExecuteablePath,
+                            FileName = GameExecutablePath,
                             WindowStyle = ProcessWindowStyle.Minimized,
                             RedirectStandardInput = true,
                             ErrorDialog = false,
                             UseShellExecute = false,
                         }
                     };
-                    
+
                     _gameProcess.EnableRaisingEvents = true;
                     _gameProcess.Exited += GameProcessExited;
 
@@ -349,8 +354,8 @@
 
         public void SetResolution(int width, int height)
         {
-            _panel.Width =  width;
-            _panel.Height =  height;
+            _panel.Width = width;
+            _panel.Height = height;
             _panel.Refresh();
         }
 
@@ -389,7 +394,7 @@
             }
 
             Execute.OnUIThread(() => OffsetFrame = 0);
-            
+
             //Wait 2 seconds to give time to start
             WaitForFrames(120);
 
@@ -504,7 +509,6 @@
             _events = events;
             _events.Subscribe(this);
 
-            _gameExecuteablePath = Settings.Default.Properties["SSFIVLocation"].DefaultValue.ToString();
             _isMainWindowEnabled = true;
 
             _sf4Memory = new SF4Memory();

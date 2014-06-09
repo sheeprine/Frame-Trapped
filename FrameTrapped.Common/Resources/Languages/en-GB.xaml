@@ -14,6 +14,9 @@
     <!-- Combo Trainer -->
     <sys:String x:Key="ComboTrainer">Combo Trainer</sys:String>
 
+    <!-- Options -->
+    <sys:String x:Key="Options">Options</sys:String>
+    
     <!-- Common text -->
     <sys:String x:Key="OK">OK</sys:String>
     <sys:String x:Key="Cancel">Cancel</sys:String>                            
