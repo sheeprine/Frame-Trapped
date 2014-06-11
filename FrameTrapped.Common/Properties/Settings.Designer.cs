@@ -31,12 +31,12 @@ namespace FrameTrapped.Common.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\Super Street Fighter IV - Arcade E" +
             "dition\\SSFIV.exe\"")]
-        public string SSFIVLocation {
+        public string SteamLocation {
             get {
-                return ((string)(this["SSFIVLocation"]));
+                return ((string)(this["SteamLocation"]));
             }
             set {
-                this["SSFIVLocation"] = value;
+                this["SteamLocation"] = value;
             }
         }
         

@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FrameTrapped.Common.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="SSFIVLocation" Description="The location for SSFIV.exe" Type="System.String" Scope="User">
+    <Setting Name="SteamLocation" Description="The location for SSFIV.exe" Type="System.String" Scope="User">
       <Value Profile="(Default)">"C:\Program Files (x86)\Steam\SteamApps\common\Super Street Fighter IV - Arcade Edition\SSFIV.exe"</Value>
     </Setting>
     <Setting Name="SSFIVSteamVersion" Type="System.Boolean" Scope="User">

@@ -16,7 +16,7 @@
         /// <summary>
         /// The location of SSFIV.exe
         /// </summary>
-        private string _ssfivLocation;
+        private string _steamLocation;
 
         /// <summary>
         /// Whether Street Fighter is on Steam.
@@ -26,19 +26,19 @@
         /// <summary>
         /// Gets or sets a value for the location of SSFIV.
         /// </summary>
-        public string SSFIVLocation
+        public string SteamLocation
         {
             get
             {
-                return _ssfivLocation;
+                return _steamLocation;
             }
 
             set
             {
-                _ssfivLocation = value;
-                Settings.Default.SSFIVLocation = _ssfivLocation;
+                _steamLocation = value;
+                Settings.Default.SteamLocation = _steamLocation;
                 Settings.Default.Save();
-                NotifyOfPropertyChange(() => SSFIVLocation);
+                NotifyOfPropertyChange(() => SteamLocation);
             }
         }
 
@@ -60,14 +60,15 @@
                 NotifyOfPropertyChange(() => SSFIVSteamVersion);
             }
         }
-        public void SSFIVLocationDialog()
+
+        public void SteamLocationDialog()
         {
             // Create OpenFileDialog
             OpenFileDialog dlg = new OpenFileDialog();
 
             // Set filter for file extension and default file extension
-            dlg.DefaultExt = "SSFIV.exe";
-            dlg.Filter = "Super Street Fighter 4|SSFIV.exe";
+            dlg.DefaultExt = "Steam.exe";
+            dlg.Filter = "Steam|Steam.exe";
 
             // Display OpenFileDialog by calling ShowDialog method
             Nullable<bool> result = dlg.ShowDialog();
@@ -77,7 +78,7 @@
             {
                 // Open document
                 string filename = dlg.FileName;
-                SSFIVLocation = filename;
+                SteamLocation = filename;
             }
         }
 
@@ -87,7 +88,7 @@
         /// <param name="events"></param>
         public OptionsViewModel(IEventAggregator events)
         {
-            SSFIVLocation = Settings.Default.SSFIVLocation;
+            SteamLocation = Settings.Default.SteamLocation;
             SSFIVSteamVersion = Settings.Default.SSFIVSteamVersion;
             _events = events;
         }

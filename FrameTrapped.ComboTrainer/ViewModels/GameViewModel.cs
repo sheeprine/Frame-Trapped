@@ -93,11 +93,11 @@
         /// <summary>
         /// Gets the game executable path.
         /// </summary>
-        public string GameExecutablePath
+        public string SteamExecutablePath
         {
             get
             {
-                return Settings.Default.SSFIVLocation;
+                return Settings.Default.SteamLocation;
             }
         }
 
@@ -219,17 +219,33 @@
                         sfivInstances[0].Kill();
                     }
 
-                    _gameProcess = new Process
+                    new Process
                     {
                         StartInfo =
                         {
-                            FileName = GameExecutablePath,
+                            FileName = SteamExecutablePath,
+                            Arguments = "-applaunch 45760",
                             WindowStyle = ProcessWindowStyle.Minimized,
                             RedirectStandardInput = true,
                             ErrorDialog = false,
                             UseShellExecute = false,
                         }
-                    };
+                    }.Start();
+
+                    int timeout = 10000;
+                    bool gameOpen = false;
+                    while (!gameOpen && timeout > 0)
+                    {
+                        // Get all instances of SSFIV.exe running on the local 
+                        // computer.
+                        if (Process.GetProcessesByName("SSFIV").Length > 0)
+                        {
+                            _gameProcess = Process.GetProcessesByName("SSFIV")[0];
+                            gameOpen = true;
+                        }
+
+                        timeout--;
+                    }
 
                     _gameProcess.EnableRaisingEvents = true;
                     _gameProcess.Exited += GameProcessExited;
@@ -240,8 +256,8 @@
                             | NativeModel.SEM_NOGPFAULTERRORBOX);
 
                         try
-                        {
-                            _gameProcess.Start();
+                        { 
+                        _gameProcess.WaitForInputIdle();
                         }
                         catch (InvalidOperationException invEx)
                         {
@@ -259,7 +275,6 @@
                                 MessageBoxImage.Error));
                         }
 
-                        _gameProcess.WaitForInputIdle();
 
                         // For correct responding, it's important to let sleep our thread for a while.
                         System.Threading.Thread.Sleep(1000);

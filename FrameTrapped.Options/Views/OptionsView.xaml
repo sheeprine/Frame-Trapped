@@ -17,12 +17,12 @@
         <!-- SSFIV.exe Location -->
         <UniformGrid Columns="2">
             <Border Style="{DynamicResource OptionDescriptionBorder}">
-                <Label Content="Super Street Fighter 4 Location:"/>
+                <Label Content="Steam Location (Steam.exe):"/>
             </Border>
             <Border Style="{DynamicResource OptionValueBorder}">
                 <DockPanel >
-                    <Button Content="Browse..." cal:Message.Attach="SSFIVLocationDialog"  DockPanel.Dock="Right"/>
-                    <TextBox x:Name="SSFIVLocation"/>
+                    <Button Content="Browse..." cal:Message.Attach="SteamLocationDialog"  DockPanel.Dock="Right"/>
+                    <TextBox x:Name="SteamLocation"/>
                 </DockPanel>
             </Border>
         </UniformGrid>
