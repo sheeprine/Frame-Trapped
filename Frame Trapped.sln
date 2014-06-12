@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30110.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrapped.Common", "FrameTrapped.Common\FrameTrapped.Common.csproj", "{A64D40B5-75E0-4BC9-9634-E3064BD4735D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrapped.StreetFighterLibrary", "FrameTrapped.StreetFighterLibrary\FrameTrapped.StreetFighterLibrary.csproj", "{BB9129B7-F30F-4CCD-BE62-A8F98D8505F1}"
@@ -23,6 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrapped", "FrameTrappe
 		{450FAA03-59F8-40FE-BE4F-ECC8C412C819} = {450FAA03-59F8-40FE-BE4F-ECC8C412C819}
 		{E313F641-01FE-4BF8-92AC-AF6060D56A76} = {E313F641-01FE-4BF8-92AC-AF6060D56A76}
 		{AB5C3E50-8965-49C0-8858-6D9558DD3B7C} = {AB5C3E50-8965-49C0-8858-6D9558DD3B7C}
+		{C3ED2861-38A2-4079-9A19-1A1C3D83B674} = {C3ED2861-38A2-4079-9A19-1A1C3D83B674}
 		{A64D40B5-75E0-4BC9-9634-E3064BD4735D} = {A64D40B5-75E0-4BC9-9634-E3064BD4735D}
 		{BB9129B7-F30F-4CCD-BE62-A8F98D8505F1} = {BB9129B7-F30F-4CCD-BE62-A8F98D8505F1}
 	EndProjectSection
@@ -32,6 +31,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrappedUnitTests", "FrameTrappedUnitTests\FrameTrappedUnitTests.csproj", "{B1F51E9B-7080-4C93-985F-1FE55073BA18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrapped.Options", "FrameTrapped.Options\FrameTrapped.Options.csproj", "{C3ED2861-38A2-4079-9A19-1A1C3D83B674}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A64D40B5-75E0-4BC9-9634-E3064BD4735D} = {A64D40B5-75E0-4BC9-9634-E3064BD4735D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

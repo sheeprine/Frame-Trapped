@@ -2,12 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.ComponentModel.Composition.Hosting;
-    using System.Linq;
     using System.Reflection;
-    using System.Windows;
+
     using Caliburn.Micro;
+
     using FrameTrapped.Common.Utilities;
     using FrameTrapped.ViewModels;
 
@@ -16,19 +14,19 @@
         /// <summary>
         /// The composition container.
         /// </summary>
-        private SimpleContainer  _container;
+        private SimpleContainer _container;
 
         /// <summary>
         /// Configure the bootstrapper. Setup the CompositionContainer.
         /// </summary>
         protected override void Configure()
         {
-            _container = new SimpleContainer ();
-             
+            _container = new SimpleContainer();
 
-            _container.Instance<IWindowManager>(new  WindowManager());
-            _container.Singleton<IEventAggregator,EventAggregator>(); 
-              
+
+            _container.Instance<IWindowManager>(new WindowManager());
+            _container.Singleton<IEventAggregator, EventAggregator>();
+
             _container.PerRequest<MainViewModel>();
         }
 
@@ -72,8 +70,7 @@
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
-            DisplayRootViewFor<MainViewModel>( );
+            DisplayRootViewFor<MainViewModel>();
         }
- 
     }
 }
