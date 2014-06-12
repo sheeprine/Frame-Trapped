@@ -136,6 +136,9 @@
     <Compile Include="Views\FighterView.xaml.cs">
       <DependentUpon>FighterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MoveListView.xaml.cs">
+      <DependentUpon>MoveListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StreetFighterLibraryView.xaml.cs">
       <DependentUpon>StreetFighterLibraryView.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FighterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MoveListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,7 +4,12 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows;
-    
+    using Caliburn.Micro;
+    using FrameTrapped.ComboTrainer.Messages;
+    using FrameTrapped.ComboTrainer.ViewModels;
+    using FrameTrapped.Input.Models;
+    using FrameTrapped.Input.ViewModels;
+
     public class MoveViewModel
     {
         public enum MoveTypeEnum
@@ -19,7 +24,9 @@
             Super,
             Ultra
         }
-         
+
+        private IEventAggregator _events;
+
         public string Name { get; private set; }
 
         public MoveTypeEnum MoveType { get; private set; }
@@ -122,13 +129,19 @@
 
         public CommandViewModel Command { get; private set; }
 
-        public void AddCommandToTimeline(object something)
+        public void AddCommandToTimeline(object moveViewModel)
         {
-            MessageBox.Show("shit");
+            foreach (InputItemViewModel inputItem in Command.Commands)
+            {
+                TimeLineItemViewModel timeLineItemViewModel = new TimeLineItemViewModel();
+                timeLineItemViewModel.InputItemViewModel = inputItem;
+                _events.Publish(new AddTimeLineItemMessage(timeLineItemViewModel));
+            }
         }
 
-        public MoveViewModel(string name, MoveTypeEnum moveType, ObservableCollection<HitViewModel> hits, CommandViewModel command)
-        { 
+        public MoveViewModel(IEventAggregator events, string name, MoveTypeEnum moveType, ObservableCollection<HitViewModel> hits, CommandViewModel command)
+        {
+            _events = events;
             Name = name;
             MoveType = moveType;
             Hits = hits;

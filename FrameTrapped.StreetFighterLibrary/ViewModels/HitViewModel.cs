@@ -16,6 +16,7 @@
         public enum CancelAbilityEnum
         {
             Chain,
+            Dash,
             Special,
             Super,
             Ultra

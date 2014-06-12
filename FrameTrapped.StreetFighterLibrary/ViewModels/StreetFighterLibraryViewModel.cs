@@ -83,7 +83,8 @@
         public StreetFighterLibraryViewModel(IEventAggregator events)
         {
             _events = events;
-            
+            FighterDataAE2012.Events = _events;
+
             FightersList = new ObservableCollection<FighterViewModel>();
 
             FightersList.Add(FighterDataAE2012.Ryu());
