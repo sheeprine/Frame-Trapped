@@ -19,7 +19,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/Banner.png" Stretch="None"/>
-        <TextBlock Grid.Row="1" Text="This is currently placeholder while I construct the recent files menu, as well as other tid bits like sharing over social networks." TextAlignment="Center" Style="{DynamicResource MediumText}"/>
+        <TextBlock Grid.Row="1" Text="This is currently placeholder while I construct the recent files menu, as well as other tid bits like sharing over social networks." TextAlignment="Center" Style="{DynamicResource MediumTextStyle}"/>
         <UniformGrid Grid.Row="2" Columns="2"  >
             <Button x:Name="ShowComboTrainer" Style="{DynamicResource HomeViewButton}" IsEnabled="False">
                 <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/sf4-timeline-button.png"/>

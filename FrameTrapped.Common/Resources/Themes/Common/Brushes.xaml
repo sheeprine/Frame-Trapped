@@ -1,15 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
-    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <SolidColorBrush x:Key="Brush" Color="Black"/>
-    
-    
+        
     <Pen x:Key="Pen" Brush="{DynamicResource Brush}" />
     <Pen x:Key="Pen2" Brush="{DynamicResource Brush}" Thickness="2"/>
     <Pen x:Key="Pen5" Brush="{DynamicResource Brush}" Thickness="5"/>
 
-    <SolidColorBrush x:Key="ThemeColorBrush" Color="Red"/>
+    <SolidColorBrush x:Key="ThemeColorBrush" Color="{DynamicResource AccentColor}"/>
     <SolidColorBrush x:Key="ThemeSelectedColorBrush" Color="White"/>
 
     <!--Control colors.-->
@@ -30,7 +33,6 @@
 
     <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
     <Color x:Key="ControlPressedColor">#FF211AA9</Color>
-
 
     <Color x:Key="GlyphColor">#FF444444</Color>
     <Color x:Key="GlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>

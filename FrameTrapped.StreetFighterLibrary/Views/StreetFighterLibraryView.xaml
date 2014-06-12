@@ -16,7 +16,7 @@
 
     <Expander DockPanel.Dock="Left" IsExpanded="True" Width="Auto" ExpandDirection="Right">
         <Expander.Header>
-            <TextBlock Text="Fighters List" Style="{StaticResource VerticalExpanderHeaderTextBlockStyle}"  />
+            <TextBlock Text="Fighters List" Style="{DynamicResource VerticalExpanderHeaderTextBlockStyle}"  />
         </Expander.Header>
         <Grid>
             <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
             <Expander DataContext="{Binding SelectedFighter}" Grid.Row="1" IsExpanded="True" ExpandDirection="Up" Height="Auto"  ScrollViewer.CanContentScroll="True" >
                 <Expander.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource FighterHeaderStyle}">
+                        <TextBlock Style="{DynamicResource HeaderTextBlockStyle}">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0}'s Stats" FallbackValue="Fighter Stats">
                                     <Binding Path="Name" />
@@ -56,20 +56,20 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Column="0" Grid.Row="0" Style="{StaticResource StatItemStyle}">
-                            <TextBlock Style="{StaticResource StatNameHeaderStyle}">Stamina</TextBlock>
+                        <StackPanel Grid.Column="0" Grid.Row="0" Style="{DynamicResource StatItemStyle}">
+                            <TextBlock Style="{DynamicResource StatNameHeaderStyle}">Stamina</TextBlock>
                             <TextBlock Text="{Binding Stamina}"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="1" Grid.Row="0" Style="{StaticResource StatItemStyle}">
-                            <TextBlock Style="{StaticResource StatNameHeaderStyle}">Stun</TextBlock>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Style="{DynamicResource StatItemStyle}">
+                            <TextBlock Style="{DynamicResource StatNameHeaderStyle}">Stun</TextBlock>
                             <TextBlock Text="{Binding Stun}"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="0" Grid.Row="1" Style="{StaticResource StatItemStyle}">
-                            <TextBlock Style="{StaticResource StatNameHeaderStyle}">Forward Move Speed</TextBlock>
+                        <StackPanel Grid.Column="0" Grid.Row="1" Style="{DynamicResource StatItemStyle}">
+                            <TextBlock Style="{DynamicResource StatNameHeaderStyle}">Forward Move Speed</TextBlock>
                             <TextBlock Text="{Binding ForwardMovementSpeed}"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="1" Grid.Row="1" Style="{StaticResource StatItemStyle}">
-                            <TextBlock Style="{StaticResource StatNameHeaderStyle}">Backward Move Speed</TextBlock>
+                        <StackPanel Grid.Column="1" Grid.Row="1" Style="{DynamicResource StatItemStyle}">
+                            <TextBlock Style="{DynamicResource StatNameHeaderStyle}">Backward Move Speed</TextBlock>
                             <TextBlock Text="{Binding BackwardMovementSpeed}"/>
                         </StackPanel>
                         <Border Background="Black" Grid.ColumnSpan="2" Grid.Row="2" Width="290" BorderBrush="Red" VerticalAlignment="Top">
