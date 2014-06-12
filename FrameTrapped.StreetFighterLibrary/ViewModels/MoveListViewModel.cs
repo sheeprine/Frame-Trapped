@@ -8,6 +8,22 @@
 
     public class MoveListViewModel : BindableCollection<MoveViewModel>
     {
+        private MoveViewModel _selectedMove;
+
+        public MoveViewModel SelectedMove
+        {
+            get
+            {
+                return _selectedMove;
+            }
+
+            set
+            {
+                _selectedMove = value;
+                NotifyOfPropertyChange(string.Empty);
+            }
+        }
+
         public void Group()
         {
             ICollectionView collection = CollectionViewSource.GetDefaultView(this);
@@ -29,6 +45,5 @@
                 collection.GroupDescriptions.Clear();
             }
         }
-
     }
 }

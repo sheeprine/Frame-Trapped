@@ -1,10 +1,10 @@
 ﻿namespace FrameTrapped.ComboTrainer.ViewModels
 {
     using System;
-    using System.Diagnostics;
     using System.Drawing;
-    using System.Windows.Controls;
+
     using Caliburn.Micro;
+
     using FrameTrapped.ComboTrainer.Utilities;
 
     public class ComboTrainerViewModel : Screen

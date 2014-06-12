@@ -10,11 +10,12 @@
         <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
     </Grid.Resources>
     <DockPanel>
-        <HeaderedContentControl DockPanel.Dock="Bottom" DataContext="{Binding ActiveItem}">
+        <HeaderedContentControl DockPanel.Dock="Bottom" DataContext="{Binding SelectedMove}">
             <HeaderedContentControl.Header>
                 <DockPanel Background="{DynamicResource AccentColorBrush}">
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}" DockPanel.Dock="Left">Move Breakdown:</TextBlock>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}" Text="{Binding Name}" DockPanel.Dock="Left"/>
+                    <ContentControl cal:View.Model="{Binding Command}" DockPanel.Dock="Left"/>
                     <Separator Margin="10,0,0,0" />
                 </DockPanel>
             </HeaderedContentControl.Header>
@@ -26,7 +27,12 @@
                     <DataGridTextColumn Header="Damage" Binding="{Binding Path=Damage}" />
                     <DataGridTextColumn Header="Stun" Binding="{Binding Path=Stun}" />
                     <DataGridTextColumn Header="Meter Gain" Binding="{Binding Path=MeterGain}" />
-                    <DataGridTextColumn Header="Cancel Ability" Binding="{Binding Path=CancelAbility}"/>
+                    <DataGridTextColumn Header="Cancel Ability" Binding="{Binding Path=CancelString}"/>
+                    <DataGridTextColumn Header="Startup" Binding="{Binding Path=Startup}" />
+                    <DataGridTextColumn Header="Active" Binding="{Binding Path=Active}" />
+                    <DataGridTextColumn Header="Recovery" Binding="{Binding Path=Recovery}" />
+                    <DataGridTextColumn Header="On Block" Binding="{Binding Path=OnBlockAdvantage}" />
+                    <DataGridTextColumn Header="On Hit" Binding="{Binding Path=OnHitAdvantage}" />
                     <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -55,7 +61,8 @@
                 FrozenColumnCount="2"  
                 AlternationCount="2" AlternatingRowBackground="Black"
                 Tag="{Binding DataContext, ElementName=LayoutRoot}" 
-                SelectionMode="Single" CanUserResizeRows="False">
+                SelectionMode="Single" CanUserResizeRows="False"
+                      SelectedItem="{Binding SelectedMove}">
                 <DataGrid.GroupStyle>
                     <!-- Style for groups at top level. -->
                     <GroupStyle>

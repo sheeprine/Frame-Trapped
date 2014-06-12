@@ -4,8 +4,6 @@
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Windows;
-    using Microsoft.VisualBasic;
 
     /// <summary>
     /// An assembly wrapper class for the program.

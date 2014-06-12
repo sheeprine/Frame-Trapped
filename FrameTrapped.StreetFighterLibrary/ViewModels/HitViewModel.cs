@@ -1,6 +1,7 @@
 ﻿namespace FrameTrapped.StreetFighterLibrary.ViewModels
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     public class HitViewModel
     {
@@ -22,19 +23,34 @@
             Ultra
         }
 
-        public BlockTypeEnum BlockType { get; set; }
-        public int Damage { get; set; }
-        public int LateDamage { get; set; }
-        public int Stun { get; set; }
-        public int LateStun { get; set; }
-        public int MeterGain { get; set; }
-        public List<CancelAbilityEnum> CancelAbility { get; set; }
-        public int Startup { get; set; }
-        public int Active { get; set; }
-        public int Recovery { get; set; }
-        public int OnBlockAdvantage { get; set; }
-        public int OnHitAdvantage { get; set; }
-        public string Notes { get; set; }
+        private BlockTypeEnum _blockType;
+        private int _damage;
+        private int _lateDamage;
+        private int _stun;
+        private int _lateStun;
+        private int _meterGain;
+        private List<CancelAbilityEnum> _cancelAbility;
+        private int _startup;
+        private int _active;
+        private int _recovery;
+        private int _onBlockAdvantage;
+        private int _onHitAdvantage;
+        private string _notes;
+
+        public BlockTypeEnum BlockType { get { return _blockType; } }
+        public int Damage { get { return _damage; } }
+        public int LateDamage { get { return _lateDamage; } }
+        public int Stun { get { return _stun; } }
+        public int LateStun { get { return _lateStun; } }
+        public int MeterGain { get { return _meterGain; } }
+        public List<CancelAbilityEnum> CancelAbility { get { return _cancelAbility; } }
+        public string CancelString{ get { return string.Join("/", _cancelAbility.Distinct().Select(o => o.ToString().Substring(0, 2))); } }
+        public int Startup { get { return _startup; } }
+        public int Active { get { return _active; } }
+        public int Recovery { get { return _recovery; } }
+        public int OnBlockAdvantage { get { return _onBlockAdvantage; } }
+        public int OnHitAdvantage { get { return _onHitAdvantage; } }
+        public string Notes { get { return _notes; } }
 
         public HitViewModel(BlockTypeEnum blockType,
             int damage,
@@ -50,20 +66,20 @@
             int onHitAdvantage,
             string notes)
         {
-            BlockType = blockType;
-            Damage = damage;
-            LateDamage = lateDamage;
-            Stun = stun;
-            LateStun = lateStun;
-            MeterGain = meterGain;
-            CancelAbility = new List<CancelAbilityEnum>();
-            CancelAbility.AddRange(cancelAbility);
-            Startup = startup;
-            Active = active;
-            Recovery = recovery;
-            OnBlockAdvantage = onBlockAdvantage;
-            OnHitAdvantage = onHitAdvantage;
-            Notes = notes;
+            _blockType = blockType;
+            _damage = damage;
+            _lateDamage = lateDamage;
+            _stun = stun;
+            _lateStun = lateStun;
+            _meterGain = meterGain;
+            _cancelAbility = new List<CancelAbilityEnum>();
+            _cancelAbility.AddRange(cancelAbility);
+            _startup = startup;
+            _active = active;
+            _recovery = recovery;
+            _onBlockAdvantage = onBlockAdvantage;
+            _onHitAdvantage = onHitAdvantage;
+            _notes = notes;
         }
     }
 }
