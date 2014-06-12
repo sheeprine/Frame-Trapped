@@ -36,7 +36,7 @@
                 </Button.Style>
             </Button>
             <Label Content="Set Resolution:" />
-            <ComboBox x:Name="Resolutions" />
+            <ComboBox x:Name="Resolutions" SelectedIndex="0" />
         </ToolBar>
         <Border Grid.Row="1" BorderBrush="AntiqueWhite" BorderThickness="3" >
 

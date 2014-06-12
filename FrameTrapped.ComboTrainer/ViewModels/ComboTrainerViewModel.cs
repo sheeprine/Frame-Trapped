@@ -50,7 +50,8 @@
                 // silly example of the collection to bind to
                 return new BindableCollection<Size>(
                     new Size[] 
-                    {
+                    { 
+                        new Size(640, 480),
                         new Size(800, 600),
                         new Size(1024, 768),
                         new Size(1280, 720),
