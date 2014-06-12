@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="SteamLocation" Description="The location for SSFIV.exe" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"C:\Program Files (x86)\Steam\SteamApps\common\Super Street Fighter IV - Arcade Edition\SSFIV.exe"</Value>
+      <Value Profile="(Default)">"C:\Program Files (x86)\Steam\Steam.exe</Value>
     </Setting>
     <Setting Name="SSFIVSteamVersion" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
