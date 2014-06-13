@@ -11,7 +11,7 @@
     <link rel="image_src" href="http://frametrapped.com/images/logo.png" / >
     <meta name="description" content="Frame Tapped helps you confirm if a particular combo is actually possible by creating a timline of inputs to play back automatically in Street Fighter 4 2012 Arcade Edition." />
 
-    <meta property="og:title" content="Frame Trapped v2.1" />
+    <meta property="og:title" content="Frame Trapped v2.3" />
     <meta property="og:type" content="website" />       
     <meta property="og:image" content="http://frametrapped.com/images/logo.png" />      
     <meta property="og:url" content="http://frametrapped.com" />
@@ -19,10 +19,8 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Frame Trapped v2.1 - SF4: Combo Trainer</title>
+    <title>Frame Trapped v2.3 - SF4: Combo Trainer</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
 
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('require', 'displayfeatures'); ga('create', 'UA-50834098-1', 'frametrapped.com'); ga('send', 'pageview'); </script>
@@ -47,16 +45,13 @@ $('#view-on-github').on('click', function() {
 </script>
     <div id="container">
       <div class="inner">
-
         <header>
-          <h1><img src="images/banner.png" alt="Frame Trapped" /><br>SF4 Combo Trainer v2.1</h1>
-
+          <h1><img src="images/banner.png" alt="Frame Trapped" /><br>SF4 Combo Trainer</h1>
+          <h3 align="center">Current version: 2.3 (rev 19)</h3>
           <h2>A tool to study, compose, playback and time combos in Street Fighter IV</h2>
         </header>
         <section id="downloads" class="clearfix">
-          <a href="https://github.com/thopiddock/Frame-Trapped/releases/download/v2.1-beta.1/FrameTrapped.zip" id="download-ft" class="bigButton"><span>Download Frame Trapped</span></a>
-          <a href="https://github.com/thopiddock/Frame-Trapped/archive/v2.1-beta.1.zip" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/thopiddock/Frame-Trapped/archive/v2.1-beta.1.tar.gz" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="http://frametrapped.com/deploy/ft/install.html" id="install-link" class="bigButton"><span>Install Frame Trapped (ClickOnce Installer)</span></a>
           <a href="https://github.com/thopiddock/Frame-Trapped" id="view-on-github" class="button"><span>View on GitHub</span></a>
         </section>
    <hr>
@@ -76,6 +71,7 @@ $('#view-on-github').on('click', function() {
   <hr>
   <li><h4>Time Line Playback</h4>Create, save and playback test time lines:- a list of moves that Frame Trapped will execute frame by frame in game for you to test if the combo will work.</li>
   <li><h4>SF4 Embedding</h4>Don't want to test it full screen? Plans are to embed Street Fighter fully with in Frame Trapped so that you can test your moves in an isolated environment without needing to switch windows.</li>
+  <li><h4>Library to Time Line</h4>Drag and drop your moves from the move list in the library into your time line. Easily compose combos and tweak them down to the exact frame timing you want to test.</li>
   <hr>
   <img src="images/timeline.png"/>  
   <hr>
@@ -85,7 +81,6 @@ $('#view-on-github').on('click', function() {
 <h3><a name="planned-features" class="anchor" href="#planned-features"><span class="octicon octicon-link"></span></a>Planned Features</h3>
 <ul>
   <li><h4>Ultra Street Fighter 4 Support</h4>With Ultra Street Fighter 4 just around the corner, (and the digital upgrades and release being release in August) I plan on supporting the new version of Street Fighter and it's new tech as soon as I am able.</li>
-  <li><h4>Library to Time Line</h4>Drag and drop your moves from the move list in the library into your time line. Easily compose combos and tweak them down to the exact frame timing you want to test.</li>
   <li><h4>What Can I Do On Block?</h4>Fed up of getting frame trapped by the enemy or don't know what you can use to punish that whiffed Standing Roundhouse? Using the library I plan a feature to find exactly what moves every character can perform to punish all moves in the game (if possible of course) in an easy to view broken down list.</li>
 </ul>
   <hr>
@@ -110,8 +105,12 @@ $('#view-on-github').on('click', function() {
   <hr>
 <h3><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Donate to the FT Project</h3>
 
-<p>As you may have guessed, this is not my day job. I'm a developer by day and this is my hobby by night. It is my own free time that I spend to create this and I do it for the love of gaming and the community behind it. Frame Trapped is free to use and always will be, however I will happily accept any donations. They help keep this project funded and allow me to spend more time on making it better.</p> 
+<p>As you may have guessed, this is not my day job. I'm a developer by day and this is my hobby by night. It is my own free time that I spend to create this and I do it for the love of gaming and the community behind it. Frame Trapped is free to use and always will be, however I will happily accept any donations. They help keep this project funded and allow me to spend more time on making it better. So a big thank you to those who have helped!</p> 
 
+<h4>Donators</h4>
+<ul>
+  <li>FSSimon - reddit</li>
+</ul>
 <form id="donate-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
@@ -123,15 +122,16 @@ $('#view-on-github').on('click', function() {
 <h3><a name="thanks" class="anchor" href="#thanks"><span class="octicon octicon-link"></span></a>Special Thanks!</h3>
 
 <p>A special mention of thanks goes out to Rushdown Edinburgh, a fantastic group of gamers who not only host tournaments but run fight nights throughout the year on Tuesday/Wednesday nights. They've helped me out with feedback and motivation so an extra special thank you to them. Go check out their <a href="https://www.facebook.com/groups/RushdownEdinburgh/">Facebook page</a> for more information and to join the discussion.</p>
-      </section>
 
-      <footer>
-        Frame-Trapped is maintained by <a href="https://github.com/thopiddock">Tom Piddock</a><br>
-        This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-      </footer>
+</section>
 
-    </div>
-  </div>  
+<footer>
+Frame-Trapped is maintained by <a href="https://github.com/thopiddock">Tom Piddock</a><br>
+This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+</footer>
+
+</div>
+</div>  
  <div id="betaImage" />
 </body>
 </html>
