@@ -64,7 +64,7 @@
 
         public float GetP2PosX()
         {
-            return readFloatFromGameMemory(0x687E6C, new int[] { 0xC, 0x70 });
+            return readFloatFromGameMemory(0x688E6C, new int[] { 0xC, 0x70 });
         }
 
         public int GetComboCounter()                  //There is only one combo counter. It's the same for both players. Will increase with 1 for each hit in a combo.
