@@ -4,26 +4,10 @@
 
     using FrameTrapped.Input.Utilities.MemoryEditor;
      
-    /**
-     * this class reads data from the memory of a running sf4 instance.
-     * atm it only reads the current framecount and the x positions of both players.
-     * other adresses are
-     * 
-     * INFO         TYPE        ADDRESS     OFFSETS
-     * --------------------------------------------------
-     * p1posY       float       0x80f0cc    8, 100
-     * p1exmeter    int         0x80f0cc    8, 0x6c64
-     * p1health     int         0x80f0cc    8, 0x6c5c
-     * p1recovery   int         0x80f0cc    8, 160, 220
-     * p1ultra      int         0x80f0cc    8, 0x6c78
-     * p2posY       float       0x80f0cc    12, 100
-     * p2exmeter    int         0x80f0cc    12, 0x6c64
-     * p2health     int         0x80f0cc    12, 0x6c5c
-     * p2ultra      int         0x80f0cc    12, 0x6c78
-     * 
-     * i haven't tested these other adresses they may or may not work
-     * if they don't try removing the added steamVersionMemoryOffset
-     */
+    /*
+      This class reads data from the memory of a running sf4 instance.
+    */
+
     public class SF4Memory
     {
         private MemoryReader memory = new MemoryReader();
@@ -70,12 +54,12 @@
 
         public int GetFrameCount() //I have not tested this much. Don't know how stable it is. Address found by toolassistedabel AKA abeltech. Should work on both high and low stage quality settings.
         {
-            return readIntFromGameMemory(0x687E90, new int[] { 0x28 });
+            return readIntFromGameMemory(0x688E90, new int[] { 0x28 });
         }
 
         public float GetP1PosX()
         {
-            return readFloatFromGameMemory(0x687E6C, new int[] { 0x8, 0x70 });
+            return readFloatFromGameMemory(0x688E6C, new int[] { 0x8, 0x70 });
         }
 
         public float GetP2PosX()
@@ -85,12 +69,12 @@
 
         public int GetComboCounter()                  //There is only one combo counter. It's the same for both players. Will increase with 1 for each hit in a combo.
         {
-            return readIntFromGameMemory(0x687E70, new int[] { 0x130 });
+            return readIntFromGameMemory(0x688E70, new int[] { 0x130 });
         }
 
         public int GetPlayerScript(int player) //Returns animation number (script number).
         {
-            int address = 0x687E6C;
+            int address = 0x688E6C;
             int action = -1;
             if (player == 1)
                 action = readIntFromGameMemory(address, new int[] { 0x8, 0xB0, 0x18 });
@@ -101,7 +85,7 @@
 
         public int GetAnimationFrame(int player) //Returns which frame the animation is on
         {
-            int address = 0x687E6C;
+            int address = 0x688E6C;
             if (player == 1)
             {
                 return System.BitConverter.ToInt16(readMemoryAOB(address, new int[] { 0x8, 0xB0, 0x1E }, 2), 0);
@@ -119,11 +103,11 @@
 
             if (player == 1)
             {
-                characterI = readIntFromGameMemory(0x689C6C);
+                characterI = readIntFromGameMemory(0x688398);
             }
             else if (player == 2)
             {
-                characterI = readIntFromGameMemory(0x689C8C);
+                characterI = readIntFromGameMemory(0x688650);
             }
 
 
