@@ -218,20 +218,7 @@
                     {
                         sfivInstances[0].Kill();
                     }
-
-                    new Process
-                    {
-                        StartInfo =
-                        {
-                            FileName = SteamExecutablePath,
-                            Arguments = "-applaunch 45760",
-                            WindowStyle = ProcessWindowStyle.Minimized,
-                            RedirectStandardInput = true,
-                            ErrorDialog = false,
-                            UseShellExecute = false,
-                        }
-                    }.Start();
-
+                    Process.Start("steam://rungameid/45760"); 
                     int timeout = 10000;
                     bool gameOpen = false;
                     while (!gameOpen && timeout > 0)
@@ -411,7 +398,7 @@
             Execute.OnUIThread(() => OffsetFrame = 0);
 
             //Wait 2 seconds to give time to start
-            WaitForFrames(120);
+            WaitForFrames(60);
 
             for (int x = 0; x < timeLineItems.Count(); x++)
             {

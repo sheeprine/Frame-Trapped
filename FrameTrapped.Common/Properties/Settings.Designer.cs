@@ -24,10 +24,10 @@ namespace FrameTrapped.Common.Properties {
         }
         
         /// <summary>
-        /// The location for SSFIV.exe
+        /// The location for Steam.exe
         /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsDescriptionAttribute("The location for SSFIV.exe")]
+        [global::System.Configuration.SettingsDescriptionAttribute("The location for Steam.exe")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\Program Files (x86)\\Steam\\Steam.exe")]
         public string SteamLocation {

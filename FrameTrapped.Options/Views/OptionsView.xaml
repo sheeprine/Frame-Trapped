@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cal="http://www.caliburnproject.org"
-             xmlns:TeamExplorer="clr-namespace:Microsoft.TeamFoundation.Controls.WPF.TeamExplorer;assembly=Microsoft.TeamFoundation.Controls" x:Class="FrameTrapped.Options.Views.OptionsView"
+             x:Class="FrameTrapped.Options.Views.OptionsView"
              mc:Ignorable="d" 
              d:DesignWidth="300">
     <UserControl.Resources>
@@ -14,8 +14,10 @@
         <DockPanel  Style="{DynamicResource HeaderDockPanelStyle}">
             <TextBlock Text="{DynamicResource Options}" Style="{DynamicResource HeaderTextBlockStyle}" />
         </DockPanel>
+        <TextBlock Style="{DynamicResource MediumTextStyle}">Options are getting revised while we figure out the best architechture to use!</TextBlock>
+        
         <!-- SSFIV.exe Location -->
-        <UniformGrid Columns="2">
+        <UniformGrid Columns="2" IsEnabled="False">
             <Border Style="{DynamicResource OptionDescriptionBorder}">
                 <Label Content="Steam Location (Steam.exe):"/>
             </Border>
@@ -28,9 +30,9 @@
         </UniformGrid>
 
         <!-- SSFIV Type (Steam or not) -->
-        <UniformGrid Columns="2" >
+        <UniformGrid Columns="2" IsEnabled="False">
             <Border Style="{DynamicResource OptionDescriptionBorder}">
-                <Label Content="Tick if this is the Steam version of SSFIV:"/>
+                <Label Content="Tick if this is the Steam version of SSFIV (Technically obsolete until :"/>
             </Border>
             <Border Style="{DynamicResource OptionValueBorder}">
                 <CheckBox Content="Steam Version" x:Name="SSFIVSteamVersion" VerticalAlignment="Center"/>
