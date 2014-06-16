@@ -5,20 +5,24 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
       xmlns:converters="clr-namespace:FrameTrapped.Common.Converters;assembly=FrameTrapped.Common"
-      mc:Ignorable="d">
+      xmlns:vm="clr-namespace:FrameTrapped.ComboTrainer.ViewModels"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d"
+      d:DataContext="{Binding Source={StaticResource designVM}}">
     <DockPanel.Resources>
         <ResourceDictionary>
+            <converters:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
+            <vm:ComboTrainerViewModel x:Key="designVM" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <converters:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
         </ResourceDictionary>
     </DockPanel.Resources>
 
-    <Expander DockPanel.Dock="Left" ExpandDirection="Right">
+    <Expander DockPanel.Dock="Left" ExpandDirection="Right" IsExpanded="{Binding PlayerOneTimeLineEnabled}">
         <ContentControl VerticalAlignment="Stretch" Margin="0,0,5,0" cal:View.Model="{Binding PlayerOneTimeLineViewModel}"/>
     </Expander>
-    <Expander DockPanel.Dock="Right" ExpandDirection="Left">
+    <Expander DockPanel.Dock="Right" ExpandDirection="Left" IsExpanded="{Binding PlayerTwoTimeLineEnabled}">
         <ContentControl DockPanel.Dock="Right" VerticalAlignment="Stretch" Margin="0,0,5,0" cal:View.Model="{Binding PlayerTwoTimeLineViewModel}"/>
     </Expander>
     <Grid Grid.Column="1">
@@ -41,17 +45,23 @@
                 </Button.Style>
             </Button>
             <Label Content="Set Resolution:" />
-            <ComboBox x:Name="Resolutions" SelectedIndex="0" Width="100">
+            <ComboBox x:Name="Resolutions" SelectedIndex="0" Width="100" Foreground="{DynamicResource HighlightBrush}">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
-                        <Setter Property="Foreground" Value="{DynamicResource ControlLightBrush}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource HighlightBrush}"/>
                     </Style>
                 </ComboBox.ItemContainerStyle>
             </ComboBox>
             <Separator />
-            <Button x:Name="PlaybackStart" Content="Play" />
+            <Button x:Name="PlaybackStart" FontSize="12" Content="Play" />
             <Separator />
-            <CheckBox Content="Loop"/>
+            <CheckBox x:Name="Repeat" FontSize="12" Content="Repeat"/>
+            <xctk:IntegerUpDown x:Name="RepeatAmount" FontSize="12" 
+                                Value="{Binding RepeatAmount}"
+                                Width="50" Height="20" 
+                                Minimum="1"
+                                Maximum="99"
+                                IsEnabled="{Binding ElementName=Repeat,Path=IsChecked}"/>
             <Separator />
         </ToolBar>
         <Border Grid.Row="1" BorderBrush="AntiqueWhite" BorderThickness="3" >

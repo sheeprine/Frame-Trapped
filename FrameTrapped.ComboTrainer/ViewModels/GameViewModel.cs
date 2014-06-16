@@ -555,7 +555,9 @@
         /// Setup to play the time line.
         /// </summary>
         /// <param name="timeLineItems"></param>
-        public void PlayTimeLine(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItems, IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItems)
+        public void PlayTimeLine(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItems,
+            IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItems,
+            int repeatAmount)
         {
             if (!DelayPlayBack())
             {
@@ -564,7 +566,11 @@
             // if we aren't in a match (defined by being on a menu or pause is selected) the play timeline stops.
             if (_inMatch)
             {
-                TwoPlayerAction(playerOneTimeLineItems, playerTwoTimeLineItems, true);
+                while (repeatAmount > 0)
+                {
+                    TwoPlayerAction(playerOneTimeLineItems, playerTwoTimeLineItems, true);
+                    repeatAmount--;
+                }
             }
             else
             {
@@ -657,7 +663,8 @@
             {
                 PlayTimeLine(
                     message.PlayerOneTimeLineItemViewModels,
-                    message.PlayerTwoTimeLineItemViewModels);
+                    message.PlayerTwoTimeLineItemViewModels,
+                    message.RepeatAmount);
             }
         }
 

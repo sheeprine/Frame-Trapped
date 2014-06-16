@@ -5,8 +5,9 @@
 
     public class PlayTimeLineMessage
     {
-        public IEnumerable<TimeLineItemViewModel> PlayerOneTimeLineItemViewModels { get; set; }
-        public IEnumerable<TimeLineItemViewModel> PlayerTwoTimeLineItemViewModels { get; set; }
+        public IEnumerable<TimeLineItemViewModel> PlayerOneTimeLineItemViewModels { get; private set; }
+        public IEnumerable<TimeLineItemViewModel> PlayerTwoTimeLineItemViewModels { get; private set; }
+        public int RepeatAmount { get; private set; }
 
         public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItemViewModels)
         {
@@ -14,10 +15,13 @@
             PlayerTwoTimeLineItemViewModels = null;
         }
 
-        public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItemViewModels, IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItemViewModels)
+        public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItemViewModels,
+            IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItemViewModels,
+            int repeatAmount)
         {
             PlayerOneTimeLineItemViewModels = playerOneTimeLineItemViewModels;
             PlayerTwoTimeLineItemViewModels = playerTwoTimeLineItemViewModels;
+            RepeatAmount = repeatAmount;
         }
 
     }
