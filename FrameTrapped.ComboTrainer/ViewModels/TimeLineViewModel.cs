@@ -37,11 +37,6 @@
         private bool _autoSwitchToSF4;
 
         /// <summary>
-        /// The steam version of SF4 flag.
-        /// </summary>
-        private bool _isSteamVersion;
-
-        /// <summary>
         /// The currently selected time line item.
         /// </summary>
         private TimeLineItemViewModel _selectedTimeLineItem;
@@ -82,22 +77,6 @@
                 {
                     _autoSwitchToSF4 = value;
                     NotifyOfPropertyChange(() => AutoSwitchToSF4);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether we are using a steam version of SF4.
-        /// </summary>
-        public bool IsSteamVersion
-        {
-            get { return _isSteamVersion; }
-            set
-            {
-                if (value != _isSteamVersion)
-                {
-                    _isSteamVersion = value;
-                    NotifyOfPropertyChange(() => IsSteamVersion);
                 }
             }
         }
@@ -151,16 +130,20 @@
             if (CanRemoveItem)
             {
                 int index = TimeLineItems.IndexOf(SelectedTimeLineItem);
+                TimeLineItemViewModel toRemove = SelectedTimeLineItem;
 
-                TimeLineItems.Remove(SelectedTimeLineItem);
-                if (index != TimeLineItems.Count)
+                //If not last item, select next, otherwise select last
+                if (SelectedTimeLineItem != TimeLineItems.Last())
                 {
-                    SelectedTimeLineItem = TimeLineItems[index];
+                    SelectedTimeLineItem = TimeLineItems[index + 1];
                 }
                 else
                 {
-                    SelectedTimeLineItem = TimeLineItems.Last();
+                    SelectedTimeLineItem = TimeLineItems[TimeLineItems.Count() - 2];
                 }
+
+                TimeLineItems.Remove(toRemove);
+
                 NotifyOfPropertyChange(() => CanRemoveItem);
                 NotifyOfPropertyChange(() => TimeLineItems);
             }
@@ -172,26 +155,6 @@
         public void ClearTimeLine()
         {
             TimeLineItems.Clear();
-        }
-
-        /// <summary>
-        /// Loops the play back for the time line.
-        /// </summary>
-        public void LoopPlaybackStart()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Starts playback for the time line.
-        /// </summary>
-        public void PlaybackStart()
-        {
-            if (AutoSwitchToSF4)
-            {
-                _events.Publish(new FocusStreetFighterMessage());
-                _events.Publish(new PlayTimeLineMessage(TimeLineItems));
-            }
         }
 
         /// <summary>
@@ -248,6 +211,8 @@
             {
                 OldDeserialize(lines);
             }
+
+            NotifyOfPropertyChange(() => CanRemoveItem);
         }
 
 
@@ -408,7 +373,6 @@
             SelectedTimeLineItem = TimeLineItems.Last();
 
             _autoSwitchToSF4 = true;
-            _isSteamVersion = true;
         }
     }
 }

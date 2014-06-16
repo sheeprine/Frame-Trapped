@@ -1,7 +1,66 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FrameTrapped.Input.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="P1_Up" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)"> UP</Value>
+    </Setting>
+    <Setting Name="P1_Down" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">DOWN</Value>
+    </Setting>
+    <Setting Name="P1_Left" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">LEFT</Value>
+    </Setting>
+    <Setting Name="P1_Right" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">RIGHT</Value>
+    </Setting>
+    <Setting Name="P1_LightPunch" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_9</Value>
+    </Setting>
+    <Setting Name="P1_MediumPunch" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_0</Value>
+    </Setting>
+    <Setting Name="P1_HardPunch" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">OEM_MINUS</Value>
+    </Setting>
+    <Setting Name="P1_LightKick" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_O</Value>
+    </Setting>
+    <Setting Name="P1_MediumKick" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_P</Value>
+    </Setting>
+    <Setting Name="P1_HardKick" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">OEM_4</Value>
+    </Setting>
+    <Setting Name="P2_Up" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_F</Value>
+    </Setting>
+    <Setting Name="P2_Down" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_V</Value>
+    </Setting>
+    <Setting Name="P2_Left" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_C</Value>
+    </Setting>
+    <Setting Name="P2_Right" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_B</Value>
+    </Setting>
+    <Setting Name="P2_LightPunch" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_1</Value>
+    </Setting>
+    <Setting Name="P2_MediumPunch" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_2</Value>
+    </Setting>
+    <Setting Name="P2_HardPunch" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_3</Value>
+    </Setting>
+    <Setting Name="P2_LightKick" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_Q</Value>
+    </Setting>
+    <Setting Name="P2_MediumKick" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_W</Value>
+    </Setting>
+    <Setting Name="P2_HardKick" Type="WindowsInput.VirtualKeyCode" Scope="User">
+      <Value Profile="(Default)">VK_E</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

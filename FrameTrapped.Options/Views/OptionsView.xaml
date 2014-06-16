@@ -14,7 +14,7 @@
         <DockPanel  Style="{DynamicResource HeaderDockPanelStyle}">
             <TextBlock Text="{DynamicResource Options}" Style="{DynamicResource HeaderTextBlockStyle}" />
         </DockPanel>
-        <TextBlock Style="{DynamicResource MediumTextStyle}">Options are getting revised while we figure out the best architechture to use!</TextBlock>
+        <TextBlock Style="{DynamicResource MediumTextStyle}" TextWrapping="Wrap">Options are getting revised while we figure out the best architechture to use, where possible we are automating everything from game files.<LineBreak/><LineBreak/>Keyboard configuration is automatically loaded upon Loading SF4 in the Combo Trainer View. Restart the game if you have changed your key settings!</TextBlock>
         
         <!-- SSFIV.exe Location -->
         <UniformGrid Columns="2" IsEnabled="False">

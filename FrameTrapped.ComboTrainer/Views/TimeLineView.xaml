@@ -3,8 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="clr-namespace:System;assembly=mscorlib" 
-    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-    Width="320">
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro">
     <Grid.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,13 +17,8 @@
     </Grid.RowDefinitions>
 
     <DockPanel Grid.Row="0">
-
         <!--Playback functions-->
         <ToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
-            <Button x:Name="PlaybackStart" Content="Play" />
-            <Separator />
-            <CheckBox Content="Loop"/>
-            <Separator />
             <Button x:Name="AddTimeLineItem"  Content="Add Input" HorizontalAlignment="Stretch" />
             <Separator />
             <Button x:Name="RemoveTimeLineItem" IsEnabled="{Binding CanRemoveItem}" Content="Remove" HorizontalAlignment="Stretch" />

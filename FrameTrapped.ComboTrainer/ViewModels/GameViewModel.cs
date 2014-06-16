@@ -68,12 +68,12 @@
         /// <summary>
         /// Array that defines directional inputs.
         /// </summary>
-        private static Input[] Directions = new Input[] { Input.P1_UP, Input.P1_DN, Input.P1_LE, Input.P1_RI, Input.P1_BK, Input.P1_FW };
+        private static Input[] Directions = InputItemModel.Directions;
 
         /// <summary>
         /// Array that defines button inputs.
         /// </summary>
-        private static Input[] Buttons = new Input[] { Input.P1_LP, Input.P1_MP, Input.P1_HP, Input.P1_LK, Input.P1_MK, Input.P1_HK };
+        private static Input[] Buttons = InputItemModel.Buttons;
 
         /// <summary>
         /// The last frame.
@@ -150,18 +150,18 @@
         /// </summary>
         /// <param name="timeLineItem"></param>
         /// <param name="sendInputs"></param>
-        private void Action(TimeLineItemViewModel timeLineItem, bool sendInputs)
+        private void Action(TimeLineItemViewModel timeLineItem, bool sendInputs, int player = 1)
         {
             if (sendInputs)
             {
                 InputCommandModel icm = timeLineItem.InputItemViewModel.InputItem.InputCommandState;
                 foreach (Input input in icm.ToInputsReleasedArray())
                 {
-                    InputSimulator.SimulateKeyUp(_inputResolver.Get(input));
+                    InputSimulator.SimulateKeyUp(_inputResolver.Get(input, player));
                 }
                 foreach (Input input in icm.ToInputsPressedArray())
                 {
-                    InputSimulator.SimulateKeyDown(_inputResolver.Get(input));
+                    InputSimulator.SimulateKeyDown(_inputResolver.Get(input, player));
                 }
                 WaitForFrames(1);
             }
@@ -199,6 +199,117 @@
         }
 
         /// <summary>
+        /// Performs all presses and releases for a time line item.
+        /// </summary>
+        /// <param name="timeLineItem"></param>
+        /// <param name="sendInputs"></param>
+        private void TwoPlayerAction(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItems, IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItems, bool sendInputs)
+        {
+            // This counts down each players frames for individual time line items.
+            int playerOneCountdown;
+            int playerTwoCountdown;
+
+            // QueueFrames is the overall frames in each time line.
+            int playerOneQueueFrames;
+            int playerTwoQueueFrames;
+
+            playerOneCountdown = 0;
+            playerTwoCountdown = 0;
+
+            // The cache for the player individual time line items.
+            TimeLineItemViewModel playerOneCurrentItem;
+            TimeLineItemViewModel playerTwoCurrentItem;
+
+            // These queues will contain the actual time line items and dequeue them as they are consumed by their frame counter
+            Queue<TimeLineItemViewModel> playerOneQueue =
+                new Queue<TimeLineItemViewModel>(playerOneTimeLineItems);
+            Queue<TimeLineItemViewModel> playerTwoQueue =
+                new Queue<TimeLineItemViewModel>(playerTwoTimeLineItems);
+
+            playerOneQueueFrames = playerOneQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
+            playerTwoQueueFrames = playerTwoQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
+
+            int longestQueueTime = Math.Max(playerOneQueueFrames, playerTwoQueueFrames);
+
+            if (playerOneQueueFrames != playerTwoQueueFrames)
+            {
+                if (playerOneQueueFrames > playerTwoQueueFrames)
+                {
+                    playerTwoQueue.Enqueue(new TimeLineItemViewModel() { WaitFrames = playerOneQueueFrames - playerTwoQueueFrames });
+                }
+                else
+                {
+                    playerOneQueue.Enqueue(new TimeLineItemViewModel() { WaitFrames = playerTwoQueueFrames - playerOneQueueFrames });
+                }
+            }
+
+            playerOneCurrentItem = playerOneQueue.Dequeue();
+            playerTwoCurrentItem = playerTwoQueue.Dequeue();
+
+            playerOneCountdown = playerOneCurrentItem.WaitFrames;
+            playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
+
+            for (int x = 0; x < longestQueueTime; x++)
+            {
+                if (playerOneCountdown == 0)
+                {
+                    playerOneCurrentItem = playerOneQueue.Dequeue();
+                    playerOneCountdown = playerOneCurrentItem.WaitFrames;
+                }
+
+                if (playerTwoCountdown == 0)
+                {
+                    playerTwoCurrentItem = playerTwoQueue.Dequeue();
+                    playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
+                }
+
+                if (sendInputs)
+                {
+                    SendPlayerInput(1, playerOneCurrentItem);
+                    SendPlayerInput(2, playerTwoCurrentItem);
+                }
+
+                if (playerOneCurrentItem.InputItemViewModel.PlaySound && playerOneQueueFrames == playerOneCountdown)
+                {
+                    Input[] inputs = playerOneCurrentItem.InputItemViewModel.InputItem.Inputs;
+                    if (inputs.Intersect(Directions).Count() == 0 && inputs.Intersect(Buttons).Count() == 0)
+                    {
+                        Roadie.Instance.PlaySound(Roadie.WAIT_SOUND);
+                    }
+                    else
+                    {
+                        if (inputs.Intersect(Buttons).Count() > 0)
+                        {
+                            Roadie.Instance.PlaySound(Roadie.PRESS_BUTTON_SOUND);
+                        }
+                        if (inputs.Intersect(Directions).Count() > 0)
+                        {
+                            Roadie.Instance.PlaySound(Roadie.PRESS_DIRECTION_SOUND);
+                        }
+                    }
+                }
+
+                playerOneCountdown--;
+                playerTwoCountdown--;
+
+                WaitForFrames(1);
+            }
+        }
+
+        private void SendPlayerInput(int player, TimeLineItemViewModel timeLineItem)
+        {
+            InputCommandModel icm = timeLineItem.InputItemViewModel.InputItem.InputCommandState;
+            foreach (Input input in icm.ToInputsReleasedArray())
+            {
+                InputSimulator.SimulateKeyUp(_inputResolver.Get(input, player));
+            }
+            foreach (Input input in icm.ToInputsPressedArray())
+            {
+                InputSimulator.SimulateKeyDown(_inputResolver.Get(input, player));
+            }
+        }
+
+        /// <summary>
         /// Creates child process.
         /// </summary>
         /// <param name="panelHandle">The panel handle.</param>
@@ -217,8 +328,10 @@
                     if (sfivInstances.Length > 0)
                     {
                         sfivInstances[0].Kill();
+                        sfivInstances[0].WaitForExit(10000);
                     }
-                    Process.Start("steam://rungameid/45760"); 
+
+                    Process.Start("steam://rungameid/45760");
                     int timeout = 10000;
                     bool gameOpen = false;
                     while (!gameOpen && timeout > 0)
@@ -243,8 +356,8 @@
                             | NativeModel.SEM_NOGPFAULTERRORBOX);
 
                         try
-                        { 
-                        _gameProcess.WaitForInputIdle();
+                        {
+                            _gameProcess.WaitForInputIdle();
                         }
                         catch (InvalidOperationException invEx)
                         {
@@ -339,7 +452,6 @@
 
             NotifyOfPropertyChange(() => IsStopped);
             TryClose();
-
         }
 
         /// <summary>
@@ -384,30 +496,43 @@
         }
 
         /// <summary>
+        /// Ensures SF4 is open and delays the playback by one second.
+        /// </summary>
+        /// <returns>true if SF4 is open, false if it is not.</returns>
+        private bool DelayPlayBack()
+        {
+            if (!_sf4Memory.openSF4Process())
+            {
+                System.Windows.Forms.MessageBox.Show("Couldn't open the SF4 Process, are you sure it's running?");
+                return false;
+            }
+
+            Execute.OnUIThread(() => OffsetFrame = 0);
+
+            //Wait 1 seconds to give time to start
+            WaitForFrames(60);
+            return true;
+        }
+
+        /// <summary>
         /// Setup to play the time line.
         /// </summary>
         /// <param name="timeLineItems"></param>
         public void PlayTimeLine(IEnumerable<TimeLineItemViewModel> timeLineItems)
         {
-            if (!_sf4Memory.openSF4Process())
+            if (!DelayPlayBack())
             {
-                System.Windows.Forms.MessageBox.Show("Couldn't open the SF4 Process, are you sure it's running?");
                 return;
             }
 
-            Execute.OnUIThread(() => OffsetFrame = 0);
-
-            //Wait 2 seconds to give time to start
-            WaitForFrames(60);
-
             for (int x = 0; x < timeLineItems.Count(); x++)
             {
-                //highlighting of current item
-                if (timeLineItems.ElementAtOrDefault(x - 1) != null)
-                {
-                    Execute.OnUIThread(() => timeLineItems.ElementAtOrDefault(x - 1).DeHighlight());
-                }
-                Execute.OnUIThread(() => timeLineItems.ElementAtOrDefault(x).Highlight());
+                ////highlighting of current item
+                //if (timeLineItems.ElementAtOrDefault(x - 1) != null)
+                //{
+                //    Execute.OnUIThread(() => timeLineItems.ElementAtOrDefault(x - 1).DeHighlight());
+                //}
+                //Execute.OnUIThread(() => timeLineItems.ElementAtOrDefault(x).Highlight());
 
                 // if we aren't in a match (defined by being on a menu or pause is selected) the play timeline stops.
                 if (_inMatch)
@@ -425,12 +550,38 @@
             ReleaseAll();
         }
 
+
+        /// <summary>
+        /// Setup to play the time line.
+        /// </summary>
+        /// <param name="timeLineItems"></param>
+        public void PlayTimeLine(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItems, IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItems)
+        {
+            if (!DelayPlayBack())
+            {
+                return;
+            }
+            // if we aren't in a match (defined by being on a menu or pause is selected) the play timeline stops.
+            if (_inMatch)
+            {
+                TwoPlayerAction(playerOneTimeLineItems, playerTwoTimeLineItems, true);
+            }
+            else
+            {
+                string message = "The combo trainer has detected that SF4 didn't produce any new frames in the last 3 seconds. Make sure that\n\na) Street Fighter 4 is running and inside a match or training mode\nb) Street Fighter is not paused\nc) You are running the latest version of Street Fighter 4 AEv2012\nd) Stage Quality in your SF4 graphic settings is set to HIGH";
+                System.Windows.MessageBox.Show(message);
+            }
+
+            ReleaseAll();
+        }
+
+
         /// <summary>
         /// Releases all the buttons.
         /// </summary>
         public void ReleaseAll()
         {
-            foreach (VirtualKeyCode key in _inputResolver.InputMap.Values)
+            foreach (VirtualKeyCode key in _inputResolver.InputMap)
             {
                 InputSimulator.SimulateKeyUp(key);
             }
@@ -498,7 +649,26 @@
         /// <param name="message"></param>
         public void Handle(PlayTimeLineMessage message)
         {
-            PlayTimeLine(message.TimeLineItemViewModels);
+            if (message.PlayerTwoTimeLineItemViewModels == null)
+            {
+                PlayTimeLine(message.PlayerOneTimeLineItemViewModels);
+            }
+            else
+            {
+                PlayTimeLine(
+                    message.PlayerOneTimeLineItemViewModels,
+                    message.PlayerTwoTimeLineItemViewModels);
+            }
+        }
+
+        /// <summary>
+        /// The TryClose method.
+        /// <remarks>Try to unsubscribe from the events aggregator to stop duplicate timeline inputs.</remarks>
+        /// </summary>
+        public override void TryClose()
+        {
+            base.TryClose();
+            _events.Unsubscribe(this);
         }
 
         /// <summary>
@@ -506,15 +676,15 @@
         /// </summary>
         /// <param name="events">The events aggregator.</param>
         /// <param name="gameExecuteablePath">The game executable path.</param>
-        public GameViewModel(IEventAggregator events, string gameExecuteablePath)
+        public GameViewModel(IEventAggregator events)
         {
             _events = events;
             _events.Subscribe(this);
 
             _isMainWindowEnabled = true;
 
-            _sf4Memory = new SF4Memory();
-            _inputResolver = new InputResolver(_sf4Memory);
+            _sf4Memory = SF4Memory.Instance;
+            _inputResolver = InputResolver.Instance;
 
             Execute.OnUIThread(
                 () =>

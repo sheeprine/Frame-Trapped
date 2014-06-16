@@ -34,12 +34,12 @@
         /// <summary>
         /// Array that defines directional inputs.
         /// </summary>
-        public static Input[] Directions = new Input[] { Input.P1_UP, Input.P1_DN, Input.P1_LE, Input.P1_RI, Input.P1_BK, Input.P1_FW };
+        public static Input[] Directions = new Input[] { Input.Up, Input.Down, Input.Left, Input.Right, Input.Back, Input.Forward };
 
         /// <summary>
         /// Array that defines button inputs.
         /// </summary>
-        public static Input[] Buttons = new Input[] { Input.P1_LP, Input.P1_MP, Input.P1_HP, Input.P1_LK, Input.P1_MK, Input.P1_HK };
+        public static Input[] Buttons = new Input[] { Input.LightPunch, Input.MediumPunch, Input.HardPunch, Input.LightKick, Input.MediumKick, Input.HardKick };
 
         /// <summary>
         /// The frame duration of this Time Line Item.
@@ -63,35 +63,35 @@
             set
             {
                 // Directions
-                if (value.Contains(Input.P1_UP) && value.Contains(Input.P1_BK))
+                if (value.Contains(Input.Up) && value.Contains(Input.Back))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.UpBack;
                 }
-                else if (value.Contains(Input.P1_UP) && value.Contains(Input.P1_FW))
+                else if (value.Contains(Input.Up) && value.Contains(Input.Forward))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.UpForward;
                 }
-                else if (value.Contains(Input.P1_UP))
+                else if (value.Contains(Input.Up))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.Up;
                 }
-                else if (value.Contains(Input.P1_DN) && value.Contains(Input.P1_BK))
+                else if (value.Contains(Input.Down) && value.Contains(Input.Back))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.DownBack;
                 }
-                else if (value.Contains(Input.P1_DN) && value.Contains(Input.P1_FW))
+                else if (value.Contains(Input.Down) && value.Contains(Input.Forward))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.DownForward;
                 }
-                else if (value.Contains(Input.P1_DN))
+                else if (value.Contains(Input.Down))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.Down;
                 }
-                else if (value.Contains(Input.P1_BK))
+                else if (value.Contains(Input.Back))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.Back;
                 }
-                else if (value.Contains(Input.P1_FW))
+                else if (value.Contains(Input.Forward))
                 {
                     InputCommandState.DirectionState = InputCommandModel.DirectionStateEnum.Forward;
                 }
@@ -101,27 +101,27 @@
                 }
 
                 // Buttons
-                if (value.Contains(Input.P1_LP))
+                if (value.Contains(Input.LightPunch))
                 {
                     InputCommandState.LightPunch = InputCommandModel.ButtonStateEnum.Pressed;
                 }
-                if (value.Contains(Input.P1_MP))
+                if (value.Contains(Input.MediumPunch))
                 {
                     InputCommandState.MediumPunch = InputCommandModel.ButtonStateEnum.Pressed;
                 }
-                if (value.Contains(Input.P1_HP))
+                if (value.Contains(Input.HardPunch))
                 {
                     InputCommandState.HardPunch = InputCommandModel.ButtonStateEnum.Pressed;
                 }
-                if (value.Contains(Input.P1_LK))
+                if (value.Contains(Input.LightKick))
                 {
                     InputCommandState.LightKick = InputCommandModel.ButtonStateEnum.Pressed;
                 }
-                if (value.Contains(Input.P1_MK))
+                if (value.Contains(Input.MediumKick))
                 {
                     InputCommandState.MediumKick = InputCommandModel.ButtonStateEnum.Pressed;
                 }
-                if (value.Contains(Input.P1_HK))
+                if (value.Contains(Input.HardKick))
                 {
                     InputCommandState.HardKick = InputCommandModel.ButtonStateEnum.Pressed;
                 }

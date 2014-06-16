@@ -24,8 +24,7 @@
             </RadialGradientBrush>
 
             <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MetroCircleToggleButtonStyle}">
-                <Setter Property="Margin" Value="2" />
-                <Setter Property="Padding" Value="2" />
+
                 <Setter Property="Width" Value="40" />
                 <Setter Property="Height" Value="40" />
                 <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
@@ -36,7 +35,7 @@
             </Style>
 
             <Style x:Key="CustomToggle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroCircleToggleButtonStyle}">
-                <Setter Property="Margin" Value="0" />
+                <Setter Property="Margin" Value="-2" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Width" Value="42" />
                 <Setter Property="Height" Value="42" />
@@ -74,7 +73,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
-        <DockPanel Width="280">
+        <DockPanel Width="254">
             <ToggleButton x:Name="PlaySound" Style="{StaticResource MetroCircleToggleButtonStyle}" DockPanel.Dock="Right">
                 <Rectangle Fill="Black" Style="{StaticResource InputRectangleStyle}" Width="24" Height="24" >
                     <Rectangle.OpacityMask>
@@ -275,7 +274,7 @@
                         <Rectangle Fill="{DynamicResource DirectionForward}" Style="{StaticResource ButtonRectangleStyle}"/>
                     </Button>
 
-                    <Slider  HorizontalAlignment="Stretch" Value="{Binding WaitFrames,FallbackValue=1}" Style="{DynamicResource SliderStyle}" Maximum="300" Minimum="1"/>
+                    <Slider HorizontalAlignment="Stretch" Value="{Binding WaitFrames,FallbackValue=1}" Style="{DynamicResource SliderStyle}" Maximum="300" Minimum="1"/>
 
                 </DockPanel>
             </Grid>

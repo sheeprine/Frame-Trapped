@@ -38,6 +38,9 @@
     <Reference Include="FrameTrapped.Common">
       <HintPath>..\FrameTrapped\lib\FrameTrapped.Common.dll</HintPath>
     </Reference>
+    <Reference Include="InputSimulator">
+      <HintPath>..\FrameTrapped\lib\InputSimulator.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\FrameTrapped\lib\MahApps.Metro.dll</HintPath>
     </Reference>

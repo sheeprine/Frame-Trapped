@@ -5,7 +5,7 @@ namespace FrameTrapped.ComboTrainer.Views
     /// <summary>
     /// Interaction logic for ComboTrainerView.xaml
     /// </summary>
-    public partial class ComboTrainerView : Grid
+    public partial class ComboTrainerView : DockPanel
     {
         public ComboTrainerView()
         {

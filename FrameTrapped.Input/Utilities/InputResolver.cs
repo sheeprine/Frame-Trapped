@@ -9,60 +9,172 @@ namespace FrameTrapped.Input.Utilities
 
     using FrameTrapped.Input.Models;
     using System.Reflection;
-    using System.IO; 
+    using System.IO;
+    using FrameTrapped.Input.Properties;
+    using System.Configuration;
+    using System.Diagnostics;
 
     /**
- * this class translates our custom Input enum to actual keyboard codes that are used by the input simulator.
- * the main reason for this class is the resolving of back and forward since the Directions change when a player crosses up.
- * it also reads the keyboard config file sf4keyboard.cfg
- */
+     * this class translates our custom Input enum to actual keyboard codes that are used by the input simulator.
+     * the main reason for this class is the resolving of back and forward since the Directions change when a player crosses up.
+     * it also reads the keyboard config file sf4keyboard.cfg
+     */
     public class InputResolver
     {
-        private SF4Memory sf4m;
+        private SF4Memory _sf4m;
 
-        public Dictionary<Input, WindowsInput.VirtualKeyCode> InputMap = new Dictionary<Input, VirtualKeyCode>();
+        private static InputResolver _instance;
 
-        public InputResolver(SF4Memory sf4memory)
+        public static InputResolver Instance
         {
-            this.sf4m = sf4memory;
-
-            readInputConfig();
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new InputResolver();
+                }
+                return _instance;
+            }
         }
+
+        public List<WindowsInput.VirtualKeyCode> InputMap = new List<VirtualKeyCode>();
+
+        public Dictionary<Input, WindowsInput.VirtualKeyCode> PlayerOneInputMap = new Dictionary<Input, VirtualKeyCode>();
+        public Dictionary<Input, WindowsInput.VirtualKeyCode> PlayerTwoInputMap = new Dictionary<Input, VirtualKeyCode>();
 
         private void readInputConfig()
         {
 
-             string asmLocation = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
-             
-            string filename = string.Format("{0}{1}", asmLocation, @"\sf4keyboard.cfg");
-
-            string[] lines = System.IO.File.ReadAllLines(filename);
-
-            foreach (String line in lines)
+            if (true)
             {
-                if (!(line.StartsWith(";")) && line.Contains('='))
+                string inputFolder = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), @"Documents\CAPCOM\SUPERSTREETFIGHTERIV\input");
+                byte[] bytes;
+
+                bytes = File.ReadAllBytes(Path.Combine(inputFolder, @"KEYBOARD_DEVICE#0.ctrlsav"));
+
+                PlayerOneInputMap.Add(Input.Up, (VirtualKeyCode)bytes[192]);
+                PlayerOneInputMap.Add(Input.Down, (VirtualKeyCode)bytes[200]);
+                PlayerOneInputMap.Add(Input.Left, (VirtualKeyCode)bytes[208]);
+                PlayerOneInputMap.Add(Input.Right, (VirtualKeyCode)bytes[216]);
+
+                PlayerOneInputMap.Add(Input.LightPunch, (VirtualKeyCode)bytes[224]);
+                PlayerOneInputMap.Add(Input.MediumPunch, (VirtualKeyCode)bytes[232]);
+                PlayerOneInputMap.Add(Input.HardPunch, (VirtualKeyCode)bytes[240]);
+                PlayerOneInputMap.Add(Input.LightKick, (VirtualKeyCode)bytes[248]);
+                PlayerOneInputMap.Add(Input.MediumKick, (VirtualKeyCode)bytes[256]);
+                PlayerOneInputMap.Add(Input.HardKick, (VirtualKeyCode)bytes[264]);
+
+                InputMap.Add((VirtualKeyCode)bytes[192]);
+                InputMap.Add((VirtualKeyCode)bytes[200]);
+                InputMap.Add((VirtualKeyCode)bytes[208]);
+                InputMap.Add((VirtualKeyCode)bytes[216]);
+
+                InputMap.Add((VirtualKeyCode)bytes[224]);
+                InputMap.Add((VirtualKeyCode)bytes[232]);
+                InputMap.Add((VirtualKeyCode)bytes[240]);
+                InputMap.Add((VirtualKeyCode)bytes[248]);
+                InputMap.Add((VirtualKeyCode)bytes[256]);
+                InputMap.Add((VirtualKeyCode)bytes[264]);
+
+                bytes = File.ReadAllBytes(Path.Combine(inputFolder, @"KEYBOARD_DEVICE#1.ctrlsav"));
+
+                PlayerTwoInputMap.Add(Input.Up, (VirtualKeyCode)bytes[192]);
+                PlayerTwoInputMap.Add(Input.Down, (VirtualKeyCode)bytes[200]);
+                PlayerTwoInputMap.Add(Input.Left, (VirtualKeyCode)bytes[208]);
+                PlayerTwoInputMap.Add(Input.Right, (VirtualKeyCode)bytes[216]);
+
+                PlayerTwoInputMap.Add(Input.LightPunch, (VirtualKeyCode)bytes[224]);
+                PlayerTwoInputMap.Add(Input.MediumPunch, (VirtualKeyCode)bytes[232]);
+                PlayerTwoInputMap.Add(Input.HardPunch, (VirtualKeyCode)bytes[240]);
+                PlayerTwoInputMap.Add(Input.LightKick, (VirtualKeyCode)bytes[248]);
+                PlayerTwoInputMap.Add(Input.MediumKick, (VirtualKeyCode)bytes[256]);
+                PlayerTwoInputMap.Add(Input.HardKick, (VirtualKeyCode)bytes[264]);
+
+                InputMap.Add((VirtualKeyCode)bytes[192]);
+                InputMap.Add((VirtualKeyCode)bytes[200]);
+                InputMap.Add((VirtualKeyCode)bytes[208]);
+                InputMap.Add((VirtualKeyCode)bytes[216]);
+
+                InputMap.Add((VirtualKeyCode)bytes[224]);
+                InputMap.Add((VirtualKeyCode)bytes[232]);
+                InputMap.Add((VirtualKeyCode)bytes[240]);
+                InputMap.Add((VirtualKeyCode)bytes[248]);
+                InputMap.Add((VirtualKeyCode)bytes[256]);
+                InputMap.Add((VirtualKeyCode)bytes[264]);
+
+            }
+            else
+            {
+                foreach (SettingsProperty setting in Settings.Default.Properties)
                 {
-                    string[] tokens = line.Split('=');
-                    Input input = (Input)Enum.Parse(typeof(Input), tokens[0]);
-                    VirtualKeyCode key = (VirtualKeyCode)Enum.Parse(typeof(VirtualKeyCode), tokens[1]);
-                    InputMap.Add(input, key);
+                    if (setting.PropertyType == typeof(VirtualKeyCode))
+                    {
+                        if (setting.Name.StartsWith("P1"))
+                        {
+                            PlayerOneInputMap.Add((Input)Enum.Parse(typeof(Input), setting.Name.Substring(3)),
+                                (VirtualKeyCode)Settings.Default.PropertyValues[setting.Name].PropertyValue);
+                            InputMap.Add((VirtualKeyCode)Settings.Default.PropertyValues[setting.Name].PropertyValue);
+                        }
+                        else if (setting.Name.StartsWith("P2"))
+                        {
+                            PlayerTwoInputMap.Add((Input)Enum.Parse(typeof(Input), setting.Name.Substring(3)),
+                               (VirtualKeyCode)Settings.Default[setting.Name]);
+                            InputMap.Add((VirtualKeyCode)Settings.Default.PropertyValues[setting.Name].PropertyValue);
+                        }
+                    }
                 }
             }
         }
 
-        public VirtualKeyCode Get(Input input)
+        private VirtualKeyCode ResolvePlayerBackwardInput(int player)
         {
-            if (input == Input.P1_BK)
+            if (player == 1)
             {
-                return getP1_BK();
+                return (_sf4m.GetP1PosX() < _sf4m.GetP2PosX()) ? Get(Input.Left, player) : Get(Input.Right, player);
             }
-            else if (input == Input.P1_FW)
+            else
             {
-                return getP1_FW();
+                return (_sf4m.GetP1PosX() > _sf4m.GetP2PosX()) ? Get(Input.Left, player) : Get(Input.Right, player);
             }
-            else if (InputMap.ContainsKey(input))
+        }
+
+        private VirtualKeyCode ResolvePlayerForwardInput(int player)
+        {
+            if (player == 1)
             {
-                return InputMap[input];
+                return (_sf4m.GetP1PosX() > _sf4m.GetP2PosX()) ? Get(Input.Left, player) : Get(Input.Right, player);
+            }
+            else
+            {
+                return (_sf4m.GetP1PosX() < _sf4m.GetP2PosX()) ? Get(Input.Left, player) : Get(Input.Right, player);
+            }
+        }
+
+        public bool IsPlayerOneOnLeft()
+        {
+            return (_sf4m.GetP1PosX() < _sf4m.GetP2PosX());
+        }
+
+        public VirtualKeyCode Get(Input input, int player)
+        {
+            if (input == Input.Back)
+            {
+                return ResolvePlayerBackwardInput(player);
+            }
+            else if (input == Input.Forward)
+            {
+                return ResolvePlayerForwardInput(player);
+            }
+            else if (PlayerOneInputMap.ContainsKey(input))
+            {
+                if (player == 1)
+                {
+                    return PlayerOneInputMap[input];
+                }
+                else
+                {
+                    return PlayerTwoInputMap[input];
+                }
             }
             else
             {
@@ -70,20 +182,11 @@ namespace FrameTrapped.Input.Utilities
             }
         }
 
-        public bool IsPlayerOnLeft()
+        private InputResolver()
         {
-            return (sf4m.GetP1PosX() < sf4m.GetP2PosX());
-        }
+            this._sf4m = SF4Memory.Instance;
 
-        private VirtualKeyCode getP1_BK()
-        {
-            return (sf4m.GetP1PosX() < sf4m.GetP2PosX()) ? Get(Input.P1_LE) : Get(Input.P1_RI);
-
-        }
-
-        private VirtualKeyCode getP1_FW()
-        {
-            return (sf4m.GetP1PosX() > sf4m.GetP2PosX()) ? Get(Input.P1_LE) : Get(Input.P1_RI);
+            readInputConfig();
         }
     }
 }

@@ -4,12 +4,16 @@
 
     using FrameTrapped.Input.Utilities.MemoryEditor;
      
-    /*
-      This class reads data from the memory of a running sf4 instance.
-    */
-
+    /// <summary>
+    ///  This class reads data from the memory of a running sf4 instance.
+    /// </summary>
     public class SF4Memory
     {
+        /// <summary>
+        /// The static singletone instance of <see cref="SF4Memory"/>.
+        /// </summary>
+        private static SF4Memory instance;
+
         private MemoryReader memory = new MemoryReader();
         
         public bool openSF4Process()
@@ -43,16 +47,8 @@
         {
             return this.memory.ReadAOB(this.memory.BaseAddress() + address , offsets, bytestoread);
         }
-        
-        
-        /* //Old one. It only works when stage quality = high
-        public int GetFrameCount()
-        {
-            return readIntFromGameMemory(0x80f0d0, new int[] { 0x1c4 });
-        }
-        */
 
-        public int GetFrameCount() //I have not tested this much. Don't know how stable it is. Address found by toolassistedabel AKA abeltech. Should work on both high and low stage quality settings.
+        public int GetFrameCount()
         {
             return readIntFromGameMemory(0x688E90, new int[] { 0x28 });
         }
@@ -67,7 +63,11 @@
             return readFloatFromGameMemory(0x688E6C, new int[] { 0xC, 0x70 });
         }
 
-        public int GetComboCounter()                  //There is only one combo counter. It's the same for both players. Will increase with 1 for each hit in a combo.
+        /// <summary>
+        /// Gets the combo counter.
+        /// </summary>
+        /// <remarks>There is only one combo counter. It's the same for both players. Will increase with 1 for each hit in a combo.</remarks>
+        public int GetComboCounter()
         {
             return readIntFromGameMemory(0x688E70, new int[] { 0x130 });
         }
@@ -193,6 +193,21 @@
                 character = "Couldn't get character";
 
             return character;
+        }
+
+        /// <summary>
+        /// Gets the static accessor for making a <see cref="SF4Memory" /> instance.
+        /// </summary>
+        public static SF4Memory Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new SF4Memory();
+                }
+                return instance;
+            }
         }
 
     }

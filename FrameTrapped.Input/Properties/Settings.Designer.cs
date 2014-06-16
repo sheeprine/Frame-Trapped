@@ -12,7 +12,7 @@ namespace FrameTrapped.Input.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,6 +20,246 @@ namespace FrameTrapped.Input.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(" UP")]
+        public global::WindowsInput.VirtualKeyCode P1_Up {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_Up"]));
+            }
+            set {
+                this["P1_Up"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("DOWN")]
+        public global::WindowsInput.VirtualKeyCode P1_Down {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_Down"]));
+            }
+            set {
+                this["P1_Down"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LEFT")]
+        public global::WindowsInput.VirtualKeyCode P1_Left {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_Left"]));
+            }
+            set {
+                this["P1_Left"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RIGHT")]
+        public global::WindowsInput.VirtualKeyCode P1_Right {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_Right"]));
+            }
+            set {
+                this["P1_Right"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_9")]
+        public global::WindowsInput.VirtualKeyCode P1_LightPunch {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_LightPunch"]));
+            }
+            set {
+                this["P1_LightPunch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_0")]
+        public global::WindowsInput.VirtualKeyCode P1_MediumPunch {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_MediumPunch"]));
+            }
+            set {
+                this["P1_MediumPunch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("OEM_MINUS")]
+        public global::WindowsInput.VirtualKeyCode P1_HardPunch {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_HardPunch"]));
+            }
+            set {
+                this["P1_HardPunch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_O")]
+        public global::WindowsInput.VirtualKeyCode P1_LightKick {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_LightKick"]));
+            }
+            set {
+                this["P1_LightKick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_P")]
+        public global::WindowsInput.VirtualKeyCode P1_MediumKick {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_MediumKick"]));
+            }
+            set {
+                this["P1_MediumKick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("OEM_4")]
+        public global::WindowsInput.VirtualKeyCode P1_HardKick {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P1_HardKick"]));
+            }
+            set {
+                this["P1_HardKick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_F")]
+        public global::WindowsInput.VirtualKeyCode P2_Up {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_Up"]));
+            }
+            set {
+                this["P2_Up"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_V")]
+        public global::WindowsInput.VirtualKeyCode P2_Down {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_Down"]));
+            }
+            set {
+                this["P2_Down"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_C")]
+        public global::WindowsInput.VirtualKeyCode P2_Left {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_Left"]));
+            }
+            set {
+                this["P2_Left"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_B")]
+        public global::WindowsInput.VirtualKeyCode P2_Right {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_Right"]));
+            }
+            set {
+                this["P2_Right"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_1")]
+        public global::WindowsInput.VirtualKeyCode P2_LightPunch {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_LightPunch"]));
+            }
+            set {
+                this["P2_LightPunch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_2")]
+        public global::WindowsInput.VirtualKeyCode P2_MediumPunch {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_MediumPunch"]));
+            }
+            set {
+                this["P2_MediumPunch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_3")]
+        public global::WindowsInput.VirtualKeyCode P2_HardPunch {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_HardPunch"]));
+            }
+            set {
+                this["P2_HardPunch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_Q")]
+        public global::WindowsInput.VirtualKeyCode P2_LightKick {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_LightKick"]));
+            }
+            set {
+                this["P2_LightKick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_W")]
+        public global::WindowsInput.VirtualKeyCode P2_MediumKick {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_MediumKick"]));
+            }
+            set {
+                this["P2_MediumKick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VK_E")]
+        public global::WindowsInput.VirtualKeyCode P2_HardKick {
+            get {
+                return ((global::WindowsInput.VirtualKeyCode)(this["P2_HardKick"]));
+            }
+            set {
+                this["P2_HardKick"] = value;
             }
         }
     }

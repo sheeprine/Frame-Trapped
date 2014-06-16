@@ -2,31 +2,45 @@
 {
     using System;
     using System.Drawing;
-
     using Caliburn.Micro;
-
+    using FrameTrapped.ComboTrainer.Messages;
     using FrameTrapped.ComboTrainer.Utilities;
 
     public class ComboTrainerViewModel : Screen
     {
         private IEventAggregator _events;
 
-        private TimeLineViewModel _timeLineViewModel;
+        private TimeLineViewModel _playerOneTimeLineViewModel;
+
+        private TimeLineViewModel _playerTwoTimeLineViewModel;
 
         private GameViewModel _gameViewModel;
 
         private Size _selectedResolution;
 
-        public TimeLineViewModel TimeLineViewModel
+        public TimeLineViewModel PlayerOneTimeLineViewModel
         {
             get
             {
-                return _timeLineViewModel;
+                return _playerOneTimeLineViewModel;
             }
             set
             {
-                _timeLineViewModel = value;
-                NotifyOfPropertyChange(() => TimeLineViewModel);
+                _playerOneTimeLineViewModel = value;
+                NotifyOfPropertyChange(() => PlayerOneTimeLineViewModel);
+            }
+        }
+
+        public TimeLineViewModel PlayerTwoTimeLineViewModel
+        {
+            get
+            {
+                return _playerTwoTimeLineViewModel;
+            }
+            set
+            {
+                _playerTwoTimeLineViewModel = value;
+                NotifyOfPropertyChange(() => PlayerTwoTimeLineViewModel);
             }
         }
 
@@ -62,6 +76,15 @@
             }
         }
 
+        /// <summary>
+        /// Starts playback for the time line.
+        /// </summary>
+        public void PlaybackStart()
+        {
+            _events.Publish(new FocusStreetFighterMessage());
+            _events.Publish(new PlayTimeLineMessage(PlayerOneTimeLineViewModel.TimeLineItems, PlayerTwoTimeLineViewModel.TimeLineItems));
+        }
+
         public Size SelectedResolution
         {
             get { return _selectedResolution; }
@@ -77,13 +100,13 @@
         {
             if (GameViewModel == null)
             {
-                GameViewModel = new GameViewModel(_events, "SSFIV.exe");
+                GameViewModel = new GameViewModel(_events);
             }
             else
             {
                 GameViewModel.TryClose();
                 GameViewModel = null;
-                GameViewModel = new GameViewModel(_events, "SSFIV.exe");
+                GameViewModel = new GameViewModel(_events);
             }
         }
 
@@ -103,7 +126,8 @@
         {
             _events = events;
 
-            _timeLineViewModel = new TimeLineViewModel(events);
+            PlayerOneTimeLineViewModel = new TimeLineViewModel(events);
+            PlayerTwoTimeLineViewModel = new TimeLineViewModel(events);
         }
     }
 }

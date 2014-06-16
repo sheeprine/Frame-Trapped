@@ -5,11 +5,20 @@
 
     public class PlayTimeLineMessage
     {
-       public IEnumerable<TimeLineItemViewModel> TimeLineItemViewModels { get; set; }
+        public IEnumerable<TimeLineItemViewModel> PlayerOneTimeLineItemViewModels { get; set; }
+        public IEnumerable<TimeLineItemViewModel> PlayerTwoTimeLineItemViewModels { get; set; }
 
-        public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> timeLineItemViewModels)
+        public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItemViewModels)
         {
-            TimeLineItemViewModels = timeLineItemViewModels;
+            PlayerOneTimeLineItemViewModels = playerOneTimeLineItemViewModels;
+            PlayerTwoTimeLineItemViewModels = null;
         }
+
+        public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItemViewModels, IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItemViewModels)
+        {
+            PlayerOneTimeLineItemViewModels = playerOneTimeLineItemViewModels;
+            PlayerTwoTimeLineItemViewModels = playerTwoTimeLineItemViewModels;
+        }
+
     }
 }

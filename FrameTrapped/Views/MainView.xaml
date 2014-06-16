@@ -9,8 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
     cal:Message.Attach="[Event KeyDown] = [OnKeyDown($eventArgs)];[Event Drop] = [OnDropFile($eventArgs)]"
-    MinWidth="1280"
-    MinHeight="960"
+    MinWidth="800"
+    MinHeight="600"
     Title="{Binding Title}"
     Style="{DynamicResource CommonWindowStyle}" 
     AllowDrop="True">

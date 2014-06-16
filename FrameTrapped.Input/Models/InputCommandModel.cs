@@ -1,23 +1,27 @@
 ﻿
 namespace FrameTrapped.Input.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using FrameTrapped.Input.Utilities;
 
     public enum Input
     {
-        P1_LE,
-        P1_RI,
-        P1_BK,
-        P1_FW,
-        P1_DN,
-        P1_UP,
-        P1_LP,
-        P1_MP,
-        P1_HP,
-        P1_LK,
-        P1_MK,
-        P1_HK
+        Up,
+        Down,
+        Left,
+        Right,
+        Back,
+        Forward,
+
+        LightPunch,
+        MediumPunch,
+        HardPunch,
+
+        LightKick,
+        MediumKick,
+        HardKick
     }
 
     public class InputCommandModel
@@ -32,7 +36,7 @@ namespace FrameTrapped.Input.Models
             Neutral = 5,
             Forward = 6,
 
-            UpBack =7,
+            UpBack = 7,
             Up = 8,
             UpForward = 9
         }
@@ -79,44 +83,44 @@ namespace FrameTrapped.Input.Models
             switch (DirectionState)
             {
                 case DirectionStateEnum.UpBack:
-                    inputsArray.Add(Input.P1_UP);
-                    inputsArray.Add(Input.P1_BK);
+                    inputsArray.Add(Input.Up);
+                    inputsArray.Add(Input.Back);
                     break;
                 case DirectionStateEnum.Up:
-                    inputsArray.Add(Input.P1_UP);
+                    inputsArray.Add(Input.Up);
                     break;
                 case DirectionStateEnum.UpForward:
-                    inputsArray.Add(Input.P1_UP);
-                    inputsArray.Add(Input.P1_FW);
+                    inputsArray.Add(Input.Up);
+                    inputsArray.Add(Input.Forward);
                     break;
                 case DirectionStateEnum.Back:
-                    inputsArray.Add(Input.P1_BK);
+                    inputsArray.Add(Input.Back);
                     break;
                 case DirectionStateEnum.Neutral:
                     // Do nothing - Placeholder for later.
                     break;
                 case DirectionStateEnum.Forward:
-                    inputsArray.Add(Input.P1_FW);
+                    inputsArray.Add(Input.Forward);
                     break;
                 case DirectionStateEnum.DownBack:
-                    inputsArray.Add(Input.P1_DN);
-                    inputsArray.Add(Input.P1_BK);
+                    inputsArray.Add(Input.Down);
+                    inputsArray.Add(Input.Back);
                     break;
                 case DirectionStateEnum.Down:
-                    inputsArray.Add(Input.P1_DN);
+                    inputsArray.Add(Input.Down);
                     break;
                 case DirectionStateEnum.DownForward:
-                    inputsArray.Add(Input.P1_DN);
-                    inputsArray.Add(Input.P1_FW);
+                    inputsArray.Add(Input.Forward);
+                    inputsArray.Add(Input.Down);
                     break;
             }
 
-            if (LightPunch == ButtonStateEnum.Pressed) inputsArray.Add(Input.P1_LP);
-            if (MediumPunch == ButtonStateEnum.Pressed) inputsArray.Add(Input.P1_MP);
-            if (HardPunch == ButtonStateEnum.Pressed) inputsArray.Add(Input.P1_HP);
-            if (LightKick == ButtonStateEnum.Pressed) inputsArray.Add(Input.P1_LK);
-            if (MediumKick == ButtonStateEnum.Pressed) inputsArray.Add(Input.P1_MK);
-            if (HardKick == ButtonStateEnum.Pressed) inputsArray.Add(Input.P1_HK);
+            if (LightPunch == ButtonStateEnum.Pressed) inputsArray.Add(Input.LightPunch);
+            if (MediumPunch == ButtonStateEnum.Pressed) inputsArray.Add(Input.MediumPunch);
+            if (HardPunch == ButtonStateEnum.Pressed) inputsArray.Add(Input.HardPunch);
+            if (LightKick == ButtonStateEnum.Pressed) inputsArray.Add(Input.LightKick);
+            if (MediumKick == ButtonStateEnum.Pressed) inputsArray.Add(Input.MediumKick);
+            if (HardKick == ButtonStateEnum.Pressed) inputsArray.Add(Input.HardKick);
 
             return inputsArray.ToArray();
         }
@@ -129,52 +133,53 @@ namespace FrameTrapped.Input.Models
         public Input[] ToInputsReleasedArray()
         {
             List<Input> inputsArray = new List<Input>();
-            inputsArray.Add(Input.P1_UP);
-            inputsArray.Add(Input.P1_DN);
-            inputsArray.Add(Input.P1_FW);
-            inputsArray.Add(Input.P1_BK);
+
+            inputsArray.Add(Input.Up);
+            inputsArray.Add(Input.Down );
+            inputsArray.Add(Input.Back);
+            inputsArray.Add(Input.Forward);
 
             switch (DirectionState)
             {
                 case DirectionStateEnum.UpBack:
-                    inputsArray.Remove(Input.P1_UP);
-                    inputsArray.Remove(Input.P1_BK);
+                    inputsArray.Remove(Input.Up);
+                    inputsArray.Remove(Input.Back);
                     break;
                 case DirectionStateEnum.Up:
-                    inputsArray.Remove(Input.P1_UP);
+                    inputsArray.Remove(Input.Up);
                     break;
                 case DirectionStateEnum.UpForward:
-                    inputsArray.Remove(Input.P1_UP);
-                    inputsArray.Remove(Input.P1_FW);
+                    inputsArray.Remove(Input.Up);
+                    inputsArray.Remove(Input.Forward);
                     break;
                 case DirectionStateEnum.Back:
-                    inputsArray.Remove(Input.P1_BK);
+                    inputsArray.Remove(Input.Back);
                     break;
                 case DirectionStateEnum.Neutral:
                     // Do nothing - Placeholder for later.
                     break;
                 case DirectionStateEnum.Forward:
-                    inputsArray.Remove(Input.P1_FW);
+                    inputsArray.Remove(Input.Forward);
                     break;
                 case DirectionStateEnum.DownBack:
-                    inputsArray.Remove(Input.P1_DN);
-                    inputsArray.Remove(Input.P1_BK);
+                    inputsArray.Remove(Input.Down);
+                    inputsArray.Remove(Input.Back);
                     break;
                 case DirectionStateEnum.Down:
-                    inputsArray.Remove(Input.P1_DN);
+                    inputsArray.Remove(Input.Down);
                     break;
                 case DirectionStateEnum.DownForward:
-                    inputsArray.Remove(Input.P1_DN);
-                    inputsArray.Remove(Input.P1_FW);
+                    inputsArray.Remove(Input.Forward);
+                    inputsArray.Remove(Input.Down);
                     break;
             }
 
-            if (LightPunch == ButtonStateEnum.Released) inputsArray.Add(Input.P1_LP);
-            if (MediumPunch == ButtonStateEnum.Released) inputsArray.Add(Input.P1_MP);
-            if (HardPunch == ButtonStateEnum.Released) inputsArray.Add(Input.P1_HP);
-            if (LightKick == ButtonStateEnum.Released) inputsArray.Add(Input.P1_LK);
-            if (MediumKick == ButtonStateEnum.Released) inputsArray.Add(Input.P1_MK);
-            if (HardKick == ButtonStateEnum.Released) inputsArray.Add(Input.P1_HK);
+            if (LightPunch == ButtonStateEnum.Released) inputsArray.Add(Input.LightPunch);
+            if (MediumPunch == ButtonStateEnum.Released) inputsArray.Add(Input.MediumPunch);
+            if (HardPunch == ButtonStateEnum.Released) inputsArray.Add(Input.HardPunch);
+            if (LightKick == ButtonStateEnum.Released) inputsArray.Add(Input.LightKick);
+            if (MediumKick == ButtonStateEnum.Released) inputsArray.Add(Input.MediumKick);
+            if (HardKick == ButtonStateEnum.Released) inputsArray.Add(Input.HardKick);
 
             return inputsArray.ToArray();
         }
