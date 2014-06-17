@@ -684,6 +684,9 @@
             _isMainWindowEnabled = true;
 
             _sf4Memory = SF4Memory.Instance;
+
+            
+
             _inputResolver = InputResolver.Instance;
 
             Execute.OnUIThread(
@@ -692,6 +695,10 @@
                     _panel = new System.Windows.Forms.Panel();
                     CreateGameProcess(_panel.Handle);
                 });
+            while (Process.GetProcessesByName("SSFIV").Length == 0)
+            { }
+
+            _sf4Memory.runScan();
         }
     }
 }
