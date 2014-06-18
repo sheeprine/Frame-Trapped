@@ -220,7 +220,7 @@
             TimeLineItemViewModel playerOneCurrentItem;
             TimeLineItemViewModel playerTwoCurrentItem;
 
-            // These queues will contain the actual time line items and dequeue them as they are consumed by their frame counter
+            // These queues will contain the actual time line items and dequeue them as they are consumed by their frame counter  
             Queue<TimeLineItemViewModel> playerOneQueue =
                 new Queue<TimeLineItemViewModel>(playerOneTimeLineItems);
             Queue<TimeLineItemViewModel> playerTwoQueue =
@@ -265,8 +265,8 @@
 
                 if (sendInputs)
                 {
-                    SendPlayerInput(1, playerOneCurrentItem);
-                    SendPlayerInput(2, playerTwoCurrentItem);
+                SendPlayerInput(1, playerOneCurrentItem);
+                SendPlayerInput(2, playerTwoCurrentItem);
                 }
 
                 if (playerOneCurrentItem.InputItemViewModel.PlaySound && playerOneQueueFrames == playerOneCountdown)
@@ -376,8 +376,8 @@
                         }
 
 
-                        // For correct responding, it's important to let sleep our thread for a while.
-                        System.Threading.Thread.Sleep(1000);
+                        // For correct response, it's important to let sleep our thread for a while.
+                        System.Threading.Thread.Sleep(50);
 
 
                         while (_gameProcessMainWindowHandle == IntPtr.Zero)
@@ -386,6 +386,8 @@
                             _gameProcessMainWindowHandle = _gameProcess.MainWindowHandle;
                             _gameProcess.Refresh();
                         }
+
+                        _sf4Memory.runScan();
 
                         int dwStyle = NativeModel.GetWindowLong(_gameProcessMainWindowHandle, NativeModel.GWL_STYLE);
                         NativeModel.SetWindowLong(_gameProcessMainWindowHandle, NativeModel.GWL_STYLE,
@@ -534,9 +536,9 @@
                 //}
                 //Execute.OnUIThread(() => timeLineItems.ElementAtOrDefault(x).Highlight());
 
-                // if we aren't in a match (defined by being on a menu or pause is selected) the play timeline stops.
-                if (_inMatch)
-                {
+            // if we aren't in a match (defined by being on a menu or pause is selected) the play timeline stops.
+            if (_inMatch)
+            {
                     Action(timeLineItems.ElementAtOrDefault(x), true);
                 }
                 else
@@ -655,10 +657,10 @@
             }
             else
             {
-                PlayTimeLine(
-                    message.PlayerOneTimeLineItemViewModels,
-                    message.PlayerTwoTimeLineItemViewModels);
-            }
+            PlayTimeLine(
+                message.PlayerOneTimeLineItemViewModels,
+                message.PlayerTwoTimeLineItemViewModels);
+        }
         }
 
         /// <summary>
@@ -684,9 +686,6 @@
             _isMainWindowEnabled = true;
 
             _sf4Memory = SF4Memory.Instance;
-
-            
-
             _inputResolver = InputResolver.Instance;
 
             Execute.OnUIThread(
