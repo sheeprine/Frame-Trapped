@@ -1,8 +1,12 @@
 ﻿namespace FrameTrapped.Input.Utilities
 {
     using System;
+    using System.Diagnostics;
+
 
     using FrameTrapped.Input.Utilities.MemoryEditor;
+    using FrameTrapped.Input.Utilities.SignatureScanner;
+
      
     /// <summary>
     ///  This class reads data from the memory of a running sf4 instance.
@@ -15,7 +19,55 @@
         private static SF4Memory instance;
 
         private MemoryReader memory = new MemoryReader();
+
+        private SigScan SigScan = new SigScan();
+
+        private int playerBase = 0;
+        private int frameCounterBase = 0;
+        private int comboCounterBase = 0;
+
+        public void runScan()
+        {
+            byte[] pattern = new byte[] { 
+                0x84, 0x05, 0xE0, 0xA2, 0xA8, 0x00, 0x75, 0x24, 0x09, 
+                0x05, 0x00, 0x00, 0x00, 0x00, 0xB9, 0x00, 0x00, 0x00, 
+                0x00, 0xC7, 0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0xE8, 
+                0x00, 0x00, 0x00, 0x00, 0x68, 0x00, 0x00, 0x00, 0x00, 
+                0xE8, 0x00, 0x00, 0x00, 0x00, 0x83, 0xC4, 0x04, 0xB8, 
+                0x00, 0x00, 0x00, 0x00, 0x8B, 0x4D, 0xF4, 0x64, 0x89, 
+                0x0D, 0x00, 0x00, 0x00, 0x00, 0x59, 0x8B, 0xE5, 0x5D };   //This is the pattern we use to find the base of what we want in memory. Add 0x5c to it to get to the players.
+
+            string mask = "xxx?xxxxxx????x????xx?????x????x????x????xxxx????xxxxxx????xxxx";
+
+            this.SigScan.Address = new IntPtr(0x400000);
+            this.SigScan.Size = 0x900000; //This should be more than enough.
+            IntPtr address = IntPtr.Zero;
+
+            try
+            {
+                SigScan.Process = Process.GetProcessesByName("SSFIV")[0];
+                address = SigScan.FindPattern(pattern, mask, 0x2d);
+            }
+            catch
+            {
+                //Error message here. (Couldn't find the process)
+            }
+            SigScan.ResetRegion();
+
+            if (address != IntPtr.Zero)
+            {
+                openSF4Process();
+                playerBase = readIntFromGameMemory(address.ToInt32()) + 0x5c;
+                frameCounterBase = playerBase + 0x24;
+                comboCounterBase = playerBase + 0x4;
+            }
+            else
+            {
+                //Error message here. (Probably wrong pattern/mask)
+            }
         
+        }
+
         public bool openSF4Process()
         {
             if (this.memory.OpenProcess("SSFIV"))
@@ -30,37 +82,37 @@
 
         private int readIntFromGameMemory(int address)
         {
-            return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + address ));
+            return Convert.ToInt32(this.memory.ReadInt(address ));
         }
 
         private int readIntFromGameMemory(int address, int[] offsets)
         {
-            return Convert.ToInt32(this.memory.ReadInt(this.memory.BaseAddress() + address, offsets));
+            return Convert.ToInt32(this.memory.ReadInt(address, offsets));
         }
 
         private float readFloatFromGameMemory(int address, int[] offsets)
         {
-            return this.memory.ReadFloat(this.memory.BaseAddress() + address, offsets);
+            return this.memory.ReadFloat(address, offsets);
         }
 
         private byte[] readMemoryAOB(int address, int[] offsets, uint bytestoread)
         {
-            return this.memory.ReadAOB(this.memory.BaseAddress() + address , offsets, bytestoread);
+            return this.memory.ReadAOB(address , offsets, bytestoread);
         }
 
         public int GetFrameCount()
         {
-            return readIntFromGameMemory(0x688E90, new int[] { 0x28 });
+            return readIntFromGameMemory(frameCounterBase, new int[] { 0x28 });
         }
 
         public float GetP1PosX()
         {
-            return readFloatFromGameMemory(0x688E6C, new int[] { 0x8, 0x70 });
+            return readFloatFromGameMemory(playerBase, new int[] { 0x8, 0x70 });
         }
 
         public float GetP2PosX()
         {
-            return readFloatFromGameMemory(0x688E6C, new int[] { 0xC, 0x70 });
+            return readFloatFromGameMemory(playerBase, new int[] { 0xC, 0x70 });
         }
 
         /// <summary>
@@ -69,12 +121,12 @@
         /// <remarks>There is only one combo counter. It's the same for both players. Will increase with 1 for each hit in a combo.</remarks>
         public int GetComboCounter()
         {
-            return readIntFromGameMemory(0x688E70, new int[] { 0x130 });
+            return readIntFromGameMemory(comboCounterBase, new int[] { 0x130 });
         }
 
         public int GetPlayerScript(int player) //Returns animation number (script number).
         {
-            int address = 0x688E6C;
+            int address = playerBase;
             int action = -1;
             if (player == 1)
                 action = readIntFromGameMemory(address, new int[] { 0x8, 0xB0, 0x18 });
@@ -85,7 +137,7 @@
 
         public int GetAnimationFrame(int player) //Returns which frame the animation is on
         {
-            int address = 0x688E6C;
+            int address = playerBase;
             if (player == 1)
             {
                 return System.BitConverter.ToInt16(readMemoryAOB(address, new int[] { 0x8, 0xB0, 0x1E }, 2), 0);
