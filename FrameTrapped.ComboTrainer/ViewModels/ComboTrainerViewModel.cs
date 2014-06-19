@@ -149,18 +149,17 @@
         public void PlaybackStart()
         {
             _events.Publish(new FocusStreetFighterMessage());
-            if (PlayerOneTimeLineEnabled || PlayerTwoTimeLineEnabled)
+            try
             {
-                try
-                {
-                    _events.Publish(new PlayTimeLineMessage(
-                        PlayerOneTimeLineEnabled ? PlayerOneTimeLineViewModel.TimeLineItems : null,
-                        PlayerTwoTimeLineEnabled ? PlayerTwoTimeLineViewModel.TimeLineItems : null,
+               _events.Publish(
+                    new PlayTimeLineMessage(
+                        PlayerOneTimeLineViewModel,
+                        PlayerTwoTimeLineViewModel,
                         RepeatAmount));
-                }
-                catch(Exception ex)
-                {
-                    Execute.OnUIThread(() =>
+            }
+            catch(Exception ex)
+            {
+                Execute.OnUIThread(() =>
                                System.Windows.MessageBox.Show(
                                System.Windows.Application.Current.MainWindow,
                                string.Format("The game crashed: {0} !", ex.Message),
@@ -168,7 +167,6 @@
                                System.Windows.MessageBoxButton.OK,
                                System.Windows.MessageBoxImage.Error));
                 }
-            }
         }
 
         public Size SelectedResolution

@@ -30,11 +30,11 @@
         /// The events aggregator.
         /// </summary>
         private IEventAggregator _events;
-
+        
         /// <summary>
-        /// The auto switch to SF4 flag.
+        /// The send inputs flag.
         /// </summary>
-        private bool _autoSwitchToSF4;
+        private bool _sendInputs;
 
         /// <summary>
         /// The currently selected time line item.
@@ -68,15 +68,15 @@
         /// <summary>
         /// Gets or sets a value indicating wether we wants to automatically switch to SF4.
         /// </summary>
-        public bool AutoSwitchToSF4
+        public bool SendInputs
         {
-            get { return _autoSwitchToSF4; }
+            get { return _sendInputs; }
             set
             {
-                if (value != _autoSwitchToSF4)
+                if (value != _sendInputs)
                 {
-                    _autoSwitchToSF4 = value;
-                    NotifyOfPropertyChange(() => AutoSwitchToSF4);
+                    _sendInputs = value;
+                    NotifyOfPropertyChange(() => SendInputs);
                 }
             }
         }
@@ -372,7 +372,7 @@
 
             SelectedTimeLineItem = TimeLineItems.Last();
 
-            _autoSwitchToSF4 = true;
+            _sendInputs = true;
         }
     }
 }

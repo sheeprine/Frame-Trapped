@@ -19,9 +19,11 @@
     <DockPanel Grid.Row="0">
         <!--Playback functions-->
         <ToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
-            <Button x:Name="AddTimeLineItem"  Content="Add Input" HorizontalAlignment="Stretch" />
+            <Button x:Name="AddTimeLineItem"  Content="Add " HorizontalAlignment="Stretch" />
             <Separator />
             <Button x:Name="RemoveTimeLineItem" IsEnabled="{Binding CanRemoveItem}" Content="Remove" HorizontalAlignment="Stretch" />
+            <Separator />
+            <ToggleButton x:Name="SendInputs"  Content="Send Inputs"/>
         </ToolBar>
 
         <!--Input Item List-->

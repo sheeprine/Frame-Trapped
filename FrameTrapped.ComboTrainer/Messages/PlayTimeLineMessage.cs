@@ -5,24 +5,17 @@
 
     public class PlayTimeLineMessage
     {
-        public IEnumerable<TimeLineItemViewModel> PlayerOneTimeLineItemViewModels { get; private set; }
-        public IEnumerable<TimeLineItemViewModel> PlayerTwoTimeLineItemViewModels { get; private set; }
+        public TimeLineViewModel PlayerOneTimeLineItemViewModels { get; set; }
+        public TimeLineViewModel PlayerTwoTimeLineItemViewModels { get; set; }
         public int RepeatAmount { get; private set; }
 
-        public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItemViewModels)
-        {
-            PlayerOneTimeLineItemViewModels = playerOneTimeLineItemViewModels;
-            PlayerTwoTimeLineItemViewModels = null;
-        }
-
-        public PlayTimeLineMessage(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItemViewModels,
-            IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItemViewModels,
+        public PlayTimeLineMessage(TimeLineViewModel playerOneTimeLineViewModels,
+            TimeLineViewModel playerTwoTimeItemViewModels,
             int repeatAmount)
         {
-            PlayerOneTimeLineItemViewModels = playerOneTimeLineItemViewModels;
-            PlayerTwoTimeLineItemViewModels = playerTwoTimeLineItemViewModels;
+            PlayerOneTimeLineItemViewModels = playerOneTimeLineViewModels;
+            PlayerTwoTimeLineItemViewModels = playerTwoTimeItemViewModels;
             RepeatAmount = repeatAmount;
         }
-
     }
 }

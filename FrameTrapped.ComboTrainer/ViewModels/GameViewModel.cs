@@ -203,7 +203,7 @@
         /// </summary>
         /// <param name="timeLineItem"></param>
         /// <param name="sendInputs"></param>
-        private void TwoPlayerAction(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItems, IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItems, bool sendInputs)
+        private void TwoPlayerAction(TimeLineViewModel playerOneTimeLine, TimeLineViewModel playerTwoTimeLine)
         {
             // This counts down each players frames for individual time line items.
             int playerOneCountdown;
@@ -221,10 +221,17 @@
             TimeLineItemViewModel playerTwoCurrentItem;
 
             // These queues will contain the actual time line items and dequeue them as they are consumed by their frame counter  
-            Queue<TimeLineItemViewModel> playerOneQueue =
-                new Queue<TimeLineItemViewModel>(playerOneTimeLineItems);
-            Queue<TimeLineItemViewModel> playerTwoQueue =
-                new Queue<TimeLineItemViewModel>(playerTwoTimeLineItems);
+            Queue<TimeLineItemViewModel> playerOneQueue = new Queue<TimeLineItemViewModel>();
+            Queue<TimeLineItemViewModel> playerTwoQueue = new Queue<TimeLineItemViewModel>();
+
+            if (playerOneTimeLine.SendInputs)
+            {
+                playerOneTimeLine.TimeLineItems.Apply(o => playerOneQueue.Enqueue(o));
+            }
+            if (playerTwoTimeLine.SendInputs)
+            {
+                playerTwoTimeLine.TimeLineItems.Apply(o => playerTwoQueue.Enqueue(o));
+            }
 
             playerOneQueueFrames = playerOneQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
             playerTwoQueueFrames = playerTwoQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
@@ -263,11 +270,8 @@
                     playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
                 }
 
-                if (sendInputs)
-                {
                 SendPlayerInput(1, playerOneCurrentItem);
                 SendPlayerInput(2, playerTwoCurrentItem);
-                }
 
                 if (playerOneCurrentItem.InputItemViewModel.PlaySound && playerOneQueueFrames == playerOneCountdown)
                 {
@@ -520,45 +524,8 @@
         /// Setup to play the time line.
         /// </summary>
         /// <param name="timeLineItems"></param>
-        public void PlayTimeLine(IEnumerable<TimeLineItemViewModel> timeLineItems)
-        {
-            if (!DelayPlayBack())
-            {
-                return;
-            }
-
-            for (int x = 0; x < timeLineItems.Count(); x++)
-            {
-                ////highlighting of current item
-                //if (timeLineItems.ElementAtOrDefault(x - 1) != null)
-                //{
-                //    Execute.OnUIThread(() => timeLineItems.ElementAtOrDefault(x - 1).DeHighlight());
-                //}
-                //Execute.OnUIThread(() => timeLineItems.ElementAtOrDefault(x).Highlight());
-
-                // if we aren't in a match (defined by being on a menu or pause is selected) the play timeline stops.
-                if (_inMatch)
-                {
-                    Action(timeLineItems.ElementAtOrDefault(x), true);
-                }
-                else
-                {
-                    string message = "The combo trainer has detected that SF4 didn't produce any new frames in the last 3 seconds. Make sure that\n\na) Street Fighter 4 is running and inside a match or training mode\nb) Street Fighter is not paused\nc) You are running the latest version of Street Fighter 4 AEv2012\nd) Stage Quality in your SF4 graphic settings is set to HIGH";
-                    System.Windows.MessageBox.Show(message);
-                    break;
-                }
-            }
-
-            ReleaseAll();
-        }
-
-
-        /// <summary>
-        /// Setup to play the time line.
-        /// </summary>
-        /// <param name="timeLineItems"></param>
-        public void PlayTimeLine(IEnumerable<TimeLineItemViewModel> playerOneTimeLineItems,
-            IEnumerable<TimeLineItemViewModel> playerTwoTimeLineItems,
+        public void PlayTimeLine(TimeLineViewModel playerOneTimeLine,
+            TimeLineViewModel playerTwoTimeLine,
             int repeatAmount)
         {
             if (!DelayPlayBack())
@@ -570,7 +537,7 @@
             {
                 while (repeatAmount > 0)
                 {
-                    TwoPlayerAction(playerOneTimeLineItems, playerTwoTimeLineItems, true);
+                    TwoPlayerAction(playerOneTimeLine, playerTwoTimeLine);
                     repeatAmount--;
                 }
             }
@@ -582,7 +549,6 @@
 
             ReleaseAll();
         }
-
 
         /// <summary>
         /// Releases all the buttons.
@@ -657,17 +623,10 @@
         /// <param name="message"></param>
         public void Handle(PlayTimeLineMessage message)
         {
-            if (message.PlayerTwoTimeLineItemViewModels == null)
-            {
-                PlayTimeLine(message.PlayerOneTimeLineItemViewModels);
-            }
-            else
-            {
-                PlayTimeLine(
-                    message.PlayerOneTimeLineItemViewModels,
-                    message.PlayerTwoTimeLineItemViewModels,
-                    message.RepeatAmount);
-            }
+            PlayTimeLine(
+                message.PlayerOneTimeLineItemViewModels,
+                message.PlayerTwoTimeLineItemViewModels,
+                message.RepeatAmount);
         }
 
         /// <summary>
@@ -701,6 +660,7 @@
                     _panel = new System.Windows.Forms.Panel();
                     CreateGameProcess(_panel.Handle);
                 });
+
         }
     }
 }
