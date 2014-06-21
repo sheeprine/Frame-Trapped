@@ -8,10 +8,19 @@
         <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
     </Menu.Resources>
     <MenuItem Header="File">
-        <MenuItem Header="Open Time Line"  cal:Message.Attach="OpenTimeLine" InputGestureText="Ctrl+O" />
-        <MenuItem Header="Append Time Line" cal:Message.Attach="AppendTimeLine" InputGestureText="Ctrl+Shift+O" />
+        <MenuItem Header="Open Time Line" >
+            <MenuItem Header="{DynamicResource PlayerOne}" cal:Message.Attach="OpenTimeLine(1)"  InputGestureText="Ctrl+O"/>
+            <MenuItem Header="{DynamicResource PlayerTwo}" cal:Message.Attach="OpenTimeLine(2)" />
+        </MenuItem>
+        <MenuItem Header="Append Time Line">
+            <MenuItem Header="{DynamicResource PlayerOne}" cal:Message.Attach="AppendTimeLine(1)"  InputGestureText="Ctrl+Shift+O"/>
+            <MenuItem Header="{DynamicResource PlayerTwo}" cal:Message.Attach="AppendTimeLine(2)" />
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="Save Time Line" cal:Message.Attach="SaveTimeLine"  InputGestureText="Ctrl+S" />
+        <MenuItem Header="Save Time Line">
+            <MenuItem Header="{DynamicResource PlayerOne}" cal:Message.Attach="SaveTimeLine(1)"  InputGestureText="Ctrl+S"/>
+            <MenuItem Header="{DynamicResource PlayerTwo}" cal:Message.Attach="SaveTimeLine(2)" />
+        </MenuItem>
         <Separator/>
         <MenuItem Header="Exit" cal:Message.Attach="Exit" InputGestureText="Alt+F4" />
     </MenuItem>

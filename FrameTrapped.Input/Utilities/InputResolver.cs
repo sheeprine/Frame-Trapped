@@ -44,86 +44,60 @@ namespace FrameTrapped.Input.Utilities
 
         private void readInputConfig()
         {
+            string inputFolder = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), @"Documents\CAPCOM\SUPERSTREETFIGHTERIV\input");
+            byte[] bytes;
 
-            if (true)
-            {
-                string inputFolder = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), @"Documents\CAPCOM\SUPERSTREETFIGHTERIV\input");
-                byte[] bytes;
+            bytes = File.ReadAllBytes(Path.Combine(inputFolder, @"KEYBOARD_DEVICE#0.ctrlsav"));
 
-                bytes = File.ReadAllBytes(Path.Combine(inputFolder, @"KEYBOARD_DEVICE#0.ctrlsav"));
+            PlayerOneInputMap.Add(Input.Up, (VirtualKeyCode)bytes[192]);
+            PlayerOneInputMap.Add(Input.Down, (VirtualKeyCode)bytes[200]);
+            PlayerOneInputMap.Add(Input.Left, (VirtualKeyCode)bytes[208]);
+            PlayerOneInputMap.Add(Input.Right, (VirtualKeyCode)bytes[216]);
 
-                PlayerOneInputMap.Add(Input.Up, (VirtualKeyCode)bytes[192]);
-                PlayerOneInputMap.Add(Input.Down, (VirtualKeyCode)bytes[200]);
-                PlayerOneInputMap.Add(Input.Left, (VirtualKeyCode)bytes[208]);
-                PlayerOneInputMap.Add(Input.Right, (VirtualKeyCode)bytes[216]);
+            PlayerOneInputMap.Add(Input.LightPunch, (VirtualKeyCode)bytes[224]);
+            PlayerOneInputMap.Add(Input.MediumPunch, (VirtualKeyCode)bytes[232]);
+            PlayerOneInputMap.Add(Input.HardPunch, (VirtualKeyCode)bytes[240]);
+            PlayerOneInputMap.Add(Input.LightKick, (VirtualKeyCode)bytes[248]);
+            PlayerOneInputMap.Add(Input.MediumKick, (VirtualKeyCode)bytes[256]);
+            PlayerOneInputMap.Add(Input.HardKick, (VirtualKeyCode)bytes[264]);
 
-                PlayerOneInputMap.Add(Input.LightPunch, (VirtualKeyCode)bytes[224]);
-                PlayerOneInputMap.Add(Input.MediumPunch, (VirtualKeyCode)bytes[232]);
-                PlayerOneInputMap.Add(Input.HardPunch, (VirtualKeyCode)bytes[240]);
-                PlayerOneInputMap.Add(Input.LightKick, (VirtualKeyCode)bytes[248]);
-                PlayerOneInputMap.Add(Input.MediumKick, (VirtualKeyCode)bytes[256]);
-                PlayerOneInputMap.Add(Input.HardKick, (VirtualKeyCode)bytes[264]);
+            InputMap.Add((VirtualKeyCode)bytes[192]);
+            InputMap.Add((VirtualKeyCode)bytes[200]);
+            InputMap.Add((VirtualKeyCode)bytes[208]);
+            InputMap.Add((VirtualKeyCode)bytes[216]);
 
-                InputMap.Add((VirtualKeyCode)bytes[192]);
-                InputMap.Add((VirtualKeyCode)bytes[200]);
-                InputMap.Add((VirtualKeyCode)bytes[208]);
-                InputMap.Add((VirtualKeyCode)bytes[216]);
+            InputMap.Add((VirtualKeyCode)bytes[224]);
+            InputMap.Add((VirtualKeyCode)bytes[232]);
+            InputMap.Add((VirtualKeyCode)bytes[240]);
+            InputMap.Add((VirtualKeyCode)bytes[248]);
+            InputMap.Add((VirtualKeyCode)bytes[256]);
+            InputMap.Add((VirtualKeyCode)bytes[264]);
 
-                InputMap.Add((VirtualKeyCode)bytes[224]);
-                InputMap.Add((VirtualKeyCode)bytes[232]);
-                InputMap.Add((VirtualKeyCode)bytes[240]);
-                InputMap.Add((VirtualKeyCode)bytes[248]);
-                InputMap.Add((VirtualKeyCode)bytes[256]);
-                InputMap.Add((VirtualKeyCode)bytes[264]);
+            bytes = File.ReadAllBytes(Path.Combine(inputFolder, @"KEYBOARD_DEVICE#1.ctrlsav"));
 
-                bytes = File.ReadAllBytes(Path.Combine(inputFolder, @"KEYBOARD_DEVICE#1.ctrlsav"));
+            PlayerTwoInputMap.Add(Input.Up, (VirtualKeyCode)bytes[192]);
+            PlayerTwoInputMap.Add(Input.Down, (VirtualKeyCode)bytes[200]);
+            PlayerTwoInputMap.Add(Input.Left, (VirtualKeyCode)bytes[208]);
+            PlayerTwoInputMap.Add(Input.Right, (VirtualKeyCode)bytes[216]);
 
-                PlayerTwoInputMap.Add(Input.Up, (VirtualKeyCode)bytes[192]);
-                PlayerTwoInputMap.Add(Input.Down, (VirtualKeyCode)bytes[200]);
-                PlayerTwoInputMap.Add(Input.Left, (VirtualKeyCode)bytes[208]);
-                PlayerTwoInputMap.Add(Input.Right, (VirtualKeyCode)bytes[216]);
+            PlayerTwoInputMap.Add(Input.LightPunch, (VirtualKeyCode)bytes[224]);
+            PlayerTwoInputMap.Add(Input.MediumPunch, (VirtualKeyCode)bytes[232]);
+            PlayerTwoInputMap.Add(Input.HardPunch, (VirtualKeyCode)bytes[240]);
+            PlayerTwoInputMap.Add(Input.LightKick, (VirtualKeyCode)bytes[248]);
+            PlayerTwoInputMap.Add(Input.MediumKick, (VirtualKeyCode)bytes[256]);
+            PlayerTwoInputMap.Add(Input.HardKick, (VirtualKeyCode)bytes[264]);
 
-                PlayerTwoInputMap.Add(Input.LightPunch, (VirtualKeyCode)bytes[224]);
-                PlayerTwoInputMap.Add(Input.MediumPunch, (VirtualKeyCode)bytes[232]);
-                PlayerTwoInputMap.Add(Input.HardPunch, (VirtualKeyCode)bytes[240]);
-                PlayerTwoInputMap.Add(Input.LightKick, (VirtualKeyCode)bytes[248]);
-                PlayerTwoInputMap.Add(Input.MediumKick, (VirtualKeyCode)bytes[256]);
-                PlayerTwoInputMap.Add(Input.HardKick, (VirtualKeyCode)bytes[264]);
+            InputMap.Add((VirtualKeyCode)bytes[192]);
+            InputMap.Add((VirtualKeyCode)bytes[200]);
+            InputMap.Add((VirtualKeyCode)bytes[208]);
+            InputMap.Add((VirtualKeyCode)bytes[216]);
 
-                InputMap.Add((VirtualKeyCode)bytes[192]);
-                InputMap.Add((VirtualKeyCode)bytes[200]);
-                InputMap.Add((VirtualKeyCode)bytes[208]);
-                InputMap.Add((VirtualKeyCode)bytes[216]);
-
-                InputMap.Add((VirtualKeyCode)bytes[224]);
-                InputMap.Add((VirtualKeyCode)bytes[232]);
-                InputMap.Add((VirtualKeyCode)bytes[240]);
-                InputMap.Add((VirtualKeyCode)bytes[248]);
-                InputMap.Add((VirtualKeyCode)bytes[256]);
-                InputMap.Add((VirtualKeyCode)bytes[264]);
-
-            }
-            else
-            {
-                foreach (SettingsProperty setting in Settings.Default.Properties)
-                {
-                    if (setting.PropertyType == typeof(VirtualKeyCode))
-                    {
-                        if (setting.Name.StartsWith("P1"))
-                        {
-                            PlayerOneInputMap.Add((Input)Enum.Parse(typeof(Input), setting.Name.Substring(3)),
-                                (VirtualKeyCode)Settings.Default.PropertyValues[setting.Name].PropertyValue);
-                            InputMap.Add((VirtualKeyCode)Settings.Default.PropertyValues[setting.Name].PropertyValue);
-                        }
-                        else if (setting.Name.StartsWith("P2"))
-                        {
-                            PlayerTwoInputMap.Add((Input)Enum.Parse(typeof(Input), setting.Name.Substring(3)),
-                               (VirtualKeyCode)Settings.Default[setting.Name]);
-                            InputMap.Add((VirtualKeyCode)Settings.Default.PropertyValues[setting.Name].PropertyValue);
-                        }
-                    }
-                }
-            }
+            InputMap.Add((VirtualKeyCode)bytes[224]);
+            InputMap.Add((VirtualKeyCode)bytes[232]);
+            InputMap.Add((VirtualKeyCode)bytes[240]);
+            InputMap.Add((VirtualKeyCode)bytes[248]);
+            InputMap.Add((VirtualKeyCode)bytes[256]);
+            InputMap.Add((VirtualKeyCode)bytes[264]);
         }
 
         private VirtualKeyCode ResolvePlayerBackwardInput(int player)

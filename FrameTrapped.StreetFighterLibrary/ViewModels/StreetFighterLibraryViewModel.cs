@@ -8,17 +8,17 @@
     using FrameTrapped.Input.ViewModels;
     using FrameTrapped.StreetFighterLibrary.Utilities;
 
-    public class StreetFighterLibraryViewModel : PropertyChangedBase
+    public class StreetFighterLibraryViewModel : Screen
     {
-        /// <summary>
-        /// The title.
-        /// </summary>
-        private string _title;
-
         /// <summary>
         /// The events aggregator.
         /// </summary>
         private IEventAggregator _events;
+
+        /// <summary>
+        /// The title.
+        /// </summary>
+        private string _title;
 
         /// <summary>
         /// The currently selected fighter.
@@ -26,29 +26,15 @@
         private FighterViewModel _selectedFighter;
 
         /// <summary>
-        /// Gets the home view model.
+        /// Is the move list tab item selected?
         /// </summary>
-        public ObservableCollection<FighterViewModel> FightersList { get; private set; }
+        private bool _moveListTabItemSelected;
 
         /// <summary>
-        /// Gets or sets the currently selected fighter.
+        /// Is the linkable moves tab item selected?
         /// </summary>
-        public FighterViewModel SelectedFighter
-        {
-            get
-            {
-                return _selectedFighter;
-            }
-            set
-            {
-                if (value != _selectedFighter)
-                { 
-                    _selectedFighter = value;
-                    NotifyOfPropertyChange(() => SelectedFighter);
-                }
-            }
-        }
-
+        private bool _linkableMovesTabItemSelected;
+        
         /// <summary>
         /// Gets or sets window title.
         /// </summary>
@@ -67,19 +53,76 @@
         }
 
         /// <summary>
+        /// Gets the home view model.
+        /// </summary>
+        public ObservableCollection<FighterViewModel> FightersList { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the currently selected fighter.
+        /// </summary>
+        public FighterViewModel SelectedFighter
+        {
+            get
+            {
+                return _selectedFighter;
+            }
+            set
+            {
+                if (value != _selectedFighter)
+                {
+                    _selectedFighter = value;
+                    NotifyOfPropertyChange(() => SelectedFighter);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the home tab item is selected.
+        /// </summary>
+        public bool MoveListTabItemSelected
+        {
+            get
+            {
+                return _moveListTabItemSelected;
+            }
+
+            set
+            {
+                _moveListTabItemSelected = value;
+                NotifyOfPropertyChange(() => MoveListTabItemSelected);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the home tab item is selected.
+        /// </summary>
+        public bool LinkableMovesTabItemSelected
+        {
+            get
+            {
+                return _linkableMovesTabItemSelected;
+            }
+
+            set
+            {
+                _linkableMovesTabItemSelected = value;
+                NotifyOfPropertyChange(() => LinkableMovesTabItemSelected);
+            }
+        } 
+        /// <summary>
         /// Add command to time line.
         /// </summary>
         /// <param name="moveViewModel">The move view model containing the moves.</param>
-        public void AddCommandToTimeline(MoveViewModel moveViewModel)
+        public void AddCommandToTimeline(MoveViewModel moveViewModel, int player)
         {
             foreach (InputItemViewModel inputItemViewModel in moveViewModel.Command.Commands)
             {
                 TimeLineItemViewModel timeLineItemViewModel = new TimeLineItemViewModel();
                 timeLineItemViewModel.InputItemViewModel = inputItemViewModel;
-                _events.Publish(new AddTimeLineItemMessage(timeLineItemViewModel));
+                _events.Publish(new AddTimeLineItemMessage(timeLineItemViewModel, player));
             }
         }
-        
+
         public StreetFighterLibraryViewModel(IEventAggregator events)
         {
             _events = events;
@@ -87,6 +130,7 @@
 
             FightersList = new ObservableCollection<FighterViewModel>();
 
+            // First Row
             FightersList.Add(FighterDataAE2012.Ryu());
             FightersList.Add(FighterDataAE2012.Ken());
             FightersList.Add(FighterDataAE2012.EHonda());
@@ -101,6 +145,7 @@
             FightersList.Add(FighterDataAE2012.Sakura());
             FightersList.Add(FighterDataAE2012.Oni());
 
+            // Second Row
             FightersList.Add(FighterDataAE2012.Yun());
             FightersList.Add(FighterDataAE2012.Juri());
             FightersList.Add(FighterDataAE2012.ChunLi());
@@ -116,6 +161,7 @@
             FightersList.Add(FighterDataAE2012.Hakan());
             FightersList.Add(FighterDataAE2012.Yang());
 
+            //Third Row
             FightersList.Add(FighterDataAE2012.EvilRyu());
             FightersList.Add(FighterDataAE2012.Guile());
             FightersList.Add(FighterDataAE2012.Blanka());
@@ -127,8 +173,9 @@
             FightersList.Add(FighterDataAE2012.FeiLong());
             FightersList.Add(FighterDataAE2012.THawk());
             FightersList.Add(FighterDataAE2012.Adon());
-            FightersList.Add(FighterDataAE2012.Rose()); 
+            FightersList.Add(FighterDataAE2012.Rose());
 
+            MoveListTabItemSelected = true;
         }
     }
 }

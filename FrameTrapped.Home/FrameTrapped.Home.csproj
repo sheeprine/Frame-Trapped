@@ -62,6 +62,12 @@
     <Reference Include="Autofac">
       <HintPath>..\lib\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="FrameTrapped.ComboTrainer">
+      <HintPath>..\FrameTrapped\lib\FrameTrapped.ComboTrainer.dll</HintPath>
+    </Reference>
+    <Reference Include="FrameTrapped.Common">
+      <HintPath>..\FrameTrapped\lib\FrameTrapped.Common.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\lib\MahApps.Metro.dll</HintPath>
       <Private>False</Private>

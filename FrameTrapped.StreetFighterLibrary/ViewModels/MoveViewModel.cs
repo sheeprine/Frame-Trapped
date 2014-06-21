@@ -25,6 +25,31 @@
             Ultra
         }
 
+        public HitViewModel.CancelAbilityEnum CancelIntoType
+        {
+            get
+            {
+                switch (MoveType)
+                {
+                    case MoveTypeEnum.Super:
+                        return HitViewModel.CancelAbilityEnum.Super;
+
+                    case MoveTypeEnum.Special:
+                    case MoveTypeEnum.ExtraSpecial:
+                        return HitViewModel.CancelAbilityEnum.Special;
+
+                    case MoveTypeEnum.Ultra:
+                        return HitViewModel.CancelAbilityEnum.Ultra;
+                }
+                if (Hits.SelectMany<HitViewModel, HitViewModel.CancelAbilityEnum>(
+                                    hit => hit.CancelAbility.ToList()).Contains(HitViewModel.CancelAbilityEnum.Chain))
+                {
+                    return HitViewModel.CancelAbilityEnum.Chain;
+                }
+                return HitViewModel.CancelAbilityEnum.None;
+            }
+        }
+
         private IEventAggregator _events;
 
         public string Name { get; private set; }
@@ -129,13 +154,17 @@
 
         public CommandViewModel Command { get; private set; }
 
-        public void AddCommandToTimeline(object moveViewModel)
+        /// <summary>
+        /// Add command to time line.
+        /// </summary>
+        /// <param name="moveViewModel">The move view model containing the moves.</param>
+        public void AddCommandToTimeline(MoveViewModel moveViewModel, int player)
         {
             foreach (InputItemViewModel inputItem in Command.Commands)
             {
                 TimeLineItemViewModel timeLineItemViewModel = new TimeLineItemViewModel();
                 timeLineItemViewModel.InputItemViewModel = inputItem;
-                _events.Publish(new AddTimeLineItemMessage(timeLineItemViewModel));
+                _events.Publish(new AddTimeLineItemMessage(timeLineItemViewModel, player));
             }
         }
 

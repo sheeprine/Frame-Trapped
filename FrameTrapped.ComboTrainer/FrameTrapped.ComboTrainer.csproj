@@ -106,7 +106,6 @@
     <Compile Include="Messages\PlayTimeLineMessage.cs" />
     <Compile Include="Messages\OpenTimeLineMessage.cs" />
     <Compile Include="Messages\SaveTimeLineMessage.cs" />
-    <Compile Include="Utilities\SF4ProcessHandler.cs" />
     <Compile Include="ViewModels\ComboTrainerViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\TimeLineItemViewModel.cs" />

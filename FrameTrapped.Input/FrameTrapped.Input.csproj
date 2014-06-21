@@ -125,9 +125,6 @@
     <Compile Include="Utilities\SF4Memory.cs" />
     <Compile Include="Utilities\SigScan\SigScan.cs" />
     <Compile Include="ViewModels\InputItemViewModel.cs" />
-    <Compile Include="Views\InputItemView.xaml.cs">
-      <DependentUpon>InputItemView.xaml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -137,12 +134,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\InputItemView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FrameTrapped.Common\FrameTrapped.Common.csproj">

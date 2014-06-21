@@ -14,23 +14,19 @@
     using FrameTrapped.Input.Utilities;
     using FrameTrapped.Input.ViewModels;
     using FrameTrapped.Utilities;
-    using FrameTrapped.ComboTrainer.Utilities;
     using FrameTrapped.ComboTrainer.Messages;
     using System.IO;
 
     /// <summary>
     /// The time line item view model class.
     /// </summary>
-    public class TimeLineViewModel : Conductor<TimeLineViewModel>.Collection.OneActive,
-                                    IHandle<AddTimeLineItemMessage>,
-                                    IHandle<SaveTimeLineMessage>,
-                                    IHandle<OpenTimeLineMessage>
+    public class TimeLineViewModel : Conductor<TimeLineItemViewModel>.Collection.OneActive
     {
         /// <summary>
         /// The events aggregator.
         /// </summary>
         private IEventAggregator _events;
-        
+
         /// <summary>
         /// The send inputs flag.
         /// </summary>
@@ -55,7 +51,11 @@
                 }
 
                 _selectedTimeLineItem = value;
-                _selectedTimeLineItem.Highlight();
+
+                if (value != null)
+                {
+                    _selectedTimeLineItem.Highlight();
+                }
                 NotifyOfPropertyChange(() => SelectedTimeLineItem);
             }
         }
@@ -108,7 +108,6 @@
             TimeLineItems.Insert(TimeLineItems.IndexOf(SelectedTimeLineItem) + 1, timeLineItemViewModel);
 
             SelectedTimeLineItem = timeLineItemViewModel;
-
 
             NotifyOfPropertyChange(() => CanRemoveItem);
             NotifyOfPropertyChange(() => TimeLineItems);
@@ -218,14 +217,14 @@
 
         public void OldDeserialize(List<string> lines)
         {
+            List<Input> inputsOnHold = new List<Input>();
             foreach (String line in lines)
             {
-                List<Input> inputsOnHold = new List<Input>();
                 String[] tokens = line.Split('#');
 
                 InputItemModel item = new InputItemModel();
                 int numInputs;
-                Input[] inputs;                 
+                Input[] inputs;
 
                 string inputType = tokens[0].ToString().ToUpper();
                 switch (inputType)
@@ -246,7 +245,7 @@
                             inputs[i] = InputItemModel.ParseInput(tokens[3 + i]);
                         }
 
-                        item = new InputItemModel(); 
+                        item = new InputItemModel();
                         item.Inputs = inputsOnHold.Concat(inputs.ToList()).Distinct().ToArray();
                         break;
 
@@ -258,7 +257,7 @@
                             inputsOnHold.Add(InputItemModel.ParseInput(tokens[3 + i]));
                         }
 
-                        item = new InputItemModel(); 
+                        item = new InputItemModel();
                         item.Inputs = inputsOnHold.Distinct().ToArray();
                         break;
 
@@ -273,10 +272,10 @@
                         }
 
                         // Add remaining holds
-                        item = new InputItemModel(); 
+                        item = new InputItemModel();
                         item.Inputs = inputsOnHold.ToArray();
                         break;
-                         
+
                     default:
                         throw new FormatException("Failed to deserialize TimelineItem, wrong string format: " + line);
                 }
@@ -329,35 +328,7 @@
                 }
             }
         }
-
-        /// <summary>
-        /// Handles the <see cref="AddTimeLineItemMessage"/>
-        /// </summary>
-        /// <param name="message">The add time line message.</param>
-        public void Handle(AddTimeLineItemMessage message)
-        {
-            TimeLineItemViewModel timeLineItem = message.TimeLineItemViewModel;
-            AddTimeLineItem(timeLineItem);
-        }
-
-        /// <summary>
-        /// Handles the <see cref="OpenTimeLineMessage"/>
-        /// </summary>
-        /// <param name="message">The open time line message.</param>
-        public void Handle(OpenTimeLineMessage message)
-        {
-            OpenTimeLine(message.FilePath, message.Append);
-        }
-
-        /// <summary>
-        /// Handles the <see cref="SaveTimeLineMessage"/>
-        /// </summary>
-        /// <param name="message">The save time line message.</param>
-        public void Handle(SaveTimeLineMessage message)
-        {
-            SaveTimeLine();
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TimeLineViewmodel"/> class.
         /// </summary>

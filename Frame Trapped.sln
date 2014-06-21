@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrapped", "FrameTrappe
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrapped.Home", "FrameTrapped.Home\FrameTrapped.Home.csproj", "{450FAA03-59F8-40FE-BE4F-ECC8C412C819}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB5C3E50-8965-49C0-8858-6D9558DD3B7C} = {AB5C3E50-8965-49C0-8858-6D9558DD3B7C}
+		{A64D40B5-75E0-4BC9-9634-E3064BD4735D} = {A64D40B5-75E0-4BC9-9634-E3064BD4735D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameTrappedUnitTests", "FrameTrappedUnitTests\FrameTrappedUnitTests.csproj", "{B1F51E9B-7080-4C93-985F-1FE55073BA18}"
 EndProject

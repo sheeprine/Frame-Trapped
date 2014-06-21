@@ -8,15 +8,20 @@
 
         public string FilePath { get; private set; }
 
-        public OpenTimeLineMessage(string filePath, bool append)
+        public int Player { get; private set; }
+
+        public OpenTimeLineMessage(string filePath, int player, bool append)
         {
-            Append = append;
             FilePath = filePath;
+            Player = player;
+            Append = append;
         }
 
-        public OpenTimeLineMessage(bool append)
+        public OpenTimeLineMessage(string filePath, int player)
         {
-            Append = append;
+            FilePath = filePath;
+            Player = player;
+            Append = false;
         }
     }
 }

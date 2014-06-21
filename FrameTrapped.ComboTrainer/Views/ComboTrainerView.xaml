@@ -1,14 +1,15 @@
-﻿<DockPanel x:Class="FrameTrapped.ComboTrainer.Views.ComboTrainerView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-      xmlns:converters="clr-namespace:FrameTrapped.Common.Converters;assembly=FrameTrapped.Common"
-      xmlns:vm="clr-namespace:FrameTrapped.ComboTrainer.ViewModels"
-      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-      mc:Ignorable="d"
-      d:DataContext="{Binding Source={StaticResource designVM}}">
+﻿<DockPanel 
+    x:Class="FrameTrapped.ComboTrainer.Views.ComboTrainerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:converters="clr-namespace:FrameTrapped.Common.Converters;assembly=FrameTrapped.Common"
+    xmlns:vm="clr-namespace:FrameTrapped.ComboTrainer.ViewModels"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    mc:Ignorable="d"
+    d:DataContext="{Binding Source={StaticResource designVM}}">
     <DockPanel.Resources>
         <ResourceDictionary>
             <converters:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
@@ -19,11 +20,11 @@
         </ResourceDictionary>
     </DockPanel.Resources>
 
-    <Expander DockPanel.Dock="Left" ExpandDirection="Right" IsExpanded="{Binding PlayerOneTimeLineEnabled}">
-        <ContentControl VerticalAlignment="Stretch" Margin="0,0,5,0" cal:View.Model="{Binding PlayerOneTimeLineViewModel}"/>
+    <Expander DockPanel.Dock="Left" ExpandDirection="Right" IsExpanded="{Binding PlayerOneTimeLineEnabled}" Margin="0">
+        <ContentControl Width="260"  VerticalAlignment="Stretch"  cal:View.Model="{Binding PlayerOneTimeLineViewModel}"/>
     </Expander>
-    <Expander DockPanel.Dock="Right" ExpandDirection="Left" IsExpanded="{Binding PlayerTwoTimeLineEnabled}">
-        <ContentControl DockPanel.Dock="Right" VerticalAlignment="Stretch" Margin="0,0,5,0" cal:View.Model="{Binding PlayerTwoTimeLineViewModel}"/>
+    <Expander DockPanel.Dock="Right" ExpandDirection="Left" IsExpanded="{Binding PlayerTwoTimeLineEnabled}" Margin="0">
+        <ContentControl Width="260" DockPanel.Dock="Right" VerticalAlignment="Stretch"  cal:View.Model="{Binding PlayerTwoTimeLineViewModel}" />
     </Expander>
     <Grid Grid.Column="1">
         <Grid.RowDefinitions>
@@ -65,11 +66,9 @@
             <Separator />
         </ToolBar>
         <Border Grid.Row="1" BorderBrush="AntiqueWhite" BorderThickness="3" >
-
             <ContentControl cal:View.Model="{Binding Path=GameViewModel, Mode=TwoWay}"
                 HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                 />
         </Border>
     </Grid>
-    <!--Visibility="{Binding IsWindowsHostHelperVisible, Converter={StaticResource BoolToVisibleConverter}}"-->
 </DockPanel>

@@ -24,24 +24,26 @@
         /// <summary>
         /// Publishes the open time line message.
         /// </summary>
-        public void OpenTimeLine()
+        public void OpenTimeLine(int player)
         {
-            _events.Publish(new OpenTimeLineMessage(false));
+            _events.Publish(new OpenTimeLineMessage("", player, false)); 
         }
 
         /// <summary>
         /// Publishes the append time line message.
         /// </summary>
-        public void AppendTimeLine() {
-            _events.Publish(new OpenTimeLineMessage(true));
+        public void AppendTimeLine(int player)
+        {
+            _events.Publish(new OpenTimeLineMessage("", player, true));
         }
 
         /// <summary>
         /// Publishes the save time line message.
         /// </summary>
-        public void SaveTimeLine() {
+        public void SaveTimeLine(int player)
+        {
 
-            _events.Publish(new SaveTimeLineMessage());
+            _events.Publish(new SaveTimeLineMessage(player));
         }
 
         /// <summary>
@@ -57,7 +59,7 @@
         /// </summary>
         /// <param name="windowManager">The window manager.</param>
         /// <param name="events">The events aggregator.</param>
-        public MainMenuViewModel( IWindowManager windowManager, IEventAggregator events)
+        public MainMenuViewModel(IWindowManager windowManager, IEventAggregator events)
         {
             _events = events;
             _windowManager = windowManager;

@@ -172,7 +172,7 @@
                 new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Down, Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 20, 0, 50, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Chain, HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 4, 3, 9, -1, 2, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Low, 20, 0, 50, 0, 20, new[] { HitViewModel.CancelAbilityEnum.Special, HitViewModel.CancelAbilityEnum.Super }, 4, 3, 9, -1, 2, ""));
 
             moveList.Add(new MoveViewModel(Events, "Crouch Short", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
@@ -208,7 +208,8 @@
 
             // Neutral Jump Strong
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Medium_Punch = true }
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 5, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -217,7 +218,8 @@
 
             // Neutral Jump Fierce
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Hard_Punch = true } 
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Punch = true } 
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 6, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -227,8 +229,9 @@
             // Neutral Jump Kicks
 
             // Neutral Jump Short
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Light_Kick = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 40, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 5, 9, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -236,8 +239,9 @@
             moveList.Add(new MoveViewModel(Events, "Neutral Jump Short", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Neutral Jump Long
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Medium_Kick = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 10, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -245,8 +249,9 @@
             moveList.Add(new MoveViewModel(Events, "Neutral Jump Long", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Neutral Jump Roundhouse
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Hard_Kick = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 200, 0, 100, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 4, 4, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -257,7 +262,8 @@
 
             // Angled Jump Jab
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Light_Punch = true } 
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Light_Punch = true } 
             });
 
             tmpHitList = new BindableCollection<HitViewModel>();
@@ -266,8 +272,9 @@
             moveList.Add(new MoveViewModel(Events, "Angled Jump Jab", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Angled Jump Strong
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Medium_Punch = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 50, 0, 50, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 7, 3, 0, 0, 0, "Legs projectile invincible until end of startup frames, [1st Air hit] floats opponent,"));
@@ -277,7 +284,8 @@
 
             // Angled Jump Fierce
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Hard_Punch = true } 
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Punch = true } 
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 6, 5, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -288,7 +296,8 @@
 
             // Angled Jump Short
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Light_Kick = true }
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 40, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 4, 8, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -297,7 +306,8 @@
 
             // Angled Jump Long
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Medium_Kick = true }
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 6, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -306,7 +316,8 @@
 
             // Angled Jump Roundhouse
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Hard_Kick = true }
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 200, 0, 100, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 7, 7, 0, 0, 0, "Legs projectile invincible until end of startup frames"));
@@ -675,14 +686,14 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.Forward, Light_Punch = true, Medium_Punch = true, Hard_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 11, 0, 0, 0, 0, "1~9f Invincible"));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 75, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 0, 120, -25, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 11, 0, 0, 0, 0, "1~9f Invincible"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 42, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 75, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 0, 120, -25, 0, ""));
 
             moveList.Add(new MoveViewModel(Events, "Metsu Hadouken", MoveViewModel.MoveTypeEnum.Ultra, tmpHitList, tmpCommand));
 
@@ -696,14 +707,14 @@
                 new InputItemViewModel() { Direction = InputCommandModel.DirectionStateEnum.Forward, Light_Kick = true, Medium_Kick = true, Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 270, 270, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 8, 3, 0, 0, 0, "1~10f Invincible, 11~f airborne"));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 233, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 3, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 3, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 3, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 3, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 3, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 3, 0, 0, 0, ""));
-            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 0, 0, 0, new[] { HitViewModel.CancelAbilityEnum.Super }, 0, 3, 84, -84, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 270, 270, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 8, 3, 0, 0, 0, "1~10f Invincible, 11~f airborne"));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 233, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 38, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 0, 0, 0, ""));
+            tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.Mid, 50, 0, 0, 0, 0, new HitViewModel.CancelAbilityEnum[] { }, 0, 3, 84, -84, 0, ""));
 
             moveList.Add(new MoveViewModel(Events, "Metsu Shoryuken", MoveViewModel.MoveTypeEnum.Ultra, tmpHitList, tmpCommand));
 
@@ -897,7 +908,8 @@
 
             // Neutral Jump Jab
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Light_Punch = true } 
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Light_Punch = true } 
             });
 
             tmpHitList = new BindableCollection<HitViewModel>();
@@ -906,8 +918,9 @@
             moveList.Add(new MoveViewModel(Events, "Neutral Jump Jab", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Neutral Jump Strong
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Medium_Punch = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 5, 4, 0, 0, 0, ""));
@@ -916,7 +929,8 @@
 
             // Neutral Jump Fierce
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Hard_Punch = true } 
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Punch = true } 
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 7, 4, 0, 0, 0, ""));
@@ -926,8 +940,9 @@
             // Neutral Jump Kicks
 
             // Neutral Jump Short
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Light_Kick = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 40, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 7, 10, 0, 0, 0, ""));
@@ -935,8 +950,9 @@
             moveList.Add(new MoveViewModel(Events, "Neutral Jump Short", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Neutral Jump Long
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Medium_Kick = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 7, 0, 0, 0, ""));
@@ -944,8 +960,9 @@
             moveList.Add(new MoveViewModel(Events, "Neutral Jump Long", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Neutral Jump Roundhouse
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, Hard_Kick = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.Up, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 6, 2, 0, 0, 0, ""));
@@ -956,7 +973,8 @@
 
             // Angled Jump Jab
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Light_Punch = true } 
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Light_Punch = true } 
             });
 
             tmpHitList = new BindableCollection<HitViewModel>();
@@ -965,8 +983,9 @@
             moveList.Add(new MoveViewModel(Events, "Angled Jump Jab", MoveViewModel.MoveTypeEnum.Normal, tmpHitList, tmpCommand));
 
             // Angled Jump Strong
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Medium_Punch = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Punch = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 70, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 5, 6, 0, 0, 0, ""));
@@ -975,7 +994,8 @@
 
             // Angled Jump Fierce
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Hard_Punch = true } 
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Punch = true } 
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 5, 4, 0, 0, 0, ""));
@@ -985,8 +1005,9 @@
             // Angled Jump Kicks
 
             // Angled Jump Short
-            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Light_Kick = true }
+            tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() {
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Light_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 50, 0, 50, 0, 20, new HitViewModel.CancelAbilityEnum[] { }, 5, 7, 0, 0, 0, ""));
@@ -995,7 +1016,8 @@
 
             // Angled Jump Long
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Medium_Kick = true }
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Medium_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 80, 0, 100, 0, 40, new HitViewModel.CancelAbilityEnum[] { }, 6, 4, 0, 0, 0, ""));
@@ -1004,7 +1026,8 @@
 
             // Angled Jump Roundhouse
             tmpCommand = new CommandViewModel(new BindableCollection<InputItemViewModel>() { 
-                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, Hard_Kick = true }
+                new InputItemViewModel() { Direction=InputCommandModel.DirectionStateEnum.UpForward, WaitFrames = 10},
+                new InputItemViewModel() { Hard_Kick = true }
             });
             tmpHitList = new BindableCollection<HitViewModel>();
             tmpHitList.Add(new HitViewModel(HitViewModel.BlockTypeEnum.High, 100, 0, 200, 0, 60, new HitViewModel.CancelAbilityEnum[] { }, 5, 7, 0, 0, 0, ""));

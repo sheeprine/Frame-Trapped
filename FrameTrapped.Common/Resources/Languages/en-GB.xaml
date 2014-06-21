@@ -10,6 +10,12 @@
     
     <!-- Library -->
     <sys:String x:Key="SFLibrary">Street Fighter Library</sys:String>
+    <sys:String x:Key="MoveList">Move List</sys:String>
+    <sys:String x:Key="MoveBreakdown">Move Breakdown:</sys:String>
+    <sys:String x:Key="GroupByMoveType">Group by Move Type</sys:String>
+    <sys:String x:Key="LinkableMoves">Linkable Moves</sys:String>
+    <sys:String x:Key="CancelableMoves">Cancelable Moves</sys:String> 
+    
 
     <!-- Combo Trainer -->
     <sys:String x:Key="ComboTrainer">Combo Trainer</sys:String>
@@ -20,7 +26,8 @@
     <!-- Common text -->
     <sys:String x:Key="OK">OK</sys:String>
     <sys:String x:Key="Cancel">Cancel</sys:String>                            
-
+    <sys:String x:Key="PlayerOne">Player One</sys:String>
+    <sys:String x:Key="PlayerTwo">Player Two</sys:String>
     <!-- Main menu -->
     <sys:String x:Key="File">File</sys:String>
     <sys:String x:Key="OpenDialog">Open...</sys:String>

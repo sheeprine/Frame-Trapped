@@ -1,7 +1,8 @@
-Hold#True#1#P1_FW
-Wait#True#60
-Release#True#1#P1_FW
-Hold#True#2#P1_DN#P1_BK
-Press#True#1#P1_LP
-Wait#False#16
-Press#True#1#P1_MP
+FTComboFile[v2.1]
+1#1#6000000
+1#60#6000000
+1#1#5000000
+1#2#1000000
+1#1#1100000
+0#16#1000000
+1#1#1010000

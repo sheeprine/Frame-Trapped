@@ -4,11 +4,15 @@
     using System.Drawing;
     using Caliburn.Micro;
     using FrameTrapped.ComboTrainer.Messages;
-    using FrameTrapped.ComboTrainer.Utilities;
 
-    public class ComboTrainerViewModel : Screen
+    public class ComboTrainerViewModel : Screen,
+        IHandle<AddTimeLineItemMessage>,
+        IHandle<OpenTimeLineMessage>,
+        IHandle<SaveTimeLineMessage>
     {
         private IEventAggregator _events;
+
+        private bool _isBusy;
 
         private bool _repeat;
 
@@ -25,6 +29,20 @@
         private GameViewModel _gameViewModel;
 
         private Size _selectedResolution;
+
+        public bool IsBusy
+        {
+            get
+            {
+                return _isBusy;
+            }
+
+            set
+            {
+                _isBusy = value;
+                NotifyOfPropertyChange(() => IsBusy);
+            }
+        }
 
         public bool Repeat
         {
@@ -184,6 +202,7 @@
 
         public void StartSF4()
         {
+            IsBusy = true;
             if (GameViewModel == null)
             {
                 GameViewModel = new GameViewModel(_events);
@@ -194,23 +213,32 @@
                 GameViewModel = null;
                 GameViewModel = new GameViewModel(_events);
             }
+            IsBusy = false;
         }
 
-        ~ComboTrainerViewModel()
+        /// <summary>
+        /// Handles the <see cref="AddTimeLineItemMessage"/>
+        /// </summary>
+        /// <param name="message">The add time line message.</param>
+        public void Handle(AddTimeLineItemMessage message)
         {
-            try
+            TimeLineItemViewModel timeLineItem = message.TimeLineItemViewModel;
+            if (message.Player == 1)
             {
-                SF4ProcessHandler.Instance.StopSF4();
+                PlayerOneTimeLineViewModel.AddTimeLineItem(timeLineItem);
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message.ToString());
+                PlayerTwoTimeLineViewModel.AddTimeLineItem(timeLineItem);
             }
         }
 
         public ComboTrainerViewModel(IEventAggregator events)
         {
             _events = events;
+            _events.Subscribe(this);
+
+            _isBusy = false;
 
             PlayerOneTimeLineEnabled = false;
             PlayerTwoTimeLineEnabled = false;
@@ -221,5 +249,29 @@
 
         public ComboTrainerViewModel() :
             this(new EventAggregator()) { }
+
+        public void Handle(OpenTimeLineMessage message)
+        {
+            if (message.Player == 1)
+            {
+                PlayerOneTimeLineViewModel.OpenTimeLine(message.FilePath, message.Append);
+            }
+            else
+            {
+                PlayerTwoTimeLineViewModel.OpenTimeLine(message.FilePath, message.Append);
+            }
+        }
+
+        public void Handle(SaveTimeLineMessage message)
+        {
+            if (message.Player == 1)
+            {
+                PlayerOneTimeLineViewModel.SaveTimeLine();
+            }
+            else
+            {
+                PlayerTwoTimeLineViewModel.SaveTimeLine();
+            }
+        }
     }
 }

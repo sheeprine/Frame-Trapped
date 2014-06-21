@@ -6,10 +6,26 @@
 
     using Caliburn.Micro;
 
-    public class MoveListViewModel : BindableCollection<MoveViewModel>
+    public class MoveListViewModel : Conductor<MoveViewModel>.Collection.OneActive
     {
         private MoveViewModel _selectedMove;
 
+        private bool _movesGrouped;
+
+        public bool MovesGrouped
+        {
+            get
+            {
+                return _movesGrouped;
+            }
+
+            set
+            {
+                _movesGrouped = value;
+                NotifyOfPropertyChange(() => MovesGrouped);
+            }
+        }
+        
         public MoveViewModel SelectedMove
         {
             get
@@ -20,30 +36,28 @@
             set
             {
                 _selectedMove = value;
-                NotifyOfPropertyChange(string.Empty);
+                NotifyOfPropertyChange(() => SelectedMove);
             }
         }
 
-        public void Group()
+        public void Add(MoveViewModel move)
         {
-            ICollectionView collection = CollectionViewSource.GetDefaultView(this);
+            Items.Add(move);
+        }
+
+        public void ToggleGroup()
+        {
+            ICollectionView collection = CollectionViewSource.GetDefaultView(this.Items);
             if (collection != null && collection.CanGroup == true)
             {
                 collection.GroupDescriptions.Clear();
-                collection.GroupDescriptions.Add(new PropertyGroupDescription("MoveType"));
-                //collection.GroupDescriptions.Add(new PropertyGroupDescription("BlockType"));
+                if (MovesGrouped)
+                {
+                    collection.GroupDescriptions.Add(new PropertyGroupDescription("MoveType"));
+                }
             }
 
             NotifyOfPropertyChange(string.Empty);
-        }
-
-        public void Ungroup()
-        {
-            ICollectionView collection = CollectionViewSource.GetDefaultView(this);
-            if (collection != null)
-            {
-                collection.GroupDescriptions.Clear();
-            }
         }
     }
 }

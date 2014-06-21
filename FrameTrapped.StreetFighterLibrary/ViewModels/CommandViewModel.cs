@@ -2,7 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using FrameTrapped.Input.ViewModels;
-    
+
     public class CommandViewModel
     {
         public ObservableCollection<InputItemViewModel> Commands { get; private set; }

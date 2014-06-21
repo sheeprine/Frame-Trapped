@@ -199,7 +199,7 @@
         /// </summary>
         public void DeHighlight()
         {
-            IsActiveItem = false;
+            Execute.OnUIThread(() => IsActiveItem = false);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@
         /// </summary>
         public void Highlight()
         {
-            IsActiveItem = true;
+           Execute.OnUIThread(() => IsActiveItem = true);
         }
 
         /// <summary>

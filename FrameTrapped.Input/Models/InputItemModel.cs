@@ -207,15 +207,32 @@
         /// <returns><see cref="Input"/></returns>
         public static Input ParseInput(String str)
         {
-            foreach (Input input in Directions)
+            switch (str.Substring(3))
             {
-                if (str.Equals(input.ToString())) { return input; }
-            }
-            foreach (Input input in Buttons)
-            {
-                if (str.Equals(input.ToString())) { return input; }
-            }
-            throw new FormatException("Cannot parse Input for " + str);
+                case "UP":
+                    return Input.Up;
+                case "DN":
+                    return Input.Down;
+                case "BK":
+                    return Input.Back;
+                case "FW":
+                    return Input.Forward;
+
+                case "LP":
+                    return Input.LightPunch;
+                case "MP":
+                    return Input.MediumPunch;
+                case "HP":
+                    return Input.HardPunch;
+                case "LK":
+                    return Input.LightKick;
+                case "MK":
+                    return Input.MediumKick;
+                case "HK":
+                    return Input.HardKick;
+                default:
+                    throw new FormatException("Cannot parse Input for " + str);
+            } 
         }
 
         /// <summary>

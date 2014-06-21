@@ -253,6 +253,10 @@
             playerOneCurrentItem = playerOneQueue.Dequeue();
             playerTwoCurrentItem = playerTwoQueue.Dequeue();
 
+            // Highlight item in time line
+            new System.Action(() => playerOneTimeLine.SelectedTimeLineItem = playerOneCurrentItem).BeginOnUIThread();
+            new System.Action(() => playerTwoTimeLine.SelectedTimeLineItem = playerTwoCurrentItem).BeginOnUIThread();
+
             playerOneCountdown = playerOneCurrentItem.WaitFrames;
             playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
 
@@ -261,12 +265,14 @@
                 if (playerOneCountdown == 0)
                 {
                     playerOneCurrentItem = playerOneQueue.Dequeue();
+                    new System.Action(() => playerOneTimeLine.SelectedTimeLineItem = playerOneCurrentItem).BeginOnUIThread();
                     playerOneCountdown = playerOneCurrentItem.WaitFrames;
                 }
 
                 if (playerTwoCountdown == 0)
                 {
                     playerTwoCurrentItem = playerTwoQueue.Dequeue();
+                    new System.Action(() => playerTwoTimeLine.SelectedTimeLineItem = playerTwoCurrentItem).BeginOnUIThread();
                     playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
                 }
 
@@ -623,10 +629,13 @@
         /// <param name="message"></param>
         public void Handle(PlayTimeLineMessage message)
         {
-            PlayTimeLine(
-                message.PlayerOneTimeLineItemViewModels,
-                message.PlayerTwoTimeLineItemViewModels,
-                message.RepeatAmount);
+            Thread worker = new Thread(() =>
+                PlayTimeLine(
+                    message.PlayerOneTimeLineItemViewModels,
+                    message.PlayerTwoTimeLineItemViewModels,
+                    message.RepeatAmount)
+                );
+            worker.Start();
         }
 
         /// <summary>

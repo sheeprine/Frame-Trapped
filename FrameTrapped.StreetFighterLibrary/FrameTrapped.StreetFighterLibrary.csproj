@@ -117,6 +117,7 @@
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\FighterViewModel.cs" />
     <Compile Include="ViewModels\HitViewModel.cs" />
+    <Compile Include="ViewModels\ComboableMovesViewModel.cs" />
     <Compile Include="ViewModels\MoveListViewModel.cs" />
     <Compile Include="ViewModels\StreetFighterLibraryViewModel.cs" />
     <Compile Include="ViewModels\MoveViewModel.cs" />
@@ -125,6 +126,9 @@
     </Compile>
     <Compile Include="Views\FighterView.xaml.cs">
       <DependentUpon>FighterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComboableMovesView.xaml.cs">
+      <DependentUpon>ComboableMovesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MoveListView.xaml.cs">
       <DependentUpon>MoveListView.xaml</DependentUpon>
@@ -157,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FighterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComboableMovesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,6 +260,7 @@
     <Resource Include="Resources\Images\FighterListIcons\ibuki.gif" />
     <Content Include="Resources\Images\Icon.svg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)$(TargetFileName)" "$(SolutionDir)FrameTrapped\lib\" /Y /I</PostBuildEvent>

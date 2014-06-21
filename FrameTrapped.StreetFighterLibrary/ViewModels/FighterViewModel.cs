@@ -11,7 +11,7 @@
     using FrameTrapped.ComboTrainer.ViewModels;
     using FrameTrapped.Input.ViewModels;
 
-    public class FighterViewModel : PropertyChangedBase
+    public class FighterViewModel : Screen
     {
         public enum FighterTypeEnum
         {
@@ -43,6 +43,7 @@
 
         public MoveListViewModel MoveList { get; private set; }
 
+        public ComboableMovesViewModel LinkableMovesList { get; private set; }
 
         public FighterViewModel(string name, FighterTypeEnum figherType, int stamina, int stun, float forwardMovementSpeed, float backwardMovementSpeed, MoveListViewModel moveList)
         {
@@ -55,6 +56,7 @@
             ForwardMovementSpeed = forwardMovementSpeed;
             BackwardMovementSpeed = backwardMovementSpeed;
             MoveList = moveList;
+            LinkableMovesList = new ComboableMovesViewModel(moveList.Items);
         }
     }
 }

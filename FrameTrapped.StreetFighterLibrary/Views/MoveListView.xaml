@@ -10,34 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
     </Grid.Resources>
     <DockPanel>
-        <HeaderedContentControl DockPanel.Dock="Bottom" DataContext="{Binding SelectedMove}">
-            <HeaderedContentControl.Header>
-                <DockPanel Background="{DynamicResource AccentColorBrush}">
-                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}" DockPanel.Dock="Left">Move Breakdown:</TextBlock>
-                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}" Text="{Binding Name}" DockPanel.Dock="Left"/>
-                    <ContentControl cal:View.Model="{Binding Command}" DockPanel.Dock="Left"/>
-                    <Separator Margin="10,0,0,0" />
-                </DockPanel>
-            </HeaderedContentControl.Header>
-            <DataGrid ItemsSource="{Binding Path=Hits}"
-                                            AutoGenerateColumns="False"
-                                            IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Block Type" Binding="{Binding Path=BlockType}" />
-                    <DataGridTextColumn Header="Damage" Binding="{Binding Path=Damage}" />
-                    <DataGridTextColumn Header="Stun" Binding="{Binding Path=Stun}" />
-                    <DataGridTextColumn Header="Meter Gain" Binding="{Binding Path=MeterGain}" />
-                    <DataGridTextColumn Header="Cancel Ability" Binding="{Binding Path=CancelString}"/>
-                    <DataGridTextColumn Header="Startup" Binding="{Binding Path=Startup}" />
-                    <DataGridTextColumn Header="Active" Binding="{Binding Path=Active}" />
-                    <DataGridTextColumn Header="Recovery" Binding="{Binding Path=Recovery}" />
-                    <DataGridTextColumn Header="On Block" Binding="{Binding Path=OnBlockAdvantage}" />
-                    <DataGridTextColumn Header="On Hit" Binding="{Binding Path=OnHitAdvantage}" />
-                    <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </HeaderedContentControl>
-        <HeaderedContentControl>
+        <HeaderedContentControl DockPanel.Dock="Left" MaxWidth="250">
             <HeaderedContentControl.Template>
                 <ControlTemplate TargetType="HeaderedContentControl">
                     <DockPanel>
@@ -48,27 +21,29 @@
             </HeaderedContentControl.Template>
             <HeaderedContentControl.Header>
                 <DockPanel Background="{DynamicResource AccentColorBrush}">
-                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}" DockPanel.Dock="Left">Moves List</TextBlock>
-                    <Button Content="Clear Groups" Margin="10,2,2,2" DockPanel.Dock="Right" cal:Message.Attach="Ungroup" />
-                    <Button Content="Group by Move Type" Margin="2" DockPanel.Dock="Right"  cal:Message.Attach="Group" />
-                    <Separator Margin="10,0,0,0" />
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}" DockPanel.Dock="Left" Text="{DynamicResource MoveList}" />
+                    <ToggleButton Content="{DynamicResource GroupByMoveType}" Margin="2" DockPanel.Dock="Right" IsChecked="{Binding MovesGrouped}" cal:Message.Attach="ToggleGroup" />
+                    <Separator Margin="5,0,0,0"/>
                 </DockPanel>
             </HeaderedContentControl.Header>
-            <DataGrid x:Name="Items" 
-                ItemsSource="{Binding}" 
+            <DataGrid 
+                x:Name="Items" 
+                ItemsSource="{Binding Items}" 
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 FrozenColumnCount="2"  
                 AlternationCount="2" AlternatingRowBackground="Black"
                 Tag="{Binding DataContext, ElementName=LayoutRoot}" 
                 SelectionMode="Single" CanUserResizeRows="False"
-                      SelectedItem="{Binding SelectedMove}">
+                SelectedItem="{Binding SelectedMove}"
+                RowStyle="{StaticResource MoveListRowStyle}"
+                >
                 <DataGrid.GroupStyle>
                     <!-- Style for groups at top level. -->
                     <GroupStyle>
                         <GroupStyle.ContainerStyle>
                             <Style TargetType="{x:Type GroupItem}">
-                                <Setter Property="Margin" Value="0,0,0,5"/>
+                                <Setter Property="Margin" Value="0,0,0,3"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GroupItem}">
@@ -76,7 +51,7 @@
                                                 <Expander.Header>
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount}"/>
-                                                        <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,0,0" Width="100"/>
+                                                        <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="3,0,0,0" Width="100"/>
                                                     </StackPanel>
                                                 </Expander.Header>
                                                 <Expander.Content>
@@ -89,49 +64,43 @@
                             </Style>
                         </GroupStyle.ContainerStyle>
                     </GroupStyle>
-                    <!-- Style for groups under the top level. -->
-                    <GroupStyle>
-                        <GroupStyle.HeaderTemplate>
-                            <DataTemplate>
-                                <DockPanel Background="LightBlue">
-                                    <TextBlock Text="{Binding Path=ItemCount}"/>
-                                    <TextBlock Text="{Binding Path=Name}" Margin="30,0,0,0" Width="100"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </GroupStyle.HeaderTemplate>
-                    </GroupStyle>
                 </DataGrid.GroupStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
-                    <DataGridTextColumn Header="Move Type" Binding="{Binding Path=MoveType}"  />
-                    <DataGridTemplateColumn Header="Command">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ContentControl cal:View.Model="{Binding Command}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Path=Name}"/>
+                </DataGrid.Columns>
+          
+            </DataGrid>
+        </HeaderedContentControl>
+        <HeaderedContentControl Margin="4,0,0,0" DataContext="{Binding SelectedMove}">
+            <HeaderedContentControl.Header>
+                <DockPanel Background="{DynamicResource AccentColorBrush}">
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}" DockPanel.Dock="Left" Text="{DynamicResource MoveBreakdown}" />
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}" DockPanel.Dock="Left" Text="{Binding Name}" />
+                    <Button Content="{DynamicResource PlayerTwo}" cal:Message.Attach="AddCommandToTimeline($dataContext, 2)"
+                            DockPanel.Dock="Right" Style="{DynamicResource HeaderButtonStyle}"  />
+                    <Button Content="{DynamicResource PlayerOne}" cal:Message.Attach="AddCommandToTimeline($dataContext, 1)"
+                            DockPanel.Dock="Right" Style="{DynamicResource HeaderButtonStyle}" />
+                    <ContentControl cal:View.Model="{Binding Command}" DockPanel.Dock="Right"/>
+                    <Separator Margin="10,0,0,0" />
+                </DockPanel>
+            </HeaderedContentControl.Header>
+            <DataGrid ItemsSource="{Binding Path=Hits}"
+                                            AutoGenerateColumns="False"
+                                            IsReadOnly="True">
+                <DataGrid.Columns>
                     <DataGridTextColumn Header="Block Type" Binding="{Binding Path=BlockType}" />
                     <DataGridTextColumn Header="Damage" Binding="{Binding Path=Damage}" />
                     <DataGridTextColumn Header="Stun" Binding="{Binding Path=Stun}" />
                     <DataGridTextColumn Header="Meter Gain" Binding="{Binding Path=MeterGain}" />
-                    <DataGridTextColumn Header="Cancel Ability" Binding="{Binding Path=CancelAbility}"/>
+                    <DataGridTextColumn Header="Cancel Into" Binding="{Binding Path=CancelString}"/>
+                    <DataGridTextColumn Header="Startup" Binding="{Binding Path=Startup}" />
+                    <DataGridTextColumn Header="Active" Binding="{Binding Path=Active}" />
+                    <DataGridTextColumn Header="Recovery" Binding="{Binding Path=Recovery}" />
+                    <DataGridTextColumn Header="On Block" Binding="{Binding Path=OnBlockAdvantage}" />
+                    <DataGridTextColumn Header="On Hit" Binding="{Binding Path=OnHitAdvantage}" />
                     <DataGridTextColumn Header="Notes" Binding="{Binding Path=Notes}"/>
                 </DataGrid.Columns>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Tag" Value="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
-                        <Setter Property="ContextMenu">
-                            <Setter.Value>
-                                <ContextMenu cal:Action.TargetWithoutContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}" >
-                                    <MenuItem Header="Add To Time Line" cal:Message.Attach="AddCommandToTimeline($dataContext)" />
-                                </ContextMenu>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.RowStyle>
             </DataGrid>
         </HeaderedContentControl>
-
     </DockPanel>
 </Grid>

@@ -1,13 +1,12 @@
 ﻿namespace FrameTrapped.ViewModels
 {
+    using System;
     using System.ComponentModel.Composition;
     using System.Deployment;
     using System.Reflection;
     using System.Windows;
     using System.Windows.Input;
-
     using Caliburn.Micro;
-
     using FrameTrapped.ComboTrainer.Messages;
     using FrameTrapped.ComboTrainer.ViewModels;
     using FrameTrapped.Home.ViewModels;
@@ -15,7 +14,7 @@
     using FrameTrapped.StreetFighterLibrary.ViewModels; 
 
     /// <summary>
-    /// 
+    /// The main view model class.
     /// </summary>
     [Export(typeof(MainViewModel))]
     public class MainViewModel : Screen
@@ -245,21 +244,31 @@
             }
         }
 
+        public Version PublishVersion
+        {
+            get
+            {
+                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                {
+                    return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion; 
+                }
+                else
+                    return null;
+            }
+        }
+
         /// <summary>
         /// Updates the application title with what view you are on.
         /// </summary>
         /// <param name="p"></param>
         private void UpdateTitle(string title)
-        {
+        { 
             string applicationName = Application.Current.TryFindResource("Title").ToString();
-            System.Version currentVersion;
-            try
+            Version currentVersion = new Version(1,0);
+
+            if (PublishVersion != null)
             {
-                currentVersion = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-            }
-            catch
-            {
-                currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                currentVersion = PublishVersion;
             }
 
             Title = string.IsNullOrWhiteSpace(title)
@@ -277,7 +286,7 @@
             {
                 foreach (string filePath in ((DataObject)e.Data).GetFileDropList())
                 {
-                    _events.Publish(new OpenTimeLineMessage(filePath, true));
+                    _events.Publish(new OpenTimeLineMessage(filePath, 1, true));
                 }
             }
         }
@@ -298,18 +307,18 @@
                 case Key.O:
                     if (modCtrl & !modShift)
                     {
-                        _events.Publish(new OpenTimeLineMessage(false));
+                        _events.Publish(new OpenTimeLineMessage("", 1, false));
                     }
                     else if (modCtrl && modShift)
                     {
-                        _events.Publish(new OpenTimeLineMessage(true));
+                        _events.Publish(new OpenTimeLineMessage("", 1, true));
                     }
 
                     break;
                 case Key.S:
                     if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
                     {
-                        _events.Publish(new SaveTimeLineMessage());
+                        _events.Publish(new SaveTimeLineMessage(1));
                     }
                     break;
                 case Key.P:
