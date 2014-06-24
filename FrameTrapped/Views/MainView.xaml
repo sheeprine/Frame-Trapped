@@ -9,8 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
     cal:Message.Attach="[Event KeyDown] = [OnKeyDown($eventArgs)];[Event Drop] = [OnDropFile($eventArgs)]"
-    MinWidth="800"
-    MinHeight="600"
+    MinWidth="1280"
+    MinHeight="720"
     Title="{Binding Title}"
     Icon="pack://application:,,,/FrameTrapped.Common;component/Resources/Icons/Logo.ico" 
     AllowDrop="True">

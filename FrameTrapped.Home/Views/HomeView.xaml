@@ -5,28 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
     <UserControl.Resources>
-        <Style x:Key="HomeViewButton" TargetType="{x:Type Button}">
-            <Setter Property="Width" Value="256"/>
-            <Setter Property="Height" Value="256"/>
-            <Setter Property="Margin" Value="16" />
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
+        <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
     </UserControl.Resources>
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/Banner.png" Stretch="None"/>
-        <TextBlock Grid.Row="1" Text="This is currently placeholder while I construct the recent files menu, as well as other tid bits like sharing over social networks." TextAlignment="Center" Style="{DynamicResource MediumTextStyle}"/>
-        <UniformGrid Grid.Row="2" Columns="2"  >
-            <Button x:Name="ShowComboTrainer" Style="{DynamicResource HomeViewButton}" IsEnabled="False">
-                <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/sf4-timeline-button.png"/>
-            </Button>
-            <Button x:Name="ShowLibrary" Style="{DynamicResource HomeViewButton}" IsEnabled="False">
-                <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/sf4-library-button.png"/>
-            </Button>
-        </UniformGrid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/Banner.png" Stretch="Uniform"/>
+            <TextBlock Grid.Row="1" Text="This is currently placeholder while I construct the recent files menu, as well as other tid bits like sharing over social networks." TextAlignment="Center" Style="{DynamicResource MediumTextStyle}"/>
+            <UniformGrid Grid.Row="2" Columns="2"  >
+                <Button x:Name="ShowComboTrainer" Style="{DynamicResource HomeViewButton}" IsEnabled="False">
+                    <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/sf4-timeline-button.png"/>
+                </Button>
+                <Button x:Name="ShowLibrary" Style="{DynamicResource HomeViewButton}" IsEnabled="False">
+                    <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/sf4-library-button.png"/>
+                </Button>
+            </UniformGrid>
+        </Grid>
+        <Border Grid.Column="1" BorderThickness="1">
+            <TextBlock Text="{DynamicResource ChangeNotes}" Style="{DynamicResource HeaderTextBlockStyle}" />
+        </Border>
     </Grid>
 </UserControl>

@@ -5,15 +5,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-    xmlns:converters="clr-namespace:FrameTrapped.Common.Converters;assembly=FrameTrapped.Common"
-    xmlns:vm="clr-namespace:FrameTrapped.ComboTrainer.ViewModels"
-    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    mc:Ignorable="d"
-    d:DataContext="{Binding Source={StaticResource designVM}}">
+    xmlns:converters="clr-namespace:FrameTrapped.Common.Converters;assembly=FrameTrapped.Common" 
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <DockPanel.Resources>
         <ResourceDictionary>
-            <converters:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
-            <vm:ComboTrainerViewModel x:Key="designVM" />
+            <converters:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/> 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -26,37 +22,22 @@
     <Expander DockPanel.Dock="Right" ExpandDirection="Left" IsExpanded="{Binding PlayerTwoTimeLineEnabled}" Margin="0">
         <ContentControl Width="260" DockPanel.Dock="Right" VerticalAlignment="Stretch"  cal:View.Model="{Binding PlayerTwoTimeLineViewModel}" />
     </Expander>
-    <Grid Grid.Column="1">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <ToolBar Grid.Row="0" HorizontalAlignment="Center">
-            <Button DockPanel.Dock="Top" Content="Load/Restart SF4..." cal:Message.Attach="StartSF4">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsBusy}" Value="True">
-                                <DataTrigger.Setters>
-                                    <Setter Property="Content" Value="Loading"/>
-                                </DataTrigger.Setters>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+            <Button DockPanel.Dock="Top" Content="Load/Restart SF4..." cal:Message.Attach="StartSF4" />
+              
             <Label Content="Set Resolution:" />
-            <ComboBox x:Name="Resolutions" SelectedIndex="0" Width="100" Foreground="{DynamicResource HighlightBrush}">
+            <ComboBox x:Name="Resolutions" SelectedIndex="0" Width="100" Foreground="{DynamicResource ForegroundBrush}">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
-                        <Setter Property="Foreground" Value="{DynamicResource HighlightBrush}"/>
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
                     </Style>
                 </ComboBox.ItemContainerStyle>
             </ComboBox>
             <Separator />
-            <Button x:Name="PlaybackStart" FontSize="12" Content="Play" />
+            <Button x:Name="PlaybackStart" Content="Play" />
             <Separator />
-            <CheckBox x:Name="Repeat" FontSize="12" Content="Repeat"/>
+            <ToggleButton x:Name="Repeat" Content="Repeat"/>
             <xctk:IntegerUpDown x:Name="RepeatAmount" FontSize="12" 
                                 Value="{Binding RepeatAmount}"
                                 Width="50" Height="20" 
@@ -70,5 +51,5 @@
                 HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                 />
         </Border>
-    </Grid>
+    </DockPanel>
 </DockPanel>
