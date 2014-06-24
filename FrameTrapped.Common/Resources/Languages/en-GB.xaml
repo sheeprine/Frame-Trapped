@@ -16,7 +16,7 @@
     <sys:String x:Key="LinkableMoves">Linkable Moves</sys:String>
     <sys:String x:Key="CancelableMoves">Cancelable Moves</sys:String> 
     
-
+    
     <!-- Combo Trainer -->
     <sys:String x:Key="ComboTrainer">Combo Trainer</sys:String>
 
@@ -25,10 +25,10 @@
     
     <!-- Common text -->
     <sys:String x:Key="OK">OK</sys:String>
-    <sys:String x:Key="Cancel">Cancel</sys:String>                            
+    <sys:String x:Key="Cancel">Cancel</sys:String>     
     <sys:String x:Key="PlayerOne">Player One</sys:String>
     <sys:String x:Key="PlayerTwo">Player Two</sys:String>
-    <!-- Main menu -->
+        <!-- Main menu -->
     <sys:String x:Key="File">File</sys:String>
     <sys:String x:Key="OpenDialog">Open...</sys:String>
     <sys:String x:Key="Close">Close</sys:String>
@@ -52,4 +52,8 @@
     <sys:String x:Key="AboutTitle">About Frame Trapped</sys:String>
     <sys:String x:Key="AboutDescription" xml:space="preserve">This project is a collective effort by a few fans of fighting games to create a tool to help other players learn the games that we love.&#10;Please enjoy using our application and feel free to give us feedback.&#10;&#13;Tom Piddock</sys:String>
 
+    <sys:String x:Key="ChangeNotesDetail">
+    Stuff changed
+    </sys:String>
+    <sys:String x:Key="ChangeNotes">Changes Notes</sys:String>
 </ResourceDictionary>
