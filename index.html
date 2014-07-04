@@ -29,18 +29,11 @@
 
   <body>
   <script type="text/javascript">
-$('#download-ft').on('click', function() {
-  ga('send', 'event', 'download', 'click', 'exe');
+$('#install-link').on('click', function() {
+  ga('send', 'event', 'Install', 'Click');
 });
-$('#download-zip').on('click', function() {
-  ga('send', 'event', 'download', 'click', 'zip');
-});
-$('#download-tar-gz').on('click', function() {
-  ga('send', 'event', 'download', 'click', 'tar-gz');
-});
-
 $('#view-on-github').on('click', function() {
-  ga('send', 'event', 'view', 'click', 'github');
+  ga('send', 'event', 'GitHub', 'Click');
 });
 </script>
     <div id="container">
@@ -51,8 +44,8 @@ $('#view-on-github').on('click', function() {
           <h2>A tool to study, compose, playback and time combos in Street Fighter IV</h2>
         </header>
         <section id="downloads" class="clearfix">
-          <a href="http://frametrapped.com/deploy/ft/install.html" id="install-link" class="bigButton"><span>Install Frame Trapped (ClickOnce Installer)</span></a>
-          <a href="https://github.com/thopiddock/Frame-Trapped" id="view-on-github" class="button"><span>View on GitHub</span></a>
+          <a href="http://frametrapped.com/deploy/ft/install.html" id="install-link" class="bigButton" onclick="ga('send', 'event', 'Install', 'Click')"><span>Install Frame Trapped (ClickOnce Installer)</span></a>
+          <a href="https://github.com/thopiddock/Frame-Trapped" id="view-on-github" class="button" onclick="ga('send', 'event', 'GitHub', 'Click')"><span>View on GitHub</span></a>
         </section>
    <hr>
 <section id="main_content">
