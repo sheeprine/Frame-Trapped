@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Reflection;
 
     using Caliburn.Micro;
@@ -70,6 +71,26 @@
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
+            try
+            {
+                string location = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + @"\Resources\Sounds\";
+                string destination = Path.GetTempPath() + @"\FrameTrapped\Sounds\";
+                if (!Directory.Exists(destination))
+                {
+                    Directory.CreateDirectory(destination);
+                }
+                string[] files = Directory.GetFiles(location);
+                foreach (string file in files)
+                {
+                    string name = Path.GetFileName(file);
+                    string dest = Path.Combine(destination, name);
+                    File.Copy(file, dest, true);
+                } 
+            }
+            catch
+            {
+            }
+
             DisplayRootViewFor<MainViewModel>();
         }
     }

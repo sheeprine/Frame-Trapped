@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
     using System.Text;
+    using System.IO;
 
     /// <summary>
     /// The Roadie class for audio handling in the time line.
@@ -118,7 +119,7 @@
         {
             get
             {
-                return System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + @"\Resources\Sounds\";
+                return Path.GetTempPath() + @"\FrameTrapped\Sounds\";
             }
         }
 
