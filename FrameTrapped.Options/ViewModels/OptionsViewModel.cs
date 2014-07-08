@@ -61,6 +61,17 @@
             }
         }
 
+        /// <summary>
+        /// The install location of Frame Trapped for users.
+        /// </summary>
+        public string FrameTrappedLocation
+        {
+            get
+            {
+                return System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            }
+        }
+
         public void SteamLocationDialog()
         {
             // Create OpenFileDialog

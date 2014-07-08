@@ -15,7 +15,17 @@
             <TextBlock Text="{DynamicResource Options}" Style="{DynamicResource HeaderTextBlockStyle}" />
         </DockPanel>
         <TextBlock Style="{DynamicResource MediumTextStyle}" TextWrapping="Wrap">Options are getting revised while we figure out the best architechture to use, where possible we are automating everything from game files.<LineBreak/><LineBreak/>Keyboard configuration is automatically loaded upon Loading SF4 in the Combo Trainer View. Restart the game if you have changed your key settings!</TextBlock>
-        
+
+        <!-- FT Location -->
+        <UniformGrid Columns="2" IsEnabled="True"  >
+            <Border Style="{DynamicResource OptionDescriptionBorder}">
+                <Label Content="This is a debug text box showing the location of Frame Trapped on disc :"/>
+            </Border>
+            <Border Style="{DynamicResource OptionValueBorder}">
+                <TextBox IsReadOnly="True"  x:Name="FrameTrappedLocation" VerticalAlignment="Center"/>
+            </Border>
+        </UniformGrid>
+
         <!-- SSFIV.exe Location -->
         <UniformGrid Columns="2" IsEnabled="False">
             <Border Style="{DynamicResource OptionDescriptionBorder}">
@@ -28,7 +38,7 @@
                 </DockPanel>
             </Border>
         </UniformGrid>
-
+        
         <!-- SSFIV Type (Steam or not) -->
         <UniformGrid Columns="2" IsEnabled="False">
             <Border Style="{DynamicResource OptionDescriptionBorder}">
