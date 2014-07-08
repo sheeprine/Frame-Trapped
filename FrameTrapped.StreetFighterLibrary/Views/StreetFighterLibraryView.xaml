@@ -37,7 +37,7 @@
             <!-- Move Data -->
             <ContentControl cal:View.Model="{Binding SelectedFighter.MoveList}"/>
         </TabItem>
-        <TabItem x:Name="LinkableMovesTabItem" IsSelected="{Binding LinkableMovesItemSelected}" Style="{DynamicResource HorizontalTabItemStyle}">
+        <TabItem x:Name="LinkableMovesTabItem" IsEnabled="False" IsSelected="{Binding LinkableMovesItemSelected}" Style="{DynamicResource HorizontalTabItemStyle}">
             <TabItem.Header>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource LinkableMoves}" Style="{DynamicResource HorizontalTabTextBlockStyle}"/>
