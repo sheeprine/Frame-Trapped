@@ -7,30 +7,41 @@
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
     </UserControl.Resources>
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+    <UniformGrid HorizontalAlignment="Stretch" VerticalAlignment="Top" MinHeight="700" Columns="2">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="600" Width="300">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/Banner.png" Stretch="Uniform"/>
-            <TextBlock Grid.Row="1" Text="This is currently placeholder while I construct the recent files menu, as well as other tid bits like sharing over social networks." TextAlignment="Center" Style="{DynamicResource MediumTextStyle}"/>
-            <UniformGrid Grid.Row="2" Columns="2"  >
-                <Button x:Name="ShowComboTrainer" Style="{DynamicResource HomeViewButton}" IsEnabled="False">
+           <TextBlock Grid.Row="0" Text="This is currently placeholder while I construct the recent files menu, as well as other tid bits like sharing over social networks." TextWrapping="Wrap" TextAlignment="Center" Style="{DynamicResource MediumTextStyle}"/>
+            <UniformGrid Grid.Row="1" Rows="2">
+                <Button x:Name="ShowComboTrainer" IsEnabled="False">
                     <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/sf4-timeline-button.png"/>
                 </Button>
-                <Button x:Name="ShowLibrary" Style="{DynamicResource HomeViewButton}" IsEnabled="False">
+                <Button x:Name="ShowLibrary" IsEnabled="False">
                     <Image Source="pack://application:,,,/FrameTrapped.Home;component/Resources/Images/sf4-library-button.png"/>
                 </Button>
             </UniformGrid>
         </Grid>
         <Border Grid.Column="1" BorderThickness="1">
-            <TextBlock Text="{DynamicResource ChangeNotes}" Style="{DynamicResource HeaderTextBlockStyle}" />
+            <!-- Patch Notes web page -->
+            <HeaderedContentControl DockPanel.Dock="Left">
+                <HeaderedContentControl.Template>
+                    <ControlTemplate TargetType="HeaderedContentControl">
+                        <DockPanel>
+                            <ContentPresenter DockPanel.Dock="Top" ContentSource="Header" />
+                            <ContentPresenter />
+                        </DockPanel>
+                    </ControlTemplate>
+                </HeaderedContentControl.Template>
+                <HeaderedContentControl.Header>
+                    <DockPanel Background="{DynamicResource AccentColorBrush}">
+                        <TextBlock Style="{StaticResource HeaderTextBlockStyle}" Text="{DynamicResource ChangeNotes}" DockPanel.Dock="Left"/>
+                        <Separator Margin="5,0,0,0"/>
+                    </DockPanel>
+                </HeaderedContentControl.Header>
+                <WebBrowser Source="http://frametrapped.com/changes.html" ScrollViewer.VerticalScrollBarVisibility="Visible" />
+            </HeaderedContentControl>
         </Border>
-    </Grid>
+    </UniformGrid>
 </UserControl>
