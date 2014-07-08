@@ -14,7 +14,6 @@
     using WindowsInput;
 
     using FrameTrapped.ComboTrainer.Messages;
-    using FrameTrapped.ComboTrainer.Views;
     using FrameTrapped.Common.Properties;
     using FrameTrapped.Common.Utilities;
     using FrameTrapped.Input.Models;
@@ -59,6 +58,11 @@
         /// The panel hosting the game.
         /// </summary>
         private System.Windows.Forms.Panel _panel;
+
+        /// <summary>
+        /// The worker thread for inputs.
+        /// </summary>
+        private Thread _inputWorker;
 
         /// <summary>
         /// The SF4 Memory handler.
@@ -205,36 +209,16 @@
         /// <param name="sendInputs"></param>
         private void TwoPlayerAction(TimeLineViewModel playerOneTimeLine, TimeLineViewModel playerTwoTimeLine)
         {
-            // This counts down each players frames for individual time line items.
-            int playerOneCountdown;
-            int playerTwoCountdown;
-
-            // QueueFrames is the overall frames in each time line.
-            int playerOneQueueFrames;
-            int playerTwoQueueFrames;
-
-            playerOneCountdown = 0;
-            playerTwoCountdown = 0;
-
-            // The cache for the player individual time line items.
-            TimeLineItemViewModel playerOneCurrentItem;
-            TimeLineItemViewModel playerTwoCurrentItem;
-
             // These queues will contain the actual time line items and dequeue them as they are consumed by their frame counter  
             Queue<TimeLineItemViewModel> playerOneQueue = new Queue<TimeLineItemViewModel>();
             Queue<TimeLineItemViewModel> playerTwoQueue = new Queue<TimeLineItemViewModel>();
 
-            if (playerOneTimeLine.SendInputs)
-            {
-                playerOneTimeLine.TimeLineItems.Apply(o => playerOneQueue.Enqueue(o));
-            }
-            if (playerTwoTimeLine.SendInputs)
-            {
-                playerTwoTimeLine.TimeLineItems.Apply(o => playerTwoQueue.Enqueue(o));
-            }
+            playerOneTimeLine.TimeLineItems.Apply(o => playerOneQueue.Enqueue(o));
+            playerTwoTimeLine.TimeLineItems.Apply(o => playerTwoQueue.Enqueue(o));
 
-            playerOneQueueFrames = playerOneQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
-            playerTwoQueueFrames = playerTwoQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
+            // QueueFrames is the overall frames in each time line.
+            int playerOneQueueFrames = playerOneQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
+            int playerTwoQueueFrames = playerTwoQueue.Sum<TimeLineItemViewModel>(t => t.WaitFrames);
 
             int longestQueueTime = Math.Max(playerOneQueueFrames, playerTwoQueueFrames);
 
@@ -250,15 +234,17 @@
                 }
             }
 
-            playerOneCurrentItem = playerOneQueue.Dequeue();
-            playerTwoCurrentItem = playerTwoQueue.Dequeue();
+            // The cache for the player individual time line items.
+            TimeLineItemViewModel playerOneCurrentItem = playerOneQueue.Dequeue();
+            TimeLineItemViewModel playerTwoCurrentItem = playerTwoQueue.Dequeue();
 
             // Highlight item in time line
             new System.Action(() => playerOneTimeLine.SelectedTimeLineItem = playerOneCurrentItem).BeginOnUIThread();
             new System.Action(() => playerTwoTimeLine.SelectedTimeLineItem = playerTwoCurrentItem).BeginOnUIThread();
 
-            playerOneCountdown = playerOneCurrentItem.WaitFrames;
-            playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
+            // This counts down each players frames for individual time line items.
+            int playerOneCountdown = playerOneCurrentItem.WaitFrames;
+            int playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
 
             for (int x = 0; x < longestQueueTime; x++)
             {
@@ -276,23 +262,30 @@
                     playerTwoCountdown = playerTwoCurrentItem.WaitFrames;
                 }
 
-                SendPlayerInput(1, playerOneCurrentItem);
-                SendPlayerInput(2, playerTwoCurrentItem);
+                if (playerOneTimeLine.SendInputs)
+                {
+                    SendPlayerInput(1, playerOneCurrentItem);
+                }
 
-                if (playerOneCurrentItem.InputItemViewModel.PlaySound && playerOneQueueFrames == playerOneCountdown)
+                if (playerTwoTimeLine.SendInputs)
+                {
+                    SendPlayerInput(2, playerTwoCurrentItem);
+                }
+
+                if (playerOneCurrentItem.InputItemViewModel.PlaySound && playerOneCurrentItem.WaitFrames == playerOneCountdown)
                 {
                     Input[] inputs = playerOneCurrentItem.InputItemViewModel.InputItem.Inputs;
-                    if (inputs.Intersect(Directions).Count() == 0 && inputs.Intersect(Buttons).Count() == 0)
+                    if (!inputs.Intersect(Directions).Any() && !inputs.Intersect(Buttons).Any())
                     {
                         Roadie.Instance.PlaySound(Roadie.WAIT_SOUND);
                     }
                     else
                     {
-                        if (inputs.Intersect(Buttons).Count() > 0)
+                        if (inputs.Intersect(Buttons).Any())
                         {
                             Roadie.Instance.PlaySound(Roadie.PRESS_BUTTON_SOUND);
                         }
-                        if (inputs.Intersect(Directions).Count() > 0)
+                        if (inputs.Intersect(Directions).Any())
                         {
                             Roadie.Instance.PlaySound(Roadie.PRESS_DIRECTION_SOUND);
                         }
@@ -387,7 +380,7 @@
 
 
                         // For correct response, it's important to let sleep our thread for a while.
-                        System.Threading.Thread.Sleep(50);
+                        Thread.Sleep(50);
 
 
                         while (_gameProcessMainWindowHandle == IntPtr.Zero)
@@ -400,12 +393,19 @@
                         _sf4Memory.runScan();
 
                         int dwStyle = NativeModel.GetWindowLong(_gameProcessMainWindowHandle, NativeModel.GWL_STYLE);
-                        NativeModel.SetWindowLong(_gameProcessMainWindowHandle, NativeModel.GWL_STYLE,
+                        NativeModel.SetWindowLong(
+                            _gameProcessMainWindowHandle,
+                            NativeModel.GWL_STYLE,
                             new IntPtr(dwStyle & ~NativeModel.WS_CAPTION & ~NativeModel.WS_THICKFRAME));
 
-                        NativeModel.SetWindowPos(_gameProcessMainWindowHandle, IntPtr.Zero, 0, 0,
-                        Convert.ToInt32(Math.Floor((double)_panel.Width)),
-                        Convert.ToInt32(Math.Floor((double)_panel.Height)), NativeModel.SWP_ASYNCWINDOWPOS);
+                        NativeModel.SetWindowPos(
+                            _gameProcessMainWindowHandle,
+                            IntPtr.Zero,
+                            0,
+                            0,
+                            Convert.ToInt32(Math.Floor((double)_panel.Width)),
+                            Convert.ToInt32(Math.Floor((double)_panel.Height)),
+                            NativeModel.SWP_ASYNCWINDOWPOS);
 
                         _panel.Invoke(new MethodInvoker(delegate { NativeModel.SetParent(_gameProcessMainWindowHandle, _panel.Handle); }));
                     }
@@ -417,16 +417,11 @@
                     });
 
                     PanelResize(this, null);
-
                 }).ContinueWith(
-                        (t) =>
+                    (t) => Execute.OnUIThread(() =>
                         {
-                            Execute.OnUIThread(() =>
-                            {
-                                IsLoading = false;
-                            });
-                        }
-                );
+                            IsLoading = false;
+                        }));
         }
 
         /// <summary>
@@ -473,16 +468,33 @@
         /// <param name="e"></param>
         private void PanelResize(object sender, EventArgs e)
         {
-            NativeModel.SetWindowPos(_gameProcessMainWindowHandle, Process.GetCurrentProcess().MainWindowHandle,
-                0, 0, _panel.Width, _panel.Height,
+            NativeModel.SetWindowPos(
+                _gameProcessMainWindowHandle,
+                Process.GetCurrentProcess().MainWindowHandle,
+                0,
+                0,
+                _panel.Width,
+                _panel.Height,
                 NativeModel.SWP_NOZORDER | NativeModel.SWP_NOACTIVATE);
         }
 
-        public void SetResolution(int width, int height)
+        /// <summary>
+        /// Ensures SF4 is open and delays the playback by one second.
+        /// </summary>
+        /// <returns>true if SF4 is open, false if it is not.</returns>
+        private bool DelayPlayBack()
         {
-            _panel.Width = width;
-            _panel.Height = height;
-            _panel.Refresh();
+            if (!_sf4Memory.openSF4Process())
+            {
+                System.Windows.Forms.MessageBox.Show("Couldn't open the SF4 Process, are you sure it's running?");
+                return false;
+            }
+
+            Execute.OnUIThread(() => OffsetFrame = 0);
+
+            // Wait 1 seconds to give time to start
+            WaitForFrames(60);
+            return true;
         }
 
         /// <summary>
@@ -502,34 +514,33 @@
 
             WindowsFormsHost windowsFormsHost = (WindowsFormsHost)frameworkElement.FindName("GameHost");
 
-            _panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            windowsFormsHost.Child = _panel;
+            _panel.Dock = DockStyle.Fill;
+            if (windowsFormsHost != null)
+            {
+                windowsFormsHost.Child = _panel;
+            }
+
             _panel.Resize += PanelResize;
         }
 
         /// <summary>
-        /// Ensures SF4 is open and delays the playback by one second.
+        /// Sets the resolution of the game panel.
         /// </summary>
-        /// <returns>true if SF4 is open, false if it is not.</returns>
-        private bool DelayPlayBack()
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        public void SetResolution(int width, int height)
         {
-            if (!_sf4Memory.openSF4Process())
-            {
-                System.Windows.Forms.MessageBox.Show("Couldn't open the SF4 Process, are you sure it's running?");
-                return false;
-            }
-
-            Execute.OnUIThread(() => OffsetFrame = 0);
-
-            //Wait 1 seconds to give time to start
-            WaitForFrames(60);
-            return true;
+            _panel.Width = width;
+            _panel.Height = height;
+            _panel.Refresh();
         }
 
         /// <summary>
         /// Setup to play the time line.
         /// </summary>
-        /// <param name="timeLineItems"></param>
+        /// <param name="playerOneTimeLine">The Player One timeline.</param>
+        /// <param name="playerTwoTimeLine">The Player Two timeline.</param>
+        /// <param name="repeatAmount">The number of times to repeat the timeline.</param>
         public void PlayTimeLine(TimeLineViewModel playerOneTimeLine,
             TimeLineViewModel playerTwoTimeLine,
             int repeatAmount)
@@ -538,6 +549,7 @@
             {
                 return;
             }
+
             // if we aren't in a match (defined by being on a menu or pause is selected) the play timeline stops.
             if (_inMatch)
             {
@@ -606,7 +618,6 @@
                     break;
                 }
             }
-
         }
 
         /// <summary>
@@ -629,13 +640,19 @@
         /// <param name="message"></param>
         public void Handle(PlayTimeLineMessage message)
         {
-            Thread worker = new Thread(() =>
-                PlayTimeLine(
-                    message.PlayerOneTimeLineItemViewModels,
-                    message.PlayerTwoTimeLineItemViewModels,
-                    message.RepeatAmount)
-                );
-            worker.Start();
+            if (_inputWorker != null && _inputWorker.IsAlive)
+            {
+                _inputWorker.Abort();
+            }
+            else
+            {
+                _inputWorker = new Thread(() =>
+                    PlayTimeLine(
+                        message.PlayerOneTimeLineItemViewModels,
+                        message.PlayerTwoTimeLineItemViewModels,
+                        message.RepeatAmount));
+                _inputWorker.Start();
+            }
         }
 
         /// <summary>
@@ -651,8 +668,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="GameViewModel"/> class.
         /// </summary>
-        /// <param name="events">The events aggregator.</param>
-        /// <param name="gameExecuteablePath">The game executable path.</param>
+        /// <param name="events">The events aggregator.</param> 
         public GameViewModel(IEventAggregator events)
         {
             _events = events;
@@ -666,10 +682,9 @@
             Execute.OnUIThread(
                 () =>
                 {
-                    _panel = new System.Windows.Forms.Panel();
+                    _panel = new Panel();
                     CreateGameProcess(_panel.Handle);
                 });
-
         }
     }
 }
