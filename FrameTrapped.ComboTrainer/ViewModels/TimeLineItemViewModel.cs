@@ -72,6 +72,7 @@
             set
             {
                 InputItemViewModel.Direction = value;
+                NotifyOfPropertyChange(() => Direction);
             }
         }
 
@@ -85,8 +86,10 @@
             set
             {
                 InputItemViewModel.Light_Punch = value;
+                NotifyOfPropertyChange(() => Light_Punch);
             }
         }
+
         public bool Medium_Punch
         {
             get
@@ -96,8 +99,10 @@
             set
             {
                 InputItemViewModel.Medium_Punch = value;
+                NotifyOfPropertyChange(() => Medium_Punch);
             }
         }
+
         public bool Hard_Punch
         {
             get
@@ -107,6 +112,7 @@
             set
             {
                 InputItemViewModel.Hard_Punch = value;
+                NotifyOfPropertyChange(() => Hard_Punch);
             }
         }
 
@@ -120,6 +126,7 @@
             set
             {
                 InputItemViewModel.Light_Kick = value;
+                NotifyOfPropertyChange(() => Light_Kick);
             }
         }
 
@@ -132,6 +139,7 @@
             set
             {
                 InputItemViewModel.Medium_Kick = value;
+                NotifyOfPropertyChange(() => Medium_Kick);
             }
         }
 
@@ -144,6 +152,7 @@
             set
             {
                 InputItemViewModel.Hard_Kick = value;
+                NotifyOfPropertyChange(() => Hard_Kick);
             }
         }
 
@@ -169,6 +178,7 @@
             set
             {
                 InputItemViewModel.WaitFrames = value;
+                NotifyOfPropertyChange(() => WaitFrames);
             }
         }
 
@@ -264,9 +274,9 @@
         /// Initializes a new instance of the <see cref="TimeLineItemViewModel"/> class.
         /// </summary>
         public TimeLineItemViewModel()
-        {
-
+        { 
             _inputItemViewModel = new InputItemViewModel();
+            InputItemViewModel.PropertyChanged += InputItemViewModel_PropertyChanged;
             _inputItemViewModel.WaitFrames = 1;
         }
     }

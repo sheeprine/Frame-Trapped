@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<ListBoxItem
     x:Class="FrameTrapped.ComboTrainer.Views.TimeLineItemView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,9 +8,9 @@
     xmlns:cal="http://www.caliburnproject.org"
     xmlns:converters="clr-namespace:FrameTrapped.Common.Converters;assembly=FrameTrapped.Common"
     Margin="2"
-    cal:Message.Attach="[Event GotKeyboardFocus] = [Action TryHighlight($source, $events)]"
-             >
-    <UserControl.Resources>
+    Background="Transparent"
+    >
+    <ListBoxItem.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/FrameTrapped.Common;component/Resources/MergedCommonResources.xaml"/>
@@ -79,7 +79,7 @@
             </Style>
             
         </ResourceDictionary>
-    </UserControl.Resources>
+    </ListBoxItem.Resources>
     <StackPanel>
         <DockPanel HorizontalAlignment="Stretch">
             <ToggleButton x:Name="PlaySound" Style="{StaticResource MetroCircleToggleButtonStyle}" DockPanel.Dock="Left">
@@ -98,10 +98,10 @@
             
             <StackPanel Orientation="Horizontal" >
                 <Rectangle Fill="{DynamicResource DirectionUpBack}" Style="{StaticResource MediumDirectionRectangleStyle}"  
-               Tag="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=UpBack,FallbackValue=false}"
+               Tag="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=UpBack, FallbackValue=false}"
                 Visibility="{Binding Tag, Converter={StaticResource boolToCollapsedConverter}, RelativeSource={RelativeSource Self}}"/>
                 <Rectangle Fill="{DynamicResource DirectionUp}" Style="{StaticResource MediumDirectionRectangleStyle}" 
-                  Tag="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=Up,FallbackValue=false}"
+                  Tag="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=Up, FallbackValue=false}"
                 Visibility="{Binding Tag, Converter={StaticResource boolToCollapsedConverter}, RelativeSource={RelativeSource Self}}"/>
                 <Rectangle Fill="{DynamicResource DirectionUpForward}" Style="{StaticResource MediumDirectionRectangleStyle}" 
                   Tag="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=UpForward,FallbackValue=false}"
@@ -137,155 +137,5 @@
 
             </StackPanel>
         </DockPanel>
-        <Grid x:Name="InputItemViewModel" 
-              DockPanel.Dock="Bottom"  
-              Visibility="{Binding IsActiveItem, Converter={StaticResource boolToCollapsedConverter}}">
-            <Grid DataContext="{Binding InputItemViewModel}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Grid.ColumnSpan="2" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" MinWidth="120"/> 
-                    </Grid.ColumnDefinitions>
-                    <UniformGrid Rows="3" Columns="3" 
-			                HorizontalAlignment="Center"
-			                VerticalAlignment="Center" >
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=UpBack}">
-                            <RadioButton.RenderTransform>
-                                <TranslateTransform X="9" Y="8" />
-                            </RadioButton.RenderTransform>
-                            <Rectangle Fill="{DynamicResource DirectionUpBack}" Style="{StaticResource DirectionRectangleStyle}" />
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=Up}">
-                            <Rectangle Fill="{DynamicResource DirectionUp}" Style="{StaticResource DirectionRectangleStyle}"/>
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=UpForward}">
-                            <RadioButton.RenderTransform>
-                                <TranslateTransform X="-9" Y="8" />
-                            </RadioButton.RenderTransform>
-                            <Rectangle  Fill="{DynamicResource DirectionUpForward}" Style="{StaticResource DirectionRectangleStyle}"/>
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=Back}">
-                            <Rectangle Fill="{DynamicResource DirectionBack}" Style="{StaticResource DirectionRectangleStyle}"/>
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=Neutral}">
-                            <RadioButton.RenderTransform>
-                                <ScaleTransform ScaleX="1.05" CenterX="24" 
-                                         ScaleY="1.05" CenterY="24"/>
-                            </RadioButton.RenderTransform>
-                            <Rectangle Fill="{DynamicResource DirectionNeutral}" Style="{StaticResource DirectionRectangleStyle}"/>
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=Forward}">
-                            <Rectangle Fill="{DynamicResource DirectionForward}" Style="{StaticResource DirectionRectangleStyle}" />
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=DownBack}">
-                            <RadioButton.RenderTransform>
-                                <TranslateTransform X="9" Y="-8" />
-                            </RadioButton.RenderTransform>
-                            <Rectangle Fill="{DynamicResource DirectionDownBack}" Style="{StaticResource DirectionRectangleStyle}"/>
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=Down}">
-                            <Rectangle Fill="{DynamicResource DirectionDown}" Style="{StaticResource DirectionRectangleStyle}"/>
-                        </RadioButton>
-                        <RadioButton GroupName="grpDirection" IsChecked="{Binding Direction, Converter={StaticResource enumBooleanConverter},ConverterParameter=DownForward}">
-                            <RadioButton.RenderTransform>
-                                <TranslateTransform X="-9" Y="-8" />
-                            </RadioButton.RenderTransform>
-                            <Rectangle Fill="{DynamicResource DirectionDownForward}" Style="{StaticResource DirectionRectangleStyle}"/>
-                        </RadioButton>
-                    </UniformGrid>
-                    <UniformGrid Grid.Column="1" Rows="2" Columns="3" 
-                                 HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ToggleButton IsChecked="{Binding Light_Punch, Mode=TwoWay}" Style="{StaticResource CustomToggle}">
-                            <StackPanel>
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource LPIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToCollapsedConverter}}" />
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource PIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToVisibleConverter}}" />
-                            </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding Medium_Punch, Mode=TwoWay}" Style="{StaticResource CustomToggle}">
-                            <StackPanel>
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource MPIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToCollapsedConverter}}" />
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource PIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToVisibleConverter}}" />
-                            </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding Hard_Punch, Mode=TwoWay}" Style="{StaticResource CustomToggle}">
-                            <StackPanel>
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource HPIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToCollapsedConverter}}" />
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource PIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToVisibleConverter}}" />
-                            </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding Light_Kick, Mode=TwoWay}" Style="{StaticResource CustomToggle}">
-                            <StackPanel>
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource LKIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToCollapsedConverter}}" />
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource KIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToVisibleConverter}}" />
-                            </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding Medium_Kick, Mode=TwoWay}" Style="{StaticResource CustomToggle}">
-                            <StackPanel>
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource MKIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToCollapsedConverter}}" />
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource KIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToVisibleConverter}}" />
-                            </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding Hard_Kick, Mode=TwoWay}" Style="{StaticResource CustomToggle}">
-                            <StackPanel>
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource HKIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToCollapsedConverter}}" />
-                                <Rectangle Style="{StaticResource InputRectangleStyle}" Fill="{DynamicResource KIcon}" Visibility="{Binding 
-                         RelativeSource={RelativeSource AncestorType=ToggleButton},
-                         Path=IsChecked,
-                         Converter={StaticResource boolToVisibleConverter}}" />
-                            </StackPanel>
-                        </ToggleButton>
-
-                    </UniformGrid>
-                </Grid>
-                <DockPanel Grid.Row="1" Margin="2" >
-                    <Button x:Name="DecrementFrames" DockPanel.Dock="Left" Style="{StaticResource MetroCircleButtonStyle}" >
-                        <Rectangle Fill="{DynamicResource DirectionBack}" Style="{StaticResource ButtonRectangleStyle}"/>
-                    </Button>
-                    <Button x:Name="IncrementFrames" DockPanel.Dock="Right" Style="{StaticResource MetroCircleButtonStyle}" >
-                        <Rectangle Fill="{DynamicResource DirectionForward}" Style="{StaticResource ButtonRectangleStyle}"/>
-                    </Button>
-
-                    <Slider HorizontalAlignment="Stretch" Value="{Binding WaitFrames,FallbackValue=1}" Style="{DynamicResource SliderStyle}" Maximum="300" Minimum="1" />
-
-                </DockPanel>
-            </Grid>
-        </Grid>
     </StackPanel>
-</UserControl>
+</ListBoxItem>

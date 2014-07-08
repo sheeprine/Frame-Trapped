@@ -23,6 +23,127 @@
     public class TimeLineViewModel : Conductor<TimeLineItemViewModel>.Collection.OneActive
     {
         /// <summary>
+        /// The premade commands enumerator.
+        /// </summary>
+        public enum PremadeCommandsEnum
+        {
+            /// <summary>
+            /// Empty command.
+            /// </summary>
+            Empty,
+
+            /// <summary>
+            /// Dash forward.
+            /// </summary>
+            Dash,
+
+            /// <summary>
+            /// Backdash.
+            /// </summary>
+            Backdash,
+
+            /// <summary>
+            /// FocusAttack Dash Cancel.
+            /// </summary>
+            FADC,
+
+            /// <summary>
+            /// FocusAttack Dash Cancel Back.
+            /// </summary>
+            FADCB,
+
+            /// <summary>
+            /// Hadoken motion (236).
+            /// </summary>
+            QCF,
+
+            /// <summary>
+            /// Shoryuken motion (623).
+            /// </summary>
+            DP,
+
+            /// <summary>
+            /// Tatsumaki motion (214).
+            /// </summary>
+            QCB,
+
+            /// <summary>
+            /// Dragon kick motion (214).
+            /// </summary>
+            RDP,
+
+            /// <summary>
+            /// Half circle forward (41236).
+            /// </summary>
+            HCF,
+
+            /// <summary>
+            /// Half circle backward (63214).
+            /// </summary>
+            HCB,
+
+            /// <summary>
+            /// Half circle forward up (12369).
+            /// </summary>
+            HCFU,
+
+            /// <summary>
+            /// Shinku Hadoken motion (236236).
+            /// </summary>
+            Super,
+
+            /// <summary>
+            /// Shink Tatsumaki motion (214214)
+            /// </summary>
+            ReverseSuper,
+
+            /// <summary>
+            /// Charge Down 55 frames (2..)
+            /// </summary>
+            ChargeD55,
+
+            /// <summary>
+            /// Charge Back 55 frames (4..)
+            /// </summary>
+            ChargeB55,
+
+            /// <summary>
+            /// Charge DownBack 55 frames (1..)
+            /// </summary>
+            ChargeDB55,
+
+            /// <summary>
+            /// The delta motion after charge (6..646)
+            /// </summary>
+            ChargeSuper,
+
+            /// <summary>
+            /// The delta motion after charge (6..319)
+            /// </summary>
+            ChargeDelta,
+
+            /// <summary>
+            /// Screw pile driver motion.
+            /// </summary>
+            SPD,
+
+            /// <summary>
+            /// Reverse screw pile driver motion.
+            /// </summary>
+            SPDB,
+            
+            /// <summary>
+            /// Full circle motion.
+            /// </summary>
+            FullCircle,
+
+            /// <summary>
+            /// Full double circle motion.
+            /// </summary>
+            DoubleCircle
+        }
+
+        /// <summary>
         /// The events aggregator.
         /// </summary>
         private IEventAggregator _events;
@@ -36,6 +157,11 @@
         /// The currently selected time line item.
         /// </summary>
         private TimeLineItemViewModel _selectedTimeLineItem;
+
+        /// <summary>
+        /// The time line items.
+        /// </summary>
+        private BindableCollection<TimeLineItemViewModel> _timeLineItems;
 
         /// <summary>
         /// Gets or sets the currently selected time line item.
@@ -63,7 +189,18 @@
         /// <summary>
         /// The collection of time line items.
         /// </summary>
-        public BindableCollection<TimeLineItemViewModel> TimeLineItems { get; private set; }
+        public BindableCollection<TimeLineItemViewModel> TimeLineItems
+        {
+            get
+            {
+                return _timeLineItems;
+            }
+            private set
+            {
+                _timeLineItems = value;
+                NotifyOfPropertyChange(() => TimeLineItems);
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating wether we wants to automatically switch to SF4.
@@ -92,11 +229,170 @@
         /// <summary>
         /// Adds a time line item to the end of the time line.
         /// </summary>
-        public void AddTimeLineItem()
+        public void AddTimeLineItem(string premadeCommand)
         {
-            TimeLineItemViewModel newTimeLineItemViewModel = new TimeLineItemViewModel(this);
-            AddTimeLineItem(newTimeLineItemViewModel);
+            List<TimeLineItemViewModel> timeLineItemList = new List<TimeLineItemViewModel>();
 
+            switch ((PremadeCommandsEnum)Enum.Parse(typeof(PremadeCommandsEnum), premadeCommand))
+            {
+                case PremadeCommandsEnum.Empty:
+                    timeLineItemList.Add(new TimeLineItemViewModel());
+
+                    break;
+                case PremadeCommandsEnum.Dash:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Neutral });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Neutral, WaitFrames = 16 });
+                    break;
+                case PremadeCommandsEnum.Backdash:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Neutral });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Neutral, WaitFrames = 19 });
+                    break;
+                case PremadeCommandsEnum.FADC:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Medium_Punch = true, Medium_Kick = true, Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Medium_Punch = true, Medium_Kick = true, Direction = InputCommandModel.DirectionStateEnum.Neutral });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Medium_Punch = true, Medium_Kick = true, Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Neutral, WaitFrames = 16 });
+                    break;
+                case PremadeCommandsEnum.FADCB:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Medium_Punch = true, Medium_Kick = true, Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Medium_Punch = true, Medium_Kick = true, Direction = InputCommandModel.DirectionStateEnum.Neutral });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Medium_Punch = true, Medium_Kick = true, Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Neutral, WaitFrames = 19 });
+                    break;
+                case PremadeCommandsEnum.QCF:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    break;
+                case PremadeCommandsEnum.DP:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    break;
+                case PremadeCommandsEnum.QCB:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    break;
+                case PremadeCommandsEnum.RDP:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    break;
+                case PremadeCommandsEnum.HCF:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    break;
+                case PremadeCommandsEnum.HCB:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    break;
+                case PremadeCommandsEnum.HCFU:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpForward });
+                    break;
+                case PremadeCommandsEnum.Super:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    break;
+                case PremadeCommandsEnum.ReverseSuper:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    break;
+                case PremadeCommandsEnum.SPD:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpForward });
+                    break;
+                case PremadeCommandsEnum.SPDB:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpBack });
+                    break;
+                case PremadeCommandsEnum.FullCircle:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Up });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpForward });
+                    break;
+
+                case PremadeCommandsEnum.DoubleCircle:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Up });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Up });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpForward });
+                    break;
+                case PremadeCommandsEnum.ChargeD55:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Down, WaitFrames = 55 });
+                    break;
+                case PremadeCommandsEnum.ChargeB55:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back, WaitFrames = 55 });
+                    break;
+                case PremadeCommandsEnum.ChargeDB55:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack, WaitFrames = 55 });
+                    break;
+                case PremadeCommandsEnum.ChargeSuper:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back, WaitFrames = 55 });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Back });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.Forward });
+                    break;
+                case PremadeCommandsEnum.ChargeDelta:
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack, WaitFrames = 55 });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownForward });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.DownBack });
+                    timeLineItemList.Add(new TimeLineItemViewModel { Direction = InputCommandModel.DirectionStateEnum.UpForward });
+                    break;
+            }
+
+            foreach (TimeLineItemViewModel item in timeLineItemList)
+            {
+                item.Parent = this; 
+                AddTimeLineItem(item);
+            }
         }
 
         /// <summary>
@@ -154,6 +450,11 @@
         public void ClearTimeLine()
         {
             TimeLineItems.Clear();
+            TimeLineItemViewModel newItem = new TimeLineItemViewModel(this);
+            AddTimeLineItem(newItem);
+
+            NotifyOfPropertyChange(() => CanRemoveItem);
+            NotifyOfPropertyChange(() => TimeLineItems);
         }
 
         /// <summary>
@@ -201,9 +502,7 @@
                     timeLineItemViewModel.Medium_Kick = inputItem.Medium_Kick;
                     timeLineItemViewModel.Hard_Kick = inputItem.Hard_Kick;
 
-
                     TimeLineItems.Add(timeLineItemViewModel);
-
                 }
             }
             else
@@ -328,7 +627,7 @@
                 }
             }
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TimeLineViewmodel"/> class.
         /// </summary>
