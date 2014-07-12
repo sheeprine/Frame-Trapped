@@ -1,0 +1,41 @@
+I saw somebody had stated they planned on adding Abel, but hasn't done it yet so I figured I'd throw my knowledge out there. Abel does not have very many complex combos, it's mainly about mixups and resets. Note for Change of Direction combos, light CoD will always combo, is faster, and only does 10 less net damage, so I always just use that one. So here's what you should know if we're only focusing on combos:
+
+Beginner Combos:
+
+    cr. lk, cr. lp, cr. lk, cr. lp, far st. lk (A good block string, you can frame trap a step kick off of a cr. lp or far st. lk)
+    cr. mp xx Change of Direction (easy beginner's way to combo off of jump-in)
+    cr. hp xx HP Falling Sky (second hit)
+    cr. hp xx LK Roll (second hit), MP Falling Sky
+    cr. hp xx Wheel Kick (second hit)
+    cr. hp, Ultra 1
+
+Intermediate Combos:
+
+    cr. lp, cr. lp, cr. lp, far st. mp (Mp may whiff on some crouching characters)
+    cr. lp, cl. st. hk (hits overhead)
+    cr. lp, cl. st. mp xx Change of Direction (first hit) (cl. st. mp forces stand, best option for confirm off of jump-in)
+    cr. lk OR cr. lp, cl. st. hp xx Change of Direction (first hit) (whiffs on some crouching opponents)
+
+Advanced Combos:
+
+    forward mk xx dash, cl. st. hp xx Change of Direction (first hit) (whiffs on some crouching opponents)
+    [Combo into Change of Direction], FADC (first hit), cr. HP xx HP Falling Sky (second hit)
+    [Combo into Change of Direction], FADC (first hit), cr. HP xx LK Roll (second hit), MP Falling Sky
+    [Combo into Change of Direction], FADC (first hit), cr. HP xx Wheel Kick (second hit)
+    [Combo into Change of Direction], FADC (first hit), cr. HP xx Ultra 1
+    cr. HP, LP Change of Direction, FADC (first hit), Ultra 1 (lets you get U1 in corner)
+
+Character Specifics:
+
+    cr. HP, Ultra 1 (corner) (only works on tall, fat characters like Sagat, Zangief, T. Hawk, etc.)
+
+Pretty Combos:
+
+    Forward mk xx Dash, cl. st. hp, Change of Direction, FADC (first hit), Forward mk xx Dash, cl. st. hp, Change of Direction, FADC (first hit), cr. hp xx HP Falling Sky OR Wheel Kick OR Ultra 1, etc.
+
+Counterhit Combos:
+
+    The following can link Step Kick (Forward mk xx Dash) on counter hit: cr. lp, cr. mp, far st. lp
+    Counterhit step kick, cr. lk, cr. lp, cl. st. mp, Change of Direction (hit confirms are optional, feel free to use one or none)
+
+Note that Step Kick is one of his main tools, but comboing from it is not easy, that's why I put it into advanced. For the beginner step kick should be used to get in and apply basic mixup (block string, regular throw, or tornado throw, etc.)

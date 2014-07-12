@@ -1,0 +1,5 @@
+Hold#False#1#P1_DN
+Press#False#1#P1_LP
+Wait#False#16
+Press#False#1#P1_HK
+Wait#False#300

@@ -1,0 +1,15 @@
+Press#False#2#P1_FW#P1_HK
+Wait#False#44
+Press#False#1#P1_LP
+Wait#False#10
+Press#False#1#P1_MP
+Wait#False#20
+Press#False#1#P1_HP
+Wait#False#10
+Press#False#1#P1_BK
+Press#False#2#P1_DN#P1_BK
+Press#False#1#P1_DN
+Press#False#2#P1_DN#P1_FW
+Press#False#1#P1_FW
+Press#False#1#P1_HP
+Wait#False#300

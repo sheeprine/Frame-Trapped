@@ -4,6 +4,11 @@
 
     using Caliburn.Micro;
 
+    using RainbowLib;
+    using RainbowLib.BCM;
+    using RainbowLib.BAC;
+
+
     using FrameTrapped.StreetFighterLibrary.ViewModels;
     using FrameTrapped.Input.ViewModels;
     using FrameTrapped.Input.Models;
@@ -1490,113 +1495,100 @@
             return kenFighter;
         }
 
-
         public static FighterViewModel EHonda()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("HND");
+            MoveListViewModel moveList = BCMreader.GetMoves();
             FighterViewModel fighter = new FighterViewModel("E. Honda", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Ibuki()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("IBK");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Ibuki", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Makoto()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("MKT");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Makoto", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Dudley()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("DDL");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Dudley", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Seth()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("BOS");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Seth", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Gouken()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("GKN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Gouken", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Akuma()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("GKI");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Akuma", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Gen()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("GEN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Gen", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Dan()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("DAN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Dan", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Sakura()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("SKR");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Sakura", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Oni()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("GKX");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Oni", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1605,140 +1597,126 @@
 
         public static FighterViewModel Yun()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("YUN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Yun", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Juri()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("JRI");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Juri", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel ChunLi()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("CNL");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Chun-Li", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Dhalsim()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("DSM");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Dhalsim", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Abel()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("JHA");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Abel", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel CViper()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("AGL");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("C. Viper", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel MBison()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("VEG");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("M. Bison", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Sagat()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("SGT");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Sagat", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Cammy()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("CMY");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Cammy", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel DeeJay()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("DJY");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Dee Jay", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Cody()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("CDY");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Cody", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Guy()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("GUY");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Guy", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Hakan()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("HKN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Hakan", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Yang()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("YAN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Yang", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
@@ -1747,120 +1725,108 @@
 
         public static FighterViewModel EvilRyu()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("RYX");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Evil Ryu", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Guile()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("GUL");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Guile", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Blanka()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("BLK");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Blanka", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Zangief()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("ZGF");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Zangief", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Rufus()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("CHB");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Rufus", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel ElFuerte()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("RIC");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("El Fuerte", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Vega()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("BLR");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Vega", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Balrog()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("BSN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Balrog", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel FeiLong()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("FLN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Fei Long", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel THawk()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("HWK");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("T. Hawk", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Adon()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("ADN");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Adon", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }
 
         public static FighterViewModel Rose()
         {
-            BindableCollection<HitViewModel> tmpHitList; ;
-            CommandViewModel tmpCommand;
-
-            MoveListViewModel moveList = new MoveListViewModel();
+            BCMreader.LoadBCM("ROS");
+            MoveListViewModel moveList = BCMreader.GetMoves();
+             
             FighterViewModel fighter = new FighterViewModel("Rose", FighterViewModel.FighterTypeEnum.Shoto, 1000, 1000, 0.045f, 0.030f, moveList);
             return fighter;
         }

@@ -1,0 +1,8 @@
+Press#False#2#P1_BK#P1_MK
+Wait#False#15
+Press#False#1#P1_MK
+Wait#False#15
+Press#False#1#P1_DN
+Press#False#1#P1_UP
+Press#False#1#P1_MK
+Wait#False#300

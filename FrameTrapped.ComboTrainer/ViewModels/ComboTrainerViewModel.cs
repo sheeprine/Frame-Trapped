@@ -1,35 +1,63 @@
 ﻿namespace FrameTrapped.ComboTrainer.ViewModels
 {
     using System;
-    using System.Drawing;
+    using System.Windows;
+
     using Caliburn.Micro;
+
     using FrameTrapped.ComboTrainer.Messages;
 
-    public class ComboTrainerViewModel : Screen,
-        IHandle<AddTimeLineItemMessage>,
-        IHandle<OpenTimeLineMessage>,
-        IHandle<SaveTimeLineMessage>
+    using Size = System.Drawing.Size;
+
+    /// <summary>
+    /// </summary>
+    public class ComboTrainerViewModel : Screen, 
+                                         IHandle<AddTimeLineItemMessage>, 
+                                         IHandle<OpenTimeLineMessage>, 
+                                         IHandle<SaveTimeLineMessage>
     {
+        /// <summary>
+        /// </summary>
         private IEventAggregator _events;
 
-        private bool _isBusy;
-
-        private bool _repeat;
-
-        private int _repeatAmount;
-
-        private bool _playerOneTimeLineEnabled;
-
-        private bool _playerTwoTimeLineEnabled;
-
-        private TimeLineViewModel _playerOneTimeLineViewModel;
-
-        private TimeLineViewModel _playerTwoTimeLineViewModel;
-
+        /// <summary>
+        /// </summary>
         private GameViewModel _gameViewModel;
 
+        /// <summary>
+        /// </summary>
+        private bool _isBusy;
+
+        /// <summary>
+        /// </summary>
+        private bool _playerOneTimeLineEnabled;
+
+        /// <summary>
+        /// </summary>
+        private TimeLineViewModel _playerOneTimeLineViewModel;
+
+        /// <summary>
+        /// </summary>
+        private bool _playerTwoTimeLineEnabled;
+
+        /// <summary>
+        /// </summary>
+        private TimeLineViewModel _playerTwoTimeLineViewModel;
+
+        /// <summary>
+        /// </summary>
+        private bool _repeat;
+
+        /// <summary>
+        /// </summary>
+        private int _repeatAmount;
+
+        /// <summary>
+        /// </summary>
         private Size _selectedResolution;
 
+        /// <summary>
+        /// </summary>
         public bool IsBusy
         {
             get
@@ -44,12 +72,15 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
         public bool Repeat
         {
             get
             {
                 return _repeat;
             }
+
             set
             {
                 _repeat = value;
@@ -57,6 +88,8 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
         public int RepeatAmount
         {
             get
@@ -70,6 +103,7 @@
                     return 1;
                 }
             }
+
             set
             {
                 _repeatAmount = value;
@@ -77,12 +111,16 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the Player One timeline is enabled.
+        /// </summary>
         public bool PlayerOneTimeLineEnabled
         {
             get
             {
                 return _playerOneTimeLineEnabled;
             }
+
             set
             {
                 _playerOneTimeLineEnabled = value;
@@ -90,12 +128,16 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the Player Two timeline is enabled.
+        /// </summary>
         public bool PlayerTwoTimeLineEnabled
         {
             get
             {
                 return _playerTwoTimeLineEnabled;
             }
+
             set
             {
                 _playerTwoTimeLineEnabled = value;
@@ -103,12 +145,15 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
         public TimeLineViewModel PlayerOneTimeLineViewModel
         {
             get
             {
                 return _playerOneTimeLineViewModel;
             }
+
             set
             {
                 _playerOneTimeLineViewModel = value;
@@ -116,12 +161,15 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
         public TimeLineViewModel PlayerTwoTimeLineViewModel
         {
             get
             {
                 return _playerTwoTimeLineViewModel;
             }
+
             set
             {
                 _playerTwoTimeLineViewModel = value;
@@ -129,12 +177,15 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
         public GameViewModel GameViewModel
         {
             get
             {
                 return _gameViewModel;
             }
+
             set
             {
                 _gameViewModel = value;
@@ -142,84 +193,49 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
         public BindableCollection<Size> Resolutions
         {
             get
             {
-                // silly example of the collection to bind to
-                return new BindableCollection<Size>(
-                    new Size[] 
-                    { 
-                        new Size(640, 480),
-                        new Size(800, 600),
-                        new Size(1024, 768),
-                        new Size(1280, 720),
-                        new Size(1600, 900),
-                        new Size(1680, 1050),
-                        new Size(1920, 1080)
-                    });
+                return
+                    new BindableCollection<Size>(
+                        new[]
+                            {
+                                new Size(640, 480), new Size(800, 600), new Size(1024, 768), new Size(1280, 720), 
+                                new Size(1600, 900), new Size(1680, 1050), new Size(1920, 1080)
+                            });
             }
         }
 
         /// <summary>
-        /// Starts playback for the time line.
         /// </summary>
-        public void PlaybackStart()
-        {
-            _events.Publish(new FocusStreetFighterMessage());
-            try
-            {
-               _events.Publish(
-                    new PlayTimeLineMessage(
-                        PlayerOneTimeLineViewModel,
-                        PlayerTwoTimeLineViewModel,
-                        RepeatAmount));
-            }
-            catch(Exception ex)
-            {
-                Execute.OnUIThread(() =>
-                               System.Windows.MessageBox.Show(
-                               System.Windows.Application.Current.MainWindow,
-                               string.Format("The game crashed: {0} !", ex.Message),
-                               "Error",
-                               System.Windows.MessageBoxButton.OK,
-                               System.Windows.MessageBoxImage.Error));
-                }
-        }
-
         public Size SelectedResolution
         {
-            get { return _selectedResolution; }
+            get
+            {
+                return _selectedResolution;
+            }
+
             set
             {
                 _selectedResolution = value;
-                if (GameViewModel != null){
+                if (GameViewModel != null)
+                {
                     GameViewModel.SetResolution(value.Width, value.Height);
                 }
+
                 NotifyOfPropertyChange(() => SelectedResolution);
             }
-        }
-
-        public void StartSF4()
-        {
-            IsBusy = true;
-            if (GameViewModel == null)
-            {
-                GameViewModel = new GameViewModel(_events);
-            }
-            else
-            {
-                GameViewModel.TryClose();
-                GameViewModel = null;
-                GameViewModel = new GameViewModel(_events);
-            }
-            IsBusy = false;
         }
 
         /// <summary>
         /// Handles the <see cref="AddTimeLineItemMessage"/>
         /// </summary>
-        /// <param name="message">The add time line message.</param>
+        /// <param name="message">
+        /// The add time line message.
+        /// </param>
         public void Handle(AddTimeLineItemMessage message)
         {
             TimeLineItemViewModel timeLineItem = message.TimeLineItemViewModel;
@@ -233,23 +249,10 @@
             }
         }
 
-        public ComboTrainerViewModel(IEventAggregator events)
-        {
-            _events = events;
-            _events.Subscribe(this);
-
-            _isBusy = false;
-
-            PlayerOneTimeLineEnabled = false;
-            PlayerTwoTimeLineEnabled = false;
-
-            PlayerOneTimeLineViewModel = new TimeLineViewModel(events);
-            PlayerTwoTimeLineViewModel = new TimeLineViewModel(events);
-        }
-
-        public ComboTrainerViewModel() :
-            this(new EventAggregator()) { }
-
+        /// <summary>
+        /// </summary>
+        /// <param name="message">
+        /// </param>
         public void Handle(OpenTimeLineMessage message)
         {
             if (message.Player == 1)
@@ -262,6 +265,10 @@
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="message">
+        /// </param>
         public void Handle(SaveTimeLineMessage message)
         {
             if (message.Player == 1)
@@ -272,6 +279,72 @@
             {
                 PlayerTwoTimeLineViewModel.SaveTimeLine();
             }
+        }
+
+        /// <summary>Starts playback for the time line.</summary>
+        public void PlaybackStart()
+        {
+            _events.Publish(new FocusStreetFighterMessage());
+            try
+            {
+                _events.Publish(
+                    new PlayTimeLineMessage(PlayerOneTimeLineViewModel, PlayerTwoTimeLineViewModel, RepeatAmount));
+            }
+            catch (Exception ex)
+            {
+                Execute.OnUIThread(
+                    () =>
+                    MessageBox.Show(
+                        Application.Current.MainWindow, 
+                        string.Format("The game crashed: {0} !", ex.Message), 
+                        "Error", 
+                        MessageBoxButton.OK, 
+                        MessageBoxImage.Error));
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        public void StartSF4()
+        {
+            IsBusy = true;
+            if (GameViewModel == null)
+            {
+                GameViewModel = new GameViewModel(_events);
+            }
+            else
+            {
+                GameViewModel.TryClose();
+                GameViewModel = null;
+                GameViewModel = new GameViewModel(_events);
+            }
+
+            IsBusy = false;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="events">
+        /// </param>
+        public ComboTrainerViewModel(IEventAggregator events)
+        {
+            _events = events;
+            _events.Subscribe(this);
+
+            _isBusy = false;
+
+            PlayerOneTimeLineEnabled = true;
+            PlayerTwoTimeLineEnabled = false;
+
+            PlayerOneTimeLineViewModel = new TimeLineViewModel(events);
+            PlayerTwoTimeLineViewModel = new TimeLineViewModel(events);
+        }
+
+        /// <summary>
+        /// </summary>
+        public ComboTrainerViewModel()
+            : this(new EventAggregator())
+        {
         }
     }
 }

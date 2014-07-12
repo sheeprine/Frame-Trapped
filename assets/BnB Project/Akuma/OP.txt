@@ -1,0 +1,11 @@
+Akuma:
+
+    Beginner combo: cr.jab x3 xx short tatsu , heavy shoryuken
+    Beginner combo: cr.jab x3 xx short tatsu , sweep (some characters)
+    Intermediate combo: cr.strong , st.cl.fierce xx short tatsu , sweep (some characters) or heavy shoryuken
+    Intermediate combo: st.roundhouse, cr.strong xx short tatsu, heavy shoryuken or sweep (some characters)
+    Advanced combo: cr.strong , st.cl.fierce xx fireball FADC cr.strong , st.cl.fierce xx short tatsu , heavy shoryuken or sweep (some characters)
+    Advanced combo: st.roundhouse, cr.forward, heavy tatsu
+    Counter-hit combo: cr.strong (counter-hit) , sweep
+    Counter-hit combo: cr.strong (counter-hit) , st.roundhouse , cr.strong xx short tatsu, heavy shoryuken or sweep (some characters)
+

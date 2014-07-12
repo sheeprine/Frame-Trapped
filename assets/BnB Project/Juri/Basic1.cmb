@@ -1,0 +1,5 @@
+Press#True#2#P1_DN#P1_HP
+Press#False#2#P1_DN#P1_BK
+Press#False#1#P1_BK
+Wait#False#10
+Press#True#1#P1_HK

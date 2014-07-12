@@ -1,0 +1,4 @@
+Press#False#2#P1_UP#P1_FW
+Wait#False#15
+Press#False#2#P1_DN#P1_MK
+Wait#False#200

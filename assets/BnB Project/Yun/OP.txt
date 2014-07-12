@@ -1,0 +1,55 @@
+Yun:
+
+All of the below can/should be comboed after a knee-height dive kick
+
+Beginner combo -
+
+st.lp xx st.lk xx st.mp) target combo xx upkicks (MK for standing opponent HK for crouching opponent)
+
+Intermediate combo -
+
+cr.lp xx cr.lp xx st.lp > st.mp xx upkicks
+
+cr.lk xx cr.lp xx st.lp > st.mp xx upkicks
+
+st.lp xx cr.lk xx st.lp > st.mp xx upkicks
+
+Genei Jin Combos:
+
+[Midscreen]
+
+st.mp xx lp shoulder hit confirm xx Genei Jin > st.hk > lp lunge > f+mk > f+mk > f+mk > lp lunge (should be at corner by now) > hp palm > st.hk/dive kick reset
+
+[Corner]
+
+st.mp xx lp shoulder hit confirm xx Genei Jin > st.hk > lp lunge > hp palm > f+mk > hp palm > f+mk > lp lunge (carry hp palm > f+mk > lp lunge on until either it runs out or you go for setup)
+
+Advanced combos:
+
+cr.mp > cr.mp > st.mp > upkicks
+
+cr.lp xx st.lp > cr.mp > st.mp/cr.mk > mp lunge
+
+cr.lp xx st.lp > cr.mp > st.mp xx upkicks
+
+cr.mp > cr.mp > st.mp > lp shoulder xx FA
+
+EX palm > lp shoulder > hp lunge
+
+EX palm > u1
+
+u1 > hp lunge
+
+FA > mp/hp (i forgot which) shoulder > hp lunge
+
+[These u1 combos can end with EX shoulder but it doesn't give much damage]
+
+cr.mp > st.mp xx EX upkicks > u1
+
+cr.mp > cr.mp > st.mp xx EX upkicks > u1
+
+cr.lp xx st.lp > cr.mp > st.mp xx EX upkicks > u1
+
+Character Specifics -
+
+cr.mp > cr.mp > cr.mp > st.mp xx upkicks can work on wider characters
