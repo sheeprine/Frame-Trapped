@@ -44,7 +44,7 @@ namespace FrameTrapped.Input.Utilities
 
         private void readInputConfig()
         {
-            string inputFolder = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), @"Documents\CAPCOM\SUPERSTREETFIGHTERIV\input");
+            string inputFolder = Path.Combine(Environment.SpecialFolder.MyDocuments), @"CAPCOM\SUPERSTREETFIGHTERIV\input");
             byte[] bytes;
 
             bytes = File.ReadAllBytes(Path.Combine(inputFolder, @"KEYBOARD_DEVICE#0.ctrlsav"));
